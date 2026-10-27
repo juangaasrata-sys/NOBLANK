@@ -1,0 +1,16 @@
+{"id":"1762d3a","c":["Arus lebih kecil: kabel lebih kecil, rugi lebih sedikit","Lower current: thinner cables, smaller losses"],"d":{"2":["Tegangan tinggi menambah serapan sinar matahari panel","Higher voltage boosts how much sunlight the panels absorb"]}}
+{"id":"f7c27e8","c":["On-grid tanpa aki; off-grid tanpa PLN; hybrid keduanya","Grid-tied: no batteries; off-grid: no grid; hybrid: both"],"d":{"2":["On-grid tetap menyala saat listrik PLN padam total","Grid-tied keeps running during a total PLN outage"]}}
+{"id":"db4143c","c":["Tak lagi mengurangi tagihan (net metering dihapus)","No longer cuts the bill (net metering abolished)"],"d":{"2":["Tetap dikreditkan 100% seperti aturan sebelumnya","Still credited 100% as under the old rule"]}}
+{"id":"3f9394a","c":["Hambatan aluminium lebih besar; sambungan bisa longgar dan panas","Aluminium resists more; joints can loosen and overheat"],"d":{"2":["Aluminium sama sekali tidak menghantar listrik searah (DC)","Aluminium doesn't conduct direct current (DC) at all"]}}
+{"id":"38d7a61","c":["10 AWG (angka kecil = tebal)","10 AWG (smaller = thicker)"],"d":{"1":["14 AWG (angka besar = tebal)","14 AWG (bigger = thicker)"]}}
+{"id":"c303b29","c":["Turun (dikali faktor koreksi ±0,82)","Falls (× a correction factor ~0.82)"],"d":{"1":["Naik dua kali karena kabel lebih hangat","Doubles because the cable is warmer"]}}
+{"id":"84a88e1","c":["±3% atau kurang","~3% or less"],"d":{"1":["Sekitar 30%","About 30%"],"3":["Tidak ada batas","No limit"]}}
+{"id":"616b0c6","c":["156% (1,25 × 1,25)","156% (1.25 × 1.25)"],"d":{"1":["100% (1,0 × 1,0)","100% (1.0 × 1.0)"],"2":["250% (2,5 × 1,0)","250% (2.5 × 1.0)"]}}
+{"id":"1f341fa","c":["Sedekat mungkin dengan aki","As close to the battery as possible"],"d":{"1":["Di ujung kabel yang paling jauh dari aki","At the cable end farthest from the battery"]}}
+{"id":"70df9e6","c":["Paduan solder beda dari tembaga; lebih baik krimp ulang","Solder alloy differs from copper; re-crimping is better"],"d":{"2":["Solder membuat kabel lebih tebal dan tidak muat di terminal","Solder thickens the cable so it won't fit the terminal"]}}
+{"id":"4b39451","d":{"3":["Semua kabel bebas warnanya asal rapi","Any colour is fine if it's tidy"]}}
+{"id":"fdf9dcf","c":["< 0,1 detik","Under 0.1 second"],"d":{"1":["Sekitar 1 menit","About 1 minute"]}}
+{"id":"d4f715c","c":["Tahan UV, panas, cuaca, dan tegangan DC tinggi","Resists UV, heat, weather and high DC voltage"],"d":{"2":["Lebih tipis dan murah karena arusnya kecil","Thinner and cheaper since currents are small"]}}
+{"id":"cc87cff","c":["±580 GW pada 2019","~580 GW in 2019"],"d":{"1":["±58 GW pada 2019","~58 GW in 2019"]}}
+{"id":"795e2da","c":["Agar tetap ada listrik saat mendung berhari-hari","To keep power through days of cloud"],"d":{"2":["Karena panel tidak bekerja pada siang hari","Because panels don't work during the day"]}}
+{"id":"09f71b4","c":["Tiap 1–2 minggu; kabel dan terminal tiap bulan","Every 1–2 weeks; cables and terminals monthly"],"d":{"1":["Sekali seumur hidup saat pemasangan saja","Once in a lifetime, at installation only"]}}
