@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kuis Merakit PC</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--tx:#1b1f24;--mu:#5d6773;--bd:#d9dee5;--ac:#1f6feb;--ok:#1a7f37;--okb:#e6f6ea;--no:#c62828;--nob:#fdeaea;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151a;--card:#1b2028;--tx:#e8ebef;--mu:#9aa5b1;--bd:#2f3742;--ac:#58a6ff;--ok:#56d364;--okb:#12301b;--no:#ff7b72;--nob:#3a1a1a}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12151a;--card:#1b2028;--tx:#e8ebef;--mu:#9aa5b1;--bd:#2f3742;--ac:#58a6ff;--ok:#56d364;--okb:#12301b;--no:#ff7b72;--nob:#3a1a1a}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:680px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;margin-bottom:12px}
+h1{font-size:1.4rem;margin:0 0 6px}h2{font-size:1.1rem;margin:0 0 10px}
+.mu{color:var(--mu);font-size:.9rem}
+button{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:11px 14px}
+.pri{background:var(--ac);border-color:var(--ac);color:#fff;font-weight:600}
+.opt{display:block;width:100%;text-align:left;margin:8px 0}
+.opt:hover:not(:disabled){border-color:var(--ac)}
+.opt.ok{background:var(--okb);border-color:var(--ok)}.opt.no{background:var(--nob);border-color:var(--no)}
+.bar{height:6px;background:var(--bd);border-radius:6px;overflow:hidden;margin:8px 0 14px}.bar i{display:block;height:100%;background:var(--ac)}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1}
+.tag{display:inline-block;font-size:.78rem;background:var(--bg);border:1px solid var(--bd);border-radius:20px;padding:2px 10px;color:var(--mu)}
+.fb{margin-top:10px;padding:10px 12px;border-radius:10px;font-size:.92rem}
+.big{font-size:2.4rem;font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:.88rem}td,th{padding:5px 6px;border-bottom:1px solid var(--bd);text-align:left}td:last-child,th:last-child{text-align:right}
+details{margin-top:8px}summary{cursor:pointer;font-weight:600}
+</style></head><body><main id="app"></main>
+<script>
+const C=["10 Alasan Merakit PC","Memilih Tipe Sistem","Memilih Casing","Motherboard","Memilih Prosesor","RAM","HDD, SSD atau Keduanya","Kartu Grafis (GPU)","Power Supply","Optical Drive","Expansion Card & Ekstra","Pendingin CPU & Casing","Tindakan Pencegahan","Jargon Buster","Persiapan Merakit","Menyiapkan Casing","Mengenal Motherboard","Memasang CPU","Memasang CPU Cooler","Memasang Memori","Motherboard ke Casing","Memasang HDD/SSD","Memasang Optical Drive","Memasang GPU","Memasang PSU","Koneksi Daya","Manajemen Kabel","Cek Akhir & First Boot","Troubleshooting","Instal Windows","Upgrade ke Windows 10","Update BIOS","Update Driver","Optimasi Performa","Proteksi Malware","Upgrade ke SSD","Migrasi Windows ke SSD","Memilih Linux","Instal Linux","20 Aplikasi Esensial","Update 2026: CPU & Platform","Update 2026: Memori & Penyimpanan","Update 2026: GPU & Daya","Update 2026: Pendingin & Casing","Update 2026: Windows & Keamanan","Update 2026: Perakitan & Troubleshooting","Update 2026: Linux & Perangkat Lunak"];
+const D=[];const Q=(c,p,q,...o)=>D.push({c,p,q,o});
+// Bagian buku (soal yang sudah usang dibuang/diperbarui; lihat Tambahan 2026)
+// Bagian 1: Plan Your Build
+Q(0,9,"Komponen mana yang disarankan dibeli paling akhir saat membeli bertahap?","Prosesor, motherboard, dan kartu grafis","Casing dan kipas","RAM dan HDD","Keyboard dan mouse");
+Q(0,9,"Merakit sendiri membantu menghindari…","Bloatware (software bawaan tak berguna)","Kabel SATA","Pembaruan BIOS","Thermal paste");
+Q(1,11,"APU pada AMD adalah…","Prosesor dan grafis dalam satu chip","Kartu suara","Jenis RAM","Pendingin CPU");
+Q(2,13,"Ukuran casing yang cocok untuk pembangun pemula adalah…","Mid tower","Mini ITX","Full tower E-ATX","Tanpa casing");
+Q(2,13,"Ciri casing yang baik menurut buku…","Min. dua kipas 120/140 mm, panel depan USB (idealnya termasuk USB-C)/audio, dominan logam","Satu kipas 80 mm, bahan plastik","Wajib bundel PSU murah","Fokus pada lampu LED saja");
+Q(3,19,"BIOS tersimpan pada…","Chip flash memory di motherboard","Hard disk","RAM","Prosesor");
+Q(4,23,"Huruf K pada nama CPU (mis. Core Ultra 7 265K) berarti…","Clock rate tidak terkunci (bisa di-overclock)","Konsumsi daya rendah","Grafis terintegrasi","Hanya untuk laptop");
+Q(4,23,"Hyper-Threading memungkinkan…","Beberapa thread berjalan pada tiap core","Core ditambah secara fisik","RAM menjadi dual-channel","CPU tanpa pendingin");
+Q(5,25,"Jika dua modul RAM beda kecepatan (1600 dan 2133MHz) di dual-channel, keduanya berjalan pada…","Kecepatan yang lebih lambat","Kecepatan yang lebih cepat","Rata-rata keduanya","Tidak bisa menyala");
+Q(5,26,"Pada timing/CAS latency RAM, angka lebih kecil umumnya berarti…","Memori lebih cepat","Memori lebih lambat","Kapasitas lebih besar","Voltase lebih tinggi");
+Q(6,29,"Kecepatan putar HDD yang paling umum adalah…","7200rpm","3600rpm","15000rpm","1200rpm");
+Q(6,31,"RAID adalah singkatan dari…","Redundant Array of Independent Disks","Random Access Internal Drive","Rapid Array of Integrated Data","Read And Index Disk");
+Q(8,36,"Peran utama PSU adalah…","Mengubah listrik AC dari stopkontak menjadi DC","Mengubah DC menjadi AC","Mendinginkan CPU","Menyimpan data");
+Q(8,37,"Sertifikasi 80 Plus menandakan PSU…","Efisiensi energi 80% atau lebih","Berdaya 80 watt","Garansi 80 bulan","Bersuara di bawah 80 dB");
+Q(10,42,"Expansion card adalah…","Papan sirkuit tambahan yang menambah fungsi PC","Jenis RAM","Kabel daya","Pasta pendingin");
+Q(11,45,"Cooler aftermarket dapat menurunkan suhu sekitar…","10–15°C dibanding stock cooler","1–2°C","40–50°C","Tidak berpengaruh");
+Q(11,45,"Water cooler bekerja dengan…","Memompa air dalam loop tertutup antara heatsink CPU dan radiator","Mengalirkan air ke seluruh casing","Menyemprot RAM","Mendinginkan PSU saja");
+Q(11,45,"Tingkat kebisingan kipas casing yang disarankan…","Di bawah 15dB","Di atas 50dB","Tepat 100dB","Tidak penting");
+Q(12,46,"Tindakan paling dasar mencegah ESD…","Sesekali menyentuh benda logam ber-ground","Memakai kaus wol","Berjalan di karpet","Menyalakan PC saat merakit");
+Q(12,46,"Hal yang tidak boleh dilakukan pada PSU…","Membongkarnya (tegangan berbahaya)","Memasangnya","Menyambungkan kabel","Menyimpannya di kotak");
+Q(12,47,"Menurut buku, yang lebih mungkin merusak kartu grafis atau hard drive daripada ESD adalah…","Komponen terjatuh","Debu halus","Cahaya lampu","Kabel LAN");
+Q(13,50,"POST adalah singkatan dari…","Power On Self Test","Primary Operating System Table","Peripheral Output Signal Transfer","Processor Overclock Safety Test");
+Q(13,51,"Virtual memory adalah memori yang…","Berada di drive penyimpanan (pagefile) dan jauh lebih lambat dari RAM","Berada di prosesor","Lebih cepat dari RAM","Berada di kartu grafis");
+// Bagian 2: Building Your PC
+Q(14,54,"Sebelum mulai merakit, Anda seharusnya sudah…","Menyelesaikan pemilihan hardware","Menginstal Windows","Memperbarui BIOS","Membeli antivirus");
+Q(15,56,"Standoff/riser motherboard berfungsi…","Menahan board agar tidak menyentuh casing sehingga tidak korsleting","Mendinginkan CPU","Menahan kipas","Menyambung kabel daya");
+Q(15,56,"Panel akses utama casing, dilihat dari depan, biasanya…","Panel kiri","Panel kanan","Panel atas","Panel bawah");
+Q(15,57,"Dua kipas bawaan casing umumnya berfungsi…","Depan menyedot udara masuk, belakang membuang udara hangat","Keduanya meniup masuk","Keduanya membuang keluar","Depan khusus mendinginkan PSU");
+Q(16,59,"Pada slot PCIe x16, “x16” merujuk pada…","Jumlah lane","Ukuran kartu dalam cm","Jumlah pin daya","Versi BIOS");
+Q(16,59,"Matched pair DIMM sebaiknya dimasukkan ke…","Soket dengan warna yang sama","Soket warna berbeda","Slot PCIe","Soket CPU");
+Q(16,61,"Pada kabel front panel dua kawat, kabel hitam/putih adalah…","Ground (GND)","Kabel berdaya","Kabel data","Kabel audio");
+Q(17,63,"Cara menyelaraskan CPU dengan soket…","Panah kecil di sudut CPU dan soket serta takik di tepi","Dari warna casing","Dari label RAM","Tidak perlu diselaraskan");
+Q(17,63,"Bagian CPU yang tidak boleh disentuh…","Kontak di sisi bawah","Sisi samping","Tepi luar","Kemasan kotak");
+Q(18,65,"Fungsi thermal paste…","Mengisi celah kecil antara heatsink dan CPU untuk membantu pelepasan panas","Merekatkan CPU ke motherboard","Mengisolasi listrik","Membersihkan debu");
+Q(18,64,"Pada motherboard Intel, langkah awal memasang cooler…","Menyiapkan mounting plate dan peg sesuai soket","Memasang kipas casing","Mengoleskan pasta ke RAM","Melepas CPU");
+Q(19,67,"Cara memasang DIMM yang benar…","Masukkan satu ujung miring, tekan ujung lain hingga klip mengunci","Tekan rata sekuat tenaga","Putar searah jarum jam","Pakai obeng");
+Q(19,67,"DIMM tidak bisa terbalik karena…","Ada takik offset yang cocok dengan pembatas soket","Warnanya berbeda","Ada kunci pas pada kabel","Ukuran asimetris");
+Q(20,68,"Back plate dipasang dengan…","Sisi berwarna/berlabel menghadap luar","Sisi berpadding menghadap luar","Dilem","Dilepas saja");
+Q(20,71,"Pada kabel front panel, polaritas yang benar…","Positif ke positif, negatif ke negatif","Positif ke negatif","Bebas","Hanya ground yang dipasang");
+Q(20,68,"Saat memasang motherboard, pegang board pada…","Tepinya, bukan kontaknya","Soket CPU","Kontak di belakang","Chip chipset");
+Q(21,72,"Saat memasang HDD di bracket, konektor daya dan SATA menghadap…","Ke dalam casing (sisi terbuka)","Ke dinding casing","Ke belakang tanpa akses","Terbalik ke bawah");
+Q(23,76,"Jumlah blanking plate yang dilepas untuk kartu grafis…","Satu atau dua","Lima","Nol","Semua");
+Q(25,80,"Konektor daya utama motherboard ATX…","24-pin (20+4)","6-pin","Molex","4-pin saja");
+Q(25,81,"Konektor Molex kini hampir sepenuhnya digantikan oleh…","Konektor SATA","USB","HDMI","PCIe");
+Q(26,82,"Selain tampilan, manajemen kabel penting untuk…","Menjaga aliran udara","Menambah kecepatan CPU","Menambah RAM","Menghemat harga");
+Q(26,83,"Kabel front panel audio yang bercabang dan tidak dipakai sebaiknya…","Dilipat dan diikat ke kabel utama","Dipotong","Dicolok ke CPU","Dibiarkan menjuntai");
+Q(27,85,"Hal yang tidak boleh dijalankan walau sebentar…","PC tanpa CPU cooler yang bekerja","PC tanpa monitor","PC tanpa mouse","PC tanpa speaker");
+Q(27,87,"Pada first boot, side panel sebaiknya…","Dilepas agar kerja kipas terlihat/terdengar","Dipasang rapat","Dilem","Dibuang");
+Q(27,86,"Jika memasang kartu grafis, kabel monitor dicolok ke…","Output pada kartu grafis","Output motherboard","Port USB","Port LAN");
+Q(28,88,"Jika PC tidak menyala sama sekali, hal pertama yang dicek…","Apakah tower tercolok dan stopkontak aktif","Ganti motherboard","Reinstal Windows","Ganti RAM");
+Q(28,91,"Pesan “can’t find boot disk” pada sistem baru sering berarti…","Boot device di BIOS salah","CPU rusak","RAM kurang","Monitor mati");
+Q(28,91,"Instalasi Windows tiba-tiba abort bisa disebabkan…","Memori rusak atau overclock","Mouse tidak ada","Kipas terlalu banyak","Kabel LAN");
+// Bagian 3: Installing Software
+Q(29,94,"File Windows digital berformat ISO harus…","Dibakar ke disc atau USB bootable","Dibuka dengan Notepad","Dihapus","Dijalankan di BIOS");
+Q(29,94,"Alat dari Microsoft untuk membuat media instalasi…","Windows Media Creation Tool","Windows Defender","Disk Management","Windows Store");
+Q(31,100,"BIOS sering disebut “firmware” karena…","Merupakan gabungan software dan hardware","Hanya hardware","Hanya aplikasi Windows","Tersimpan di hard disk");
+Q(31,102,"Cara mudah mencari update BIOS…","Ketik model motherboard + “BIOS update” di Google","Tebak dari warna board","Tanya antivirus","Gunakan Disk Management");
+Q(31,102,"Saat update BIOS di laptop…","Pastikan terhubung adaptor listrik, bukan baterai","Gunakan baterai saja","Cabut RAM","Matikan layar");
+Q(32,105,"Setelah memperbarui driver, disarankan…","Me-restart PC","Menghapus driver","Mematikan internet","Memformat disk");
+Q(33,107,"Menonaktifkan hard disk setelah idle dapat…","Memperlambat PC karena HDD perlu spin-up lagi","Mempercepat PC","Menambah RAM","Menghapus data");
+Q(34,108,"Sebelum scan malware, sebaiknya…","Memperbarui definisi/signature virus","Mematikan firewall","Mencabut kabel RAM","Menghapus Windows");
+Q(37,118,"Distro Linux yang disarankan buku untuk pemula…","Ubuntu","Debian","Fedora","openSUSE Tumbleweed");
+Q(37,118,"Linux Mint populer karena…","Pilihan desktop, mis. Cinnamon yang mirip Windows","Tidak punya desktop","Hanya bisa di server","Berbayar");
+Q(38,121,"Opsi instalasi Ubuntu untuk menghapus Windows…","Erase disk and install Ubuntu","Install alongside Windows","Try Ubuntu","Something else");
+Q(38,120,"Mode “Try Ubuntu” berarti…","Menjalankan Ubuntu tanpa instal penuh dan tanpa menyimpan file","Instal permanen","Menghapus Windows","Memformat BIOS");
+
+const BASE=D.length;
+// ===== Tambahan 2026 (materi di luar buku, tanpa rujukan halaman) =====
+// Bab 2
+Q(1,0,"Memilih antara AMD dan Intel untuk build baru sebaiknya berdasarkan…","Benchmark terbaru dan harga untuk kebutuhan Anda (gaming, kerja, dll.), bukan merek semata","Warna logo","Selalu AMD","Selalu Intel");
+// Bab 10
+Q(9,0,"Mengapa banyak casing modern tidak lagi menyediakan bay optical drive 5¼ inci?","Instalasi OS dan software kini lewat USB atau unduhan, sehingga drive optik jarang diperlukan","Disc lebih cepat daripada SSD","Optical drive kini wajib berada di dalam PSU","Bay 5¼ inci dilarang oleh standar ATX");
+// Bab 14
+Q(13,0,"NPU (Neural Processing Unit) pada prosesor modern adalah…","Unit khusus yang mempercepat tugas AI dengan daya rendah (mis. pada Intel Core Ultra dan AMD Ryzen AI)","Jenis RAM baru","Konektor daya GPU","Pasta termal khusus");
+// Bab 20
+Q(19,0,"Pada motherboard dengan empat slot DDR5 dan hanya dua modul RAM, umumnya modul dipasang di…","Slot yang ditunjuk manual, biasanya slot ke-2 dan ke-4 dihitung dari CPU (A2 dan B2)","Dua slot yang bersebelahan paling dekat CPU","Hanya slot paling jauh dari CPU","Slot PCIe");
+// Bab 22
+Q(21,0,"Cara memasang SSD M.2 yang benar…","Masukkan miring sekitar 30°, tekan rata, lalu kunci dengan sekrup atau latch M.2","Dimasukkan tegak lurus dari atas","Dilem ke motherboard","Disambung dengan kabel SATA");
+// Bab 34
+Q(33,0,"Drive penyimpanan sistem yang nyaman untuk PC serba guna/gaming di 2026…","SSD NVMe 1TB (500GB sebagai minimum praktis)","32GB","64GB","HDD 500GB");
+// Bab 37
+Q(36,0,"Cara paling aman memindahkan Windows ke SSD baru…","Cloning dengan alat dari produsen SSD atau Clonezilla, atau instal bersih lalu pulihkan data dari backup","Menyalin folder Windows secara manual","Mencabut baterai CMOS","Menukar CPU");
+// Bab 40
+Q(39,0,"Aplikasi gratis untuk mengekstrak arsip ZIP/7z/RAR di Windows…","7-Zip","Notepad","Paint","Calculator");
+Q(39,0,"Pemutar media gratis lintas platform yang memutar hampir semua format adalah…","VLC","Excel","Photoshop","Outlook");
+Q(39,0,"Manajer kata sandi (mis. Bitwarden) berguna untuk…","Menyimpan kata sandi unik yang kuat untuk tiap akun","Mempercepat internet","Menggantikan antivirus","Menambah RAM");
+// Bab 41
+Q(40,0,"Soket prosesor desktop Intel Core Ultra seri 200S (Arrow Lake) adalah…","LGA 1851","LGA 1700","LGA 1151","AM5");
+Q(40,0,"Prosesor AMD Ryzen 7000 dan 9000 memakai soket…","AM5","AM4","LGA 1700","TR4");
+Q(40,0,"Motherboard AM5 hanya mendukung RAM jenis…","DDR5","DDR4","DDR3","DDR4 dan DDR5 sekaligus");
+Q(40,0,"Berbeda dari AM4, pada AM5 pin kontaknya berada di…","Soket motherboard (desain LGA), bukan pada CPU","Pada CPU (desain PGA)","Pada pendingin CPU","Tidak ada kontak fisik");
+Q(40,0,"Akhiran “X3D” pada Ryzen berarti…","Ada cache L3 tambahan bertumpuk (3D V-Cache), unggul untuk gaming","Grafis terintegrasi lebih kuat","Khusus laptop","Tidak butuh pendingin");
+Q(40,0,"Akhiran “F” pada prosesor Intel (mis. Core i5-14400F atau Core Ultra 5 245KF) berarti…","Tanpa grafis terintegrasi, wajib memakai kartu grafis terpisah","Clock tidak terkunci","Daya sangat rendah","Khusus server");
+Q(40,0,"Arsitektur hybrid Intel modern memadukan…","P-core (performa) dan E-core (efisiensi)","Dua soket CPU","RAM cepat dan lambat","Dua BIOS");
+Q(40,0,"Teknologi pada AMD yang setara dengan Hyper-Threading Intel adalah…","SMT (Simultaneous Multithreading)","Turbo Boost","EXPO","CrossFire");
+Q(40,0,"Thermal throttling adalah…","CPU menurunkan clock sendiri saat terlalu panas","CPU otomatis overclock","RAM penuh","PSU mati permanen");
+Q(40,0,"Sebelum membeli CPU baru untuk motherboard lama, yang wajib dicek selain soket adalah…","Daftar dukungan CPU dan versi BIOS minimum motherboard","Warna casing","Merek kipas","Panjang kabel SATA");
+Q(40,0,"Fitur seperti BIOS Flashback / Q-Flash Plus berguna untuk…","Memperbarui BIOS lewat USB tanpa CPU atau RAM terpasang","Overclock RAM","Mengganti thermal paste","Mematikan TPM");
+Q(40,0,"Keunggulan UEFI dibanding BIOS legacy adalah…","Antarmuka grafis dan dukungan boot dari drive GPT berkapasitas besar","Hanya ganti warna layar","Tidak butuh motherboard","Lebih lambat tapi aman");
+Q(40,0,"Intel Core Ultra seri 200S (Arrow Lake) dibanding generasi Core sebelumnya…","Tidak memiliki Hyper-Threading; performa multi-thread mengandalkan P-core dan E-core","Memakai soket AM5","Hanya mendukung DDR4","Tidak punya E-core");
+Q(40,0,"Salah satu alasan platform AM5 menarik untuk build 2026…","Soket yang sama dipakai lintas beberapa generasi Ryzen sehingga CPU bisa di-upgrade tanpa ganti motherboard","AM5 memakai RAM DDR3","AM5 tidak butuh pendingin","AM5 sama dengan LGA 1851");
+// Bab 42
+Q(41,0,"Modul DDR4 dan DDR5 tidak bisa tertukar karena…","Posisi takik (notch) berbeda sehingga tidak muat di slot yang salah","Hanya beda warna slot","DDR5 lebih tebal","Beda merek saja");
+Q(41,0,"Kapasitas RAM yang praktis untuk PC serba guna/gaming di 2026…","32GB (16GB sebagai minimum)","4GB","2GB","256GB");
+Q(41,0,"Fungsi XMP (Intel) atau EXPO (AMD) di BIOS…","Menerapkan profil kecepatan RAM sesuai yang diiklankan","Memperbarui BIOS","Mengatur kecepatan kipas","Menonaktifkan RAM");
+Q(41,0,"Dibanding satu modul 1×32GB, kit 2×16GB memberi keuntungan…","Mode dual-channel dengan bandwidth lebih tinggi","Kapasitas lebih besar","Tidak butuh slot","Voltase lebih rendah selalu");
+Q(41,0,"M.2 sebenarnya adalah…","Bentuk fisik (form factor) yang dapat membawa SSD NVMe atau SATA","Jenis RAM","Protokol jaringan","Soket CPU");
+Q(41,0,"Kecepatan sekuensial SSD NVMe PCIe 4.0 x4 dibanding SSD SATA kira-kira…","±7.000 MB/s dibanding ±550 MB/s","±550 MB/s dibanding ±7.000 MB/s","Sama persis","±100 MB/s dibanding ±50 MB/s");
+Q(41,0,"Kode “2280” pada SSD M.2 menunjukkan…","Lebar 22 mm dan panjang 80 mm","Kapasitas 2.280 GB","Kecepatan 2.280 MB/s","Tahun produksi");
+Q(41,0,"SSD PCIe 5.0 yang cepat umumnya membutuhkan…","Heatsink agar tidak throttling karena panas","Pendingin air wajib","PSU 2000W","Dua CPU");
+Q(41,0,"TBW pada spesifikasi SSD berarti…","Total data yang dijamin garansi bisa ditulis ke drive","Kecepatan baca maksimum","Ukuran cache","Suhu kerja");
+Q(41,0,"Dibanding QLC, SSD bertipe TLC umumnya…","Lebih awet dan kinerja tulis lebih konsisten, tetapi lebih mahal per GB","Selalu lebih murah dan lebih lambat","Tidak bisa dipakai untuk OS","Hanya untuk HDD");
+Q(41,0,"Untuk drive baru pada PC modern berbasis UEFI/Windows 11, skema partisi standar yang dipilih adalah…","GPT","MBR","FAT12","Tanpa partisi");
+Q(41,0,"Batas ukuran partisi pada skema MBR adalah…","2TB","500GB","16TB","128GB");
+Q(41,0,"Strategi backup 3-2-1 berarti…","3 salinan data, 2 jenis media berbeda, 1 salinan di lokasi lain","3 disk, 2 PC, 1 kabel","3 hari, 2 jam, 1 menit","1 salinan di 3 folder");
+Q(41,0,"HDD masih relevan di 2026 terutama untuk…","Penyimpanan arsip berkapasitas besar dengan harga per TB murah","Menjalankan OS tercepat","Menggantikan RAM","Menjadi cache CPU");
+Q(41,0,"SSD NVMe PCIe 5.0 yang dipasang di slot M.2 PCIe 4.0…","Tetap berfungsi pada kecepatan PCIe 4.0 (kompatibel mundur)","Tidak terdeteksi","Rusak permanen","Berjalan lebih cepat dari spesifikasi");
+// Bab 43
+Q(42,0,"Kartu grafis PCIe 4.0 dipasang di slot PCIe 5.0…","Tetap bisa (kompatibel mundur), berjalan pada kecepatan PCIe 4.0","Tidak bisa menyala","Rusak","Butuh adaptor khusus");
+Q(42,0,"Konektor daya GPU 12VHPWR / 12V-2x6 harus…","Tertancap penuh dan kabel tidak ditekuk tajam dekat konektor","Boleh ditekuk sekuat mungkin","Dilonggarkan agar dingin","Dipasang lewat splitter apa saja");
+Q(42,0,"Untuk gaming modern di 1440p, kapasitas VRAM yang lebih aman di 2026…","12–16GB","512MB","1GB","2GB");
+Q(42,0,"Resizable BAR (Smart Access Memory) memungkinkan…","CPU mengakses seluruh VRAM GPU sekaligus","Menambah kapasitas VRAM","Memperbesar casing","Overclock RAM otomatis");
+Q(42,0,"Upscaling seperti DLSS, FSR, dan XeSS bekerja dengan…","Merender di resolusi lebih rendah lalu memperbesarnya dengan algoritma/AI","Menambah VRAM fisik","Mengganti monitor","Menghapus tekstur");
+Q(42,0,"Sebelum membeli GPU, ukuran casing yang harus dicek adalah…","Panjang dan ketebalan (jumlah slot) kartu","Warna LED","Berat PSU","Merek keyboard");
+Q(42,0,"GPU besar dan berat yang melorot (sag) sebaiknya dibantu dengan…","Bracket atau penyangga GPU","Lem panas","Kabel SATA","Mengurangi kipas casing");
+Q(42,0,"PSU berstandar ATX 3.x dirancang untuk…","Menangani lonjakan daya sesaat GPU modern dan mendukung konektor 12V-2x6","Hanya laptop","Mengubah AC ke AC","Menggantikan UPS");
+Q(42,0,"Urutan sertifikasi 80 Plus dari terendah ke tertinggi…","Bronze, Silver, Gold, Platinum, Titanium","Titanium, Platinum, Gold, Silver, Bronze","Gold, Bronze, Titanium, Silver, Platinum","Silver, Bronze, Platinum, Gold, Titanium");
+Q(42,0,"Kabel modular PSU sebaiknya…","Hanya memakai kabel yang dibuat untuk PSU tersebut","Dipakai dari merek apa pun","Dipotong agar pas","Dicampur antar-PSU");
+Q(42,0,"GPU berdaya besar dengan beberapa konektor PCIe 8-pin sebaiknya dialiri…","Kabel PCIe terpisah dari PSU untuk tiap konektor bila tersedia","Satu kabel bercabang untuk semuanya","Adaptor Molex","Kabel SATA");
+Q(42,0,"Kabel video yang umum untuk monitor refresh rate tinggi…","DisplayPort atau HDMI 2.1","VGA","Composite","S-Video");
+Q(42,0,"Cara menghitung kapasitas PSU yang wajar…","Jumlahkan daya GPU, CPU, dan komponen lain, lalu tambah cadangan ±20–30%","Pilih yang paling murah","Samakan dengan jumlah kipas","Pilih berdasarkan warna kabel");
+Q(42,0,"Kartu grafis NVIDIA GeForce RTX 50 memakai arsitektur…","Blackwell","Ada Lovelace","Pascal","Zen 5");
+Q(42,0,"Kartu grafis AMD Radeon RX 9000 memakai arsitektur…","RDNA 4","GCN","Blackwell","Zen 5");
+Q(42,0,"Konfigurasi multi-GPU (SLI/CrossFire) di era sekarang…","Praktis ditinggalkan; satu kartu grafis yang kuat lebih disarankan untuk gaming","Wajib agar game bisa berjalan","Satu-satunya cara memakai PCIe","Hanya untuk SSD");
+// Bab 44
+Q(43,0,"Angka 240 atau 360 pada AIO liquid cooler menunjukkan…","Ukuran radiator (dua atau tiga kipas 120 mm)","Kapasitas air dalam ml","Daya dalam watt","Suhu maksimum");
+Q(43,0,"Pasta termal yang umum dioleskan pada CPU…","Titik sebesar kacang polong di tengah, lalu disebar oleh tekanan cooler","Olesan tebal di seluruh motherboard","Tanpa pasta sama sekali","Hanya di sisi cooler");
+Q(43,0,"Film plastik pelindung di dasar cooler baru…","Harus dilepas sebelum dipasang","Dibiarkan agar aman","Dipakai sebagai pengganti pasta","Dilem ke CPU");
+Q(43,0,"Tekanan udara positif di casing (intake lebih banyak dari exhaust) membantu…","Mengurangi debu yang masuk lewat celah casing","Menambah panas","Memperlambat kipas","Mengganti PSU");
+Q(43,0,"Konfigurasi aliran udara casing yang umum…","Intake dari depan/bawah, exhaust ke belakang/atas","Semua kipas meniup masuk","Semua kipas membuang keluar","Kipas hanya di PSU");
+Q(43,0,"Dibanding panel depan kaca tertutup, panel depan mesh umumnya…","Memberi aliran udara lebih baik","Selalu lebih panas","Tidak ada beda","Tidak bisa dipasangi kipas");
+Q(43,0,"Pada tower cooler besar, spesifikasi casing yang harus dicek adalah…","Batas tinggi maksimum CPU cooler","Lebar kabel SATA","Warna panel","Berat motherboard");
+Q(43,0,"Kipas PWM 4-pin dibanding kipas DC 3-pin…","Kecepatannya diatur lewat sinyal PWM dengan rentang kontrol lebih luas","Selalu lebih lambat","Hanya bisa 5V","Tidak butuh header");
+Q(43,0,"Header ARGB (5V, 3-pin) dan RGB (12V, 4-pin)…","Tidak boleh tertukar karena bisa merusak LED","Boleh ditukar bebas","Sama persis","Hanya untuk RAM");
+Q(43,0,"Pompa AIO sebaiknya…","Tidak diletakkan di titik tertinggi loop agar udara tidak terjebak","Selalu di titik tertinggi","Dilepas dari header","Dibalik");
+// Bab 45
+Q(44,0,"Dukungan reguler Windows 10 (update keamanan gratis untuk pengguna rumahan) telah berakhir pada…","14 Oktober 2025","Tahun 2020","Tahun 2030","Belum ada jadwal");
+Q(44,0,"Persyaratan utama Windows 11 mencakup…","TPM 2.0, Secure Boot, dan UEFI","TPM 1.0 saja","BIOS legacy saja","Tidak ada syarat");
+Q(44,0,"Pada PC rakitan, fitur TPM biasanya diaktifkan di BIOS sebagai…","fTPM (AMD) atau PTT (Intel)","CSM","XMP","PCIe lane");
+Q(44,0,"Agar boot UEFI penuh dengan Secure Boot dan GPT berjalan, CSM sebaiknya…","Dinonaktifkan","Diaktifkan wajib","Dioverclock","Dihapus dari CPU");
+Q(44,0,"Media instalasi Windows lewat USB memerlukan flash drive minimal…","8GB","512MB","1GB","100MB");
+Q(44,0,"File ISO Windows sebaiknya diunduh dari…","Situs resmi Microsoft","Forum acak","Torrent","Pesan berantai");
+Q(44,0,"BitLocker adalah…","Fitur enkripsi drive; recovery key harus disimpan di tempat aman","Antivirus bawaan","Alat overclock","Pembersih registry");
+Q(44,0,"Setelah Windows terpasang, langkah driver yang tepat…","Pasang driver chipset dan GPU dari situs resmi produsen","Matikan semua driver","Instal banyak “driver updater” pihak ketiga","Hapus Windows Update");
+Q(44,0,"Lisensi digital Windows pada PC rakitan…","Terkait hardware/akun Microsoft; ganti motherboard bisa memerlukan aktivasi ulang","Tertanam di CPU selamanya","Harus dibeli ulang tiap tahun","Tidak pernah bisa dipindah");
+Q(44,0,"Soal antivirus di Windows modern…","Windows Security (Defender) aktif bawaan; hindari dua antivirus real-time sekaligus","Windows tak punya antivirus","Wajib dua antivirus","Antivirus hanya untuk Linux");
+Q(44,0,"Cara mereset BIOS ke default lewat hardware…","Cabut baterai CR2032 beberapa menit atau gunakan jumper CLR_CMOS","Cabut RAM","Cabut kipas","Format SSD");
+Q(44,0,"Autentikasi dua faktor (2FA) pada akun Microsoft/Google…","Menjaga akun tetap lebih aman walau password bocor","Menggantikan antivirus","Mempercepat PC","Menghapus virus");
+Q(44,0,"Setelah dukungan Windows 10 berakhir, pilihan yang paling aman untuk PC yang memenuhi syarat…","Upgrade ke Windows 11 (gratis bila PC memenuhi syarat)","Terus memakai tanpa pembaruan apa pun","Mematikan firewall","Beralih ke Windows XP");
+Q(44,0,"Pembaruan fitur Windows 11 versi 25H2 untuk PC yang sudah menjalankan 24H2 diberikan lewat…","Enablement package, yaitu pembaruan kecil lewat Windows Update","Instal ulang penuh yang wajib","Pembelian lisensi baru","Penggantian motherboard");
+// Bab 46
+Q(45,0,"Bench test (menyalakan komponen di luar casing)…","Berguna untuk memastikan komponen dasar bekerja sebelum dirakit penuh","Berbahaya dan dilarang","Merusak motherboard","Wajib setelah selesai dirakit");
+Q(45,0,"Mengapa CPU, RAM, M.2, dan cooler sering dipasang sebelum motherboard masuk casing…","Ruang kerja lebih lega dan lebih mudah","Dilarang sesudah itu","Merusak casing","Agar PSU tidak perlu");
+Q(45,0,"Konektor CPU power (EPS 4+4 pin) yang lupa dipasang…","PC tidak menyala atau tidak POST","Tidak berpengaruh","RAM jadi lambat","Kipas berhenti selamanya");
+Q(45,0,"Standoff motherboard sebaiknya…","Hanya dipasang pada posisi yang sesuai lubang motherboard","Dipasang sebanyak mungkin","Dilepas semua","Ditaruh di bawah kipas");
+Q(45,0,"Bila I/O shield terpisah dari motherboard…","Dipasang ke casing sebelum motherboard dimasukkan","Dipasang sesudah GPU","Tidak perlu","Dilem ke PSU");
+Q(45,0,"LED debug (CPU/DRAM/VGA/BOOT) di motherboard menunjukkan…","Tahap POST yang sedang bermasalah","Suhu CPU","Mode RGB","Tegangan PSU");
+Q(45,0,"Boot pertama platform DDR5 (mis. AM5) kadang layar kosong beberapa menit karena…","Memory training; sebaiknya ditunggu sebelum mengambil tindakan","PC rusak pasti","PSU salah","BIOS terhapus");
+Q(45,0,"Jika layar kosong padahal ada GPU, langkah awal yang tepat…","Pastikan kabel monitor di GPU dan coba pasang ulang GPU/RAM","Beli monitor baru","Instal ulang Windows","Ganti casing");
+Q(45,0,"Alat umum untuk menguji kestabilan RAM…","MemTest86","Notepad","Paint","Calculator");
+Q(45,0,"Alat untuk memantau suhu dan tegangan komponen…","HWiNFO","Paint","WordPad","Calculator");
+Q(45,0,"Port USB-C di panel depan casing memerlukan…","Header USB-C/USB 3.2 Gen 2 Type-E pada motherboard","Konektor SATA","Slot PCIe","Konektor Molex");
+Q(45,0,"Cara memasang kabel front panel (power SW, reset, LED) yang benar…","Mengikuti diagram pin di manual motherboard","Menebak urutannya","Selalu hitam ke kiri","Tidak perlu dicolok");
+// Bab 47
+Q(46,0,"Ubuntu LTS dirilis…","Setiap dua tahun dengan dukungan standar 5 tahun","Setiap bulan","Setiap 10 hari","Dengan dukungan 6 bulan");
+Q(46,0,"Alat yang umum untuk membuat USB bootable Linux…","Rufus, Ventoy, atau balenaEtcher","Photoshop","Excel","Notepad");
+Q(46,0,"Untuk dual boot Windows dan Linux, urutan yang disarankan…","Pasang Windows dulu, baru Linux","Linux dulu, baru Windows","Tidak mungkin dual boot","Hapus partisi EFI dulu");
+Q(46,0,"Sebelum dual boot pada drive yang dienkripsi BitLocker…","Pastikan recovery key tersedia dan nonaktifkan/atur BitLocker","Abaikan saja","Hapus TPM","Cabut RAM");
+Q(46,0,"Proton pada Steam memungkinkan…","Menjalankan banyak game Windows di Linux","Memformat SSD","Overclock GPU","Memasang Windows");
+Q(46,0,"Perintah/aplikasi apt, dnf, atau Flatpak adalah…","Package manager untuk memasang aplikasi di Linux","Antivirus","Browser","Pendingin");
+Q(46,0,"PC lama yang tidak memenuhi syarat Windows 11 dapat…","Diperbarui hardware-nya atau dipakai dengan Linux","Otomatis lolos","Harus dibuang","Hanya cocok untuk Mac");
+Q(46,0,"Sebelum menginstal OS baru atau mempartisi ulang drive…","Cadangkan data penting karena partisi/format bisa menghapus data","Langsung format","Cabut kabel monitor","Matikan PSU");
+Q(46,0,"Ubuntu 26.04 LTS (Resolute Raccoon) dirilis pada…","April 2026, dengan dukungan standar 5 tahun","Oktober 2020","April 2018","Desember 2030");
+
+const ADV=D.length;C.push("2026 Lanjutan");
+// Update 2026 Lanjutan (47)
+Q(47,0,"Pada CPU Intel, PL1 dan PL2 adalah…","PL1 batas daya berkelanjutan (jangka panjang), PL2 batas daya boost jangka pendek","PL1 jumlah core, PL2 jumlah thread","PL1 voltase RAM, PL2 voltase GPU","PL1 kecepatan kipas, PL2 suhu maksimum");
+Q(47,0,"Untuk mengatasi ketidakstabilan/degradasi pada Core generasi 13 dan 14, langkah utamanya…","Update BIOS dengan microcode terbaru dan memakai profil daya default Intel","Mengganti thermal paste saja","Menambah jumlah kipas casing","Mengganti PSU");
+Q(47,0,"Pada AMD Ryzen, Curve Optimizer dengan offset negatif berarti…","Menurunkan tegangan per core (undervolt) sehingga suhu turun dan boost bisa lebih tinggi","Menaikkan tegangan per core","Mengunci clock di nilai minimum","Menonaktifkan SMT");
+Q(47,0,"Mengapa lulus satu benchmark singkat belum membuktikan overclock/undervolt stabil…","Error bisa muncul hanya pada beban tertentu atau setelah berjam-jam, jadi perlu uji beragam dan lama","Benchmark selalu menemukan semua error","Stabilitas tidak bisa diuji","Hanya GPU yang bisa tidak stabil");
+Q(47,0,"Selisih besar antara suhu GPU dan hot spot (junction) di HWiNFO dapat menandakan…","Kontak pendingin atau thermal paste/pad yang kurang baik","RAM rusak","PSU terlalu besar","Monitor salah kabel");
+Q(47,0,"Tujuan undervolting GPU (mis. lewat kurva V/F di MSI Afterburner)…","Menurunkan daya dan suhu dengan performa hampir sama","Menambah VRAM","Membuka kunci core tambahan","Mengganti konektor daya");
+Q(47,0,"Perbedaan umum chipset kelas B dan kelas X/Z…","Kelas X/Z umumnya menyediakan lebih banyak lane PCIe/USB dan fitur, kelas B lebih terjangkau dengan fitur lebih sedikit","Kelas B selalu lebih cepat","Keduanya persis sama","Kelas B memakai soket berbeda");
+Q(47,0,"Memasang SSD di slot M.2 tertentu dapat menonaktifkan port SATA tertentu karena…","Lane/bandwidth chipset dibagi bersama","Kabel SATA terlalu pendek","PSU kekurangan daya","BIOS rusak");
+Q(47,0,"VRM motherboard berkualitas rendah yang dipasangkan dengan CPU berdaya tinggi berisiko…","Throttling dan ketidakstabilan karena VRM terlalu panas","RAM menjadi DDR4","Layar berubah warna","Kipas berhenti permanen");
+Q(47,0,"Proteksi OCP, OVP, dan SCP pada PSU adalah…","Over Current, Over Voltage, dan Short Circuit Protection","Over Clock, Over Volt, dan Slow Cooling Protection","Optical, Overheat, dan Surge Charge Protection","Output, Overload, dan Safe Cooling Protection");
+Q(47,0,"PSU berkapasitas pas-pasan berisiko dengan GPU modern karena…","Lonjakan daya sesaat (transient) dapat memicu proteksi dan membuat PC mati mendadak","GPU modern tidak butuh daya","PSU otomatis menambah watt","Lonjakan daya tidak pernah terjadi");
+Q(47,0,"Risiko utama PSU murah tanpa proteksi memadai…","Tegangan tidak stabil atau ripple tinggi yang dapat merusak komponen lain","Hanya suaranya berisik","Hanya warnanya kurang bagus","Tidak ada risiko");
+Q(47,0,"Beep code saat POST berguna untuk…","Memberi petunjuk kesalahan perangkat keras (mis. RAM/GPU) saat layar belum menampilkan apa pun; artinya bergantung pada produsen","Mengukur suhu CPU","Mengatur volume speaker","Menandai Windows sudah siap");
+Q(47,0,"Pada S.M.A.R.T. HDD, tanda yang paling mengkhawatirkan…","Reallocated atau pending sector yang terus bertambah","Jumlah jam hidup yang nol","Suhu ruangan","Warna label drive");
+Q(47,0,"Display Driver Uninstaller (DDU) digunakan untuk…","Menghapus bersih driver GPU lama (biasanya di Safe Mode) sebelum instal ulang atau ganti merek GPU","Memperbarui BIOS","Overclock GPU","Mengunduh game");
+Q(47,0,"Jika sering BSOD “WHEA_UNCORRECTABLE_ERROR” setelah overclock/undervolt, langkah pertama…","Kembalikan pengaturan ke default (reset BIOS) lalu uji ulang secara bertahap","Instal ulang Windows","Beli CPU baru","Naikkan voltase sebanyak mungkin");
+Q(47,0,"RAID 1 memberikan…","Mirroring: data identik di dua drive sehingga tahan kegagalan satu drive","Kecepatan dua kali lipat tanpa redundansi","Kapasitas gabungan tanpa proteksi","Enkripsi otomatis");
+Q(47,0,"RAID 0 meningkatkan kecepatan tetapi…","Kegagalan satu drive menghilangkan seluruh data","Selalu lebih aman dari RAID 1","Mengurangi kapasitas setengah","Tidak butuh dua drive");
+Q(47,0,"RAID bukan pengganti backup karena…","Tidak melindungi dari penghapusan, ransomware, atau korupsi yang tersalin ke semua drive","RAID selalu menghapus data","RAID hanya untuk SSD","Backup tidak pernah diperlukan");
+Q(47,0,"SSD tanpa DRAM umumnya…","Lebih murah tetapi kinerja acak/berkelanjutan bisa turun, terutama saat hampir penuh","Selalu lebih cepat","Tidak bisa dipakai sebagai drive OS","Hanya bisa SATA");
+Q(47,0,"Cara melindungi backup dari ransomware…","Simpan salinan offline atau immutable yang tidak selalu terhubung ke PC","Simpan di folder yang sama dengan data asli","Matikan antivirus","Gunakan satu drive untuk semuanya");
+Q(47,0,"Wi-Fi 6E menambahkan…","Pita frekuensi 6 GHz","Pita 900 MHz","Kabel Ethernet","Port USB");
+Q(47,0,"Konektor USB-C tidak otomatis berarti…","Mendukung USB4/Thunderbolt, output video, atau pengisian daya tinggi; spesifikasinya harus dicek","Selalu USB4","Selalu mendukung 100W","Selalu ada output video");
+Q(47,0,"FreeSync dan G-Sync mengatasi…","Screen tearing dan stutter dengan menyesuaikan refresh rate monitor ke frame rate GPU","Suhu GPU","Kecepatan internet","Kebisingan kipas");
+Q(47,0,"Monitor 144Hz tetap tampil 60Hz bila…","Refresh rate di Windows belum diubah atau kabel/port tidak mendukung","Monitor rusak pasti","RAM kurang","BIOS lama");
+Q(47,0,"Label HDR400 pada monitor sering…","Hanya menandakan dukungan dasar dengan kecerahan dan kontras terbatas dibanding HDR1000/OLED","Setara HDR terbaik","Berarti 400 Hz","Berarti 400 nits per piksel");
+Q(47,0,"Pada Linux dengan GPU NVIDIA untuk gaming, driver yang umum disarankan…","Driver proprietary NVIDIA, bukan nouveau","Hanya nouveau","Tanpa driver","Driver Windows lewat Wine");
+Q(47,0,"Wayland dibanding X11 adalah…","Protokol tampilan modern pengganti X11 dengan isolasi antar aplikasi yang lebih baik","Jenis distro Linux","Pendingin CPU","Format partisi");
+Q(47,0,"Wi-Fi 7 (802.11be) dibanding Wi-Fi 6E menambahkan…","Kanal lebih lebar (hingga 320 MHz) dan Multi-Link Operation untuk throughput/latensi lebih baik","Hanya pita 900 MHz","Kabel Ethernet wajib","Penghapusan pita 5 GHz");
+const CE=["10 Reasons to Build a PC","Choosing a System Type","Choosing a Case","Motherboards","Choosing a Processor","RAM","HDD, SSD or Both","Graphics Card (GPU)","Power Supply","Optical Drive","Expansion Cards & Extras","CPU & Case Cooling","Precautions","Jargon Buster","Preparing to Build","Preparing the Case","Getting to Know the Motherboard","Installing the CPU","Installing the CPU Cooler","Installing Memory","Motherboard into the Case","Installing HDD/SSD","Installing an Optical Drive","Installing the GPU","Installing the PSU","Power Connections","Cable Management","Final Check & First Boot","Troubleshooting","Installing Windows","Upgrading to Windows 10","Updating the BIOS","Updating Drivers","Performance Tuning","Malware Protection","Upgrading to an SSD","Migrating Windows to an SSD","Choosing Linux","Installing Linux","20 Essential Apps","2026 Update: CPU & Platform","2026 Update: Memory & Storage","2026 Update: GPU & Power","2026 Update: Cooling & Cases","2026 Update: Windows & Security","2026 Update: Building & Troubleshooting","2026 Update: Linux & Software"];
+// English translations of the 2026 extra questions (D index BASE+k). Correct answer stays first.
+const EX=[
+["Choosing between AMD and Intel for a new build should be based on…", "Current benchmarks and pricing for your needs (gaming, work, etc.), not the brand alone", "Logo color", "Always AMD", "Always Intel"],
+["Why do many modern cases no longer offer a 5¼-inch optical drive bay?", "OS and software installs now go through USB or downloads, so optical drives are rarely needed", "Discs are faster than SSDs", "Optical drives must now live inside the PSU", "5¼-inch bays are banned by the ATX standard"],
+["An NPU (Neural Processing Unit) in modern processors is…", "A dedicated unit that accelerates AI tasks at low power (e.g. in Intel Core Ultra and AMD Ryzen AI)", "A new type of RAM", "A GPU power connector", "A special thermal paste"],
+["On a motherboard with four DDR5 slots and only two RAM modules, they are usually installed in…", "The slots named in the manual, usually the 2nd and 4th counting from the CPU (A2 and B2)", "The two adjacent slots closest to the CPU", "Only the slot farthest from the CPU", "A PCIe slot"],
+["The correct way to install an M.2 SSD…", "Insert at about a 30° angle, press it flat, then secure with the M.2 screw or latch", "Push it straight down from above", "Glue it to the motherboard", "Connect it with a SATA cable"],
+["A comfortable system storage size for a general-purpose/gaming PC in 2026…", "A 1TB NVMe SSD (500GB as a practical minimum)", "32GB", "64GB", "A 500GB HDD"],
+["The safest way to move Windows to a new SSD…", "Clone with the SSD maker's tool or Clonezilla, or do a clean install and restore data from backup", "Copy the Windows folder by hand", "Remove the CMOS battery", "Swap the CPU"],
+["A free app for extracting ZIP/7z/RAR archives on Windows…", "7-Zip", "Notepad", "Paint", "Calculator"],
+["A free cross-platform media player that plays almost any format is…", "VLC", "Excel", "Photoshop", "Outlook"],
+["A password manager (e.g. Bitwarden) is useful for…", "Storing a strong unique password for each account", "Speeding up the internet", "Replacing antivirus", "Adding RAM"],
+["The desktop socket for Intel Core Ultra 200S (Arrow Lake) processors is…", "LGA 1851", "LGA 1700", "LGA 1151", "AM5"],
+["AMD Ryzen 7000 and 9000 processors use socket…", "AM5", "AM4", "LGA 1700", "TR4"],
+["AM5 motherboards only support RAM of type…", "DDR5", "DDR4", "DDR3", "Both DDR4 and DDR5"],
+["Unlike AM4, on AM5 the contact pins are located on…", "The motherboard socket (LGA design), not the CPU", "The CPU (PGA design)", "The CPU cooler", "There are no physical contacts"],
+["The “X3D” suffix on a Ryzen CPU means…", "Extra stacked L3 cache (3D V-Cache), great for gaming", "Stronger integrated graphics", "Laptop only", "No cooler needed"],
+["The “F” suffix on an Intel processor (e.g. Core i5-14400F or Core Ultra 5 245KF) means…", "No integrated graphics; a discrete graphics card is required", "Unlocked clock", "Very low power", "Server only"],
+["Modern Intel hybrid architecture combines…", "P-cores (performance) and E-cores (efficiency)", "Two CPU sockets", "Fast and slow RAM", "Two BIOSes"],
+["AMD's equivalent of Intel Hyper-Threading is…", "SMT (Simultaneous Multithreading)", "Turbo Boost", "EXPO", "CrossFire"],
+["Thermal throttling is when…", "The CPU lowers its own clock speed when too hot", "The CPU overclocks automatically", "RAM is full", "The PSU dies permanently"],
+["Before buying a new CPU for an older motherboard, besides the socket you must check…", "The motherboard's CPU support list and minimum BIOS version", "Case color", "Fan brand", "SATA cable length"],
+["Features like BIOS Flashback / Q-Flash Plus are useful for…", "Updating the BIOS via USB with no CPU or RAM installed", "Overclocking RAM", "Replacing thermal paste", "Disabling TPM"],
+["An advantage of UEFI over legacy BIOS is…", "A graphical interface and booting from large GPT drives", "It only changes the screen color", "It needs no motherboard", "Slower but safer"],
+["Compared with earlier Core generations, Intel Core Ultra 200S (Arrow Lake)…", "Has no Hyper-Threading; multi-thread performance relies on P-cores and E-cores", "Uses socket AM5", "Supports only DDR4", "Has no E-cores"],
+["One reason AM5 is attractive for a 2026 build…", "The same socket spans several Ryzen generations, so the CPU can be upgraded without changing the motherboard", "AM5 uses DDR3 RAM", "AM5 needs no cooler", "AM5 is the same as LGA 1851"],
+["DDR4 and DDR5 modules can't be mixed up because…", "The notch positions differ, so they won't fit the wrong slot", "Only the slot colors differ", "DDR5 is thicker", "Only the brand differs"],
+["A practical RAM capacity for a general-purpose/gaming PC in 2026…", "32GB (16GB as a minimum)", "4GB", "2GB", "256GB"],
+["The function of XMP (Intel) or EXPO (AMD) in the BIOS…", "Applies the RAM's advertised speed profile", "Updates the BIOS", "Sets fan speed", "Disables RAM"],
+["Compared to a single 1×32GB module, a 2×16GB kit offers…", "Dual-channel mode with higher bandwidth", "Larger capacity", "No slot needed", "Always lower voltage"],
+["M.2 is actually…", "A physical form factor that can carry NVMe or SATA SSDs", "A type of RAM", "A network protocol", "A CPU socket"],
+["Sequential speed of a PCIe 4.0 x4 NVMe SSD versus a SATA SSD is roughly…", "~7,000 MB/s vs ~550 MB/s", "~550 MB/s vs ~7,000 MB/s", "Exactly the same", "~100 MB/s vs ~50 MB/s"],
+["The code “2280” on an M.2 SSD indicates…", "22 mm wide and 80 mm long", "2,280 GB capacity", "2,280 MB/s speed", "Year of manufacture"],
+["Fast PCIe 5.0 SSDs generally need…", "A heatsink to avoid thermal throttling", "Mandatory water cooling", "A 2000W PSU", "Two CPUs"],
+["TBW in an SSD spec means…", "Total data the warranty guarantees can be written to the drive", "Maximum read speed", "Cache size", "Operating temperature"],
+["Compared to QLC, TLC SSDs are generally…", "More durable with more consistent write performance, but pricier per GB", "Always cheaper and slower", "Unusable for an OS", "HDD only"],
+["For a new drive on a modern UEFI/Windows 11 PC, the standard partition scheme is…", "GPT", "MBR", "FAT12", "No partition"],
+["The partition size limit of the MBR scheme is…", "2TB", "500GB", "16TB", "128GB"],
+["The 3-2-1 backup strategy means…", "3 copies of data, 2 different media types, 1 copy offsite", "3 disks, 2 PCs, 1 cable", "3 days, 2 hours, 1 minute", "1 copy in 3 folders"],
+["HDDs are still relevant in 2026 mainly for…", "High-capacity archive storage with a cheap price per TB", "Running the fastest OS", "Replacing RAM", "Acting as CPU cache"],
+["A PCIe 5.0 NVMe SSD installed in a PCIe 4.0 M.2 slot…", "Still works at PCIe 4.0 speed (backward compatible)", "Is not detected", "Is permanently damaged", "Runs faster than its spec"],
+["A PCIe 4.0 graphics card installed in a PCIe 5.0 slot…", "Still works (backward compatible), running at PCIe 4.0 speed", "Won't power on", "Gets damaged", "Needs a special adapter"],
+["The GPU power connector 12VHPWR / 12V-2x6 must be…", "Fully seated, with the cable not sharply bent near the connector", "Bent as hard as possible", "Left loose to stay cool", "Plugged in via any splitter"],
+["For modern 1440p gaming, a safer VRAM capacity in 2026 is…", "12–16GB", "512MB", "1GB", "2GB"],
+["Resizable BAR (Smart Access Memory) allows…", "The CPU to access the GPU's entire VRAM at once", "Adding VRAM capacity", "A bigger case", "Automatic RAM overclocking"],
+["Upscaling such as DLSS, FSR, and XeSS works by…", "Rendering at a lower resolution, then enlarging with algorithms/AI", "Adding physical VRAM", "Replacing the monitor", "Deleting textures"],
+["Before buying a GPU, the case dimension you must check is…", "The card's length and thickness (slot count)", "LED color", "PSU weight", "Keyboard brand"],
+["A large, heavy GPU that sags should be helped with…", "A GPU bracket or support", "Hot glue", "A SATA cable", "Fewer case fans"],
+["An ATX 3.x PSU is designed to…", "Handle modern GPUs' brief power spikes and support the 12V-2x6 connector", "Be laptop only", "Convert AC to AC", "Replace a UPS"],
+["The order of 80 Plus certifications from lowest to highest…", "Bronze, Silver, Gold, Platinum, Titanium", "Titanium, Platinum, Gold, Silver, Bronze", "Gold, Bronze, Titanium, Silver, Platinum", "Silver, Bronze, Platinum, Gold, Titanium"],
+["Modular PSU cables should…", "Only be the ones made for that specific PSU", "Be used from any brand", "Be cut to fit", "Be mixed between PSUs"],
+["A high-power GPU with several 8-pin PCIe connectors should be fed by…", "A separate PCIe cable from the PSU for each connector when available", "One split cable for everything", "A Molex adapter", "A SATA cable"],
+["A common video cable for high refresh rate monitors…", "DisplayPort or HDMI 2.1", "VGA", "Composite", "S-Video"],
+["A sensible way to size a PSU…", "Add up GPU, CPU, and other component power, then add ~20–30% headroom", "Choose the cheapest", "Match it to the fan count", "Pick by cable color"],
+["NVIDIA GeForce RTX 50 series graphics cards use the architecture…", "Blackwell", "Ada Lovelace", "Pascal", "Zen 5"],
+["AMD Radeon RX 9000 series graphics cards use the architecture…", "RDNA 4", "GCN", "Blackwell", "Zen 5"],
+["Multi-GPU setups (SLI/CrossFire) today are…", "Practically abandoned; one strong graphics card is recommended for gaming", "Required for games to run", "The only way to use PCIe", "For SSDs only"],
+["The number 240 or 360 on an AIO liquid cooler indicates…", "Radiator size (two or three 120 mm fans)", "Water capacity in ml", "Power in watts", "Maximum temperature"],
+["The usual way to apply thermal paste on a CPU…", "A pea-sized dot in the center, spread by the cooler's pressure", "A thick layer over the whole motherboard", "No paste at all", "Only on the cooler side"],
+["The protective plastic film on the base of a new cooler…", "Must be removed before installing", "Is left on for safety", "Replaces thermal paste", "Is glued to the CPU"],
+["Positive case air pressure (more intake than exhaust) helps…", "Reduce dust entering through gaps", "Add heat", "Slow the fans", "Replace the PSU"],
+["A common case airflow configuration…", "Intake from the front/bottom, exhaust to the rear/top", "All fans blow in", "All fans exhaust out", "Fans only on the PSU"],
+["Compared to a closed glass front panel, a mesh front panel generally…", "Provides better airflow", "Is always hotter", "Makes no difference", "Can't take fans"],
+["For a large tower cooler, the case spec to check is…", "Maximum CPU cooler height", "SATA cable width", "Panel color", "Motherboard weight"],
+["A 4-pin PWM fan compared to a 3-pin DC fan…", "Has speed controlled by a PWM signal with a wider control range", "Is always slower", "Only runs on 5V", "Needs no header"],
+["ARGB (5V, 3-pin) and RGB (12V, 4-pin) headers…", "Must not be swapped, as it can damage the LEDs", "Can be freely swapped", "Are identical", "Are for RAM only"],
+["An AIO pump should…", "Not be placed at the highest point of the loop so air doesn't get trapped", "Always be at the highest point", "Be unplugged from its header", "Be upside down"],
+["Regular Windows 10 support (free security updates for home users) ended on…", "October 14, 2025", "2020", "2030", "No schedule yet"],
+["The main Windows 11 requirements include…", "TPM 2.0, Secure Boot, and UEFI", "TPM 1.0 only", "Legacy BIOS only", "No requirements"],
+["On a custom-built PC, TPM is usually enabled in the BIOS as…", "fTPM (AMD) or PTT (Intel)", "CSM", "XMP", "PCIe lane"],
+["For full UEFI boot with Secure Boot and GPT to work, CSM should be…", "Disabled", "Mandatorily enabled", "Overclocked", "Removed from the CPU"],
+["A USB Windows installation media needs a flash drive of at least…", "8GB", "512MB", "1GB", "100MB"],
+["The Windows ISO file should be downloaded from…", "Microsoft's official website", "A random forum", "Torrents", "Chain messages"],
+["BitLocker is…", "A drive encryption feature; keep the recovery key somewhere safe", "A built-in antivirus", "An overclocking tool", "A registry cleaner"],
+["Once Windows is installed, the right driver step is…", "Install chipset and GPU drivers from the manufacturer's official site", "Disable all drivers", "Install lots of third-party “driver updaters”", "Delete Windows Update"],
+["A Windows digital license on a custom-built PC…", "Is tied to hardware/Microsoft account; changing the motherboard may require reactivation", "Is embedded in the CPU forever", "Must be repurchased every year", "Can never be transferred"],
+["About antivirus on modern Windows…", "Windows Security (Defender) is on by default; avoid two real-time antiviruses at once", "Windows has no antivirus", "Two antiviruses are mandatory", "Antivirus is for Linux only"],
+["How to reset the BIOS to defaults via hardware…", "Remove the CR2032 battery for a few minutes or use the CLR_CMOS jumper", "Remove the RAM", "Remove the fans", "Format the SSD"],
+["Two-factor authentication (2FA) on a Microsoft/Google account…", "Keeps the account safer even if the password leaks", "Replaces antivirus", "Speeds up the PC", "Removes viruses"],
+["After Windows 10 support ended, the safest choice for an eligible PC is…", "Upgrade to Windows 11 (free if the PC meets the requirements)", "Keep using it with no updates at all", "Turn off the firewall", "Switch to Windows XP"],
+["The Windows 11 version 25H2 feature update for PCs already on 24H2 is delivered via…", "An enablement package, a small update through Windows Update", "A mandatory full reinstall", "Buying a new license", "Replacing the motherboard"],
+["A bench test (powering components outside the case)…", "Is useful to confirm the basic components work before full assembly", "Is dangerous and forbidden", "Damages the motherboard", "Is required after finishing the build"],
+["Why are the CPU, RAM, M.2, and cooler often installed before the motherboard goes in the case…", "There's more room and it's easier to work", "It's forbidden afterwards", "It damages the case", "So a PSU isn't needed"],
+["If you forget the CPU power connector (EPS 4+4 pin)…", "The PC won't turn on or won't POST", "No effect", "RAM becomes slow", "Fans stop forever"],
+["Motherboard standoffs should…", "Only be installed in positions matching the motherboard's holes", "Be installed as many as possible", "All be removed", "Be placed under the fan"],
+["If the I/O shield is separate from the motherboard…", "Install it in the case before inserting the motherboard", "Install it after the GPU", "It's not needed", "Glue it to the PSU"],
+["The debug LEDs (CPU/DRAM/VGA/BOOT) on a motherboard show…", "Which POST stage is having a problem", "CPU temperature", "RGB mode", "PSU voltage"],
+["On the first boot of a DDR5 platform (e.g. AM5), the screen may stay blank for several minutes because of…", "Memory training; wait before taking any action", "The PC is definitely broken", "The wrong PSU", "The BIOS was erased"],
+["If the screen is blank even though a GPU is installed, the right first step is…", "Make sure the monitor cable is in the GPU and reseat the GPU/RAM", "Buy a new monitor", "Reinstall Windows", "Change the case"],
+["A common tool for testing RAM stability…", "MemTest86", "Notepad", "Paint", "Calculator"],
+["A tool for monitoring component temperatures and voltages…", "HWiNFO", "Paint", "WordPad", "Calculator"],
+["A front-panel USB-C port on a case requires…", "A USB-C/USB 3.2 Gen 2 Type-E header on the motherboard", "A SATA connector", "A PCIe slot", "A Molex connector"],
+["The right way to connect front-panel cables (power SW, reset, LEDs)…", "Follow the pin diagram in the motherboard manual", "Guess the order", "Always black to the left", "No need to plug them in"],
+["Ubuntu LTS is released…", "Every two years with 5 years of standard support", "Every month", "Every 10 days", "With 6 months of support"],
+["Common tools for making a bootable Linux USB…", "Rufus, Ventoy, or balenaEtcher", "Photoshop", "Excel", "Notepad"],
+["For dual-booting Windows and Linux, the recommended order is…", "Install Windows first, then Linux", "Linux first, then Windows", "Dual boot is impossible", "Delete the EFI partition first"],
+["Before dual-booting on a BitLocker-encrypted drive…", "Make sure the recovery key is available and suspend/configure BitLocker", "Ignore it", "Delete the TPM", "Remove the RAM"],
+["Proton in Steam allows…", "Running many Windows games on Linux", "Formatting an SSD", "Overclocking a GPU", "Installing Windows"],
+["The apt, dnf, or Flatpak commands/apps are…", "Package managers for installing apps on Linux", "Antivirus", "Browsers", "Coolers"],
+["An old PC that doesn't meet Windows 11 requirements can…", "Have its hardware upgraded or run Linux", "Pass automatically", "Must be thrown away", "Only suits a Mac"],
+["Before installing a new OS or re-partitioning drives…", "Back up important data, since partitioning/formatting can erase it", "Format right away", "Unplug the monitor cable", "Switch off the PSU"],
+["Ubuntu 26.04 LTS (Resolute Raccoon) was released in…", "April 2026, with 5 years of standard support", "October 2020", "April 2018", "December 2030"],
+];
+CE.push("2026 Advanced");EX.push(
+["On Intel CPUs, PL1 and PL2 are…", "PL1 the sustained (long-term) power limit, PL2 the short-term boost power limit", "PL1 core count, PL2 thread count", "PL1 RAM voltage, PL2 GPU voltage", "PL1 fan speed, PL2 maximum temperature"],
+["To address instability/degradation on 13th and 14th gen Core CPUs, the main step is…", "Update the BIOS with the latest microcode and use Intel's default power profile", "Just replace the thermal paste", "Add more case fans", "Replace the PSU"],
+["On AMD Ryzen, a negative Curve Optimizer offset means…", "Lowering per-core voltage (undervolt) so temperatures drop and boost can be higher", "Raising per-core voltage", "Locking the clock at its minimum", "Disabling SMT"],
+["Why passing one short benchmark doesn't prove an overclock/undervolt is stable…", "Errors may appear only under certain loads or after hours, so varied and long tests are needed", "Benchmarks always find every error", "Stability can't be tested", "Only GPUs can be unstable"],
+["A large gap between GPU temperature and hot spot (junction) in HWiNFO can indicate…", "Poor cooler contact or thermal paste/pad", "Faulty RAM", "An oversized PSU", "The wrong monitor cable"],
+["The goal of GPU undervolting (e.g. via the V/F curve in MSI Afterburner)…", "Lower power and temperature with nearly the same performance", "Add VRAM", "Unlock extra cores", "Change the power connector"],
+["The usual difference between B-class and X/Z-class chipsets…", "X/Z generally offer more PCIe/USB lanes and features, B is cheaper with fewer features", "B is always faster", "They are exactly the same", "B uses a different socket"],
+["Installing an SSD in certain M.2 slots can disable certain SATA ports because…", "Chipset lanes/bandwidth are shared", "The SATA cable is too short", "The PSU lacks power", "The BIOS is broken"],
+["A low-quality motherboard VRM paired with a high-power CPU risks…", "Throttling and instability from an overheating VRM", "RAM becoming DDR4", "The screen changing color", "Fans stopping permanently"],
+["The OCP, OVP, and SCP protections on a PSU are…", "Over Current, Over Voltage, and Short Circuit Protection", "Over Clock, Over Volt, and Slow Cooling Protection", "Optical, Overheat, and Surge Charge Protection", "Output, Overload, and Safe Cooling Protection"],
+["A barely-sufficient PSU is risky with modern GPUs because…", "Brief power spikes (transients) can trip protection and shut the PC off suddenly", "Modern GPUs need no power", "The PSU automatically adds watts", "Power spikes never happen"],
+["The main risk of a cheap PSU with inadequate protection…", "Unstable voltage or high ripple that can damage other components", "It's only noisy", "It only looks worse", "There is no risk"],
+["Beep codes during POST are useful for…", "Hinting at hardware faults (e.g. RAM/GPU) before anything shows on screen; meanings vary by manufacturer", "Measuring CPU temperature", "Setting speaker volume", "Signaling Windows is ready"],
+["On an HDD's S.M.A.R.T. data, the most worrying sign is…", "Reallocated or pending sectors that keep increasing", "Zero power-on hours", "Room temperature", "The drive label color"],
+["Display Driver Uninstaller (DDU) is used to…", "Cleanly remove old GPU drivers (usually in Safe Mode) before reinstalling or switching GPU brand", "Update the BIOS", "Overclock the GPU", "Download games"],
+["If you often get “WHEA_UNCORRECTABLE_ERROR” BSODs after overclocking/undervolting, the first step is…", "Revert settings to default (reset the BIOS) and retest gradually", "Reinstall Windows", "Buy a new CPU", "Raise voltage as much as possible"],
+["RAID 1 provides…", "Mirroring: identical data on two drives, surviving one drive failure", "Double speed without redundancy", "Combined capacity without protection", "Automatic encryption"],
+["RAID 0 improves speed but…", "One drive failing loses all the data", "Is always safer than RAID 1", "Halves the capacity", "Doesn't need two drives"],
+["RAID is not a backup because…", "It doesn't protect against deletion, ransomware, or corruption copied to all drives", "RAID always erases data", "RAID is for SSDs only", "Backups are never needed"],
+["A DRAM-less SSD is generally…", "Cheaper but random/sustained performance can drop, especially when nearly full", "Always faster", "Unusable as an OS drive", "SATA only"],
+["A way to protect backups from ransomware…", "Keep an offline or immutable copy that isn't always connected to the PC", "Store them in the same folder as the original data", "Turn off antivirus", "Use one drive for everything"],
+["Wi-Fi 6E adds…", "The 6 GHz frequency band", "The 900 MHz band", "An Ethernet cable", "A USB port"],
+["A USB-C connector doesn't automatically mean…", "Support for USB4/Thunderbolt, video output, or high-power charging; the specs must be checked", "Always USB4", "Always 100W support", "Always has video output"],
+["FreeSync and G-Sync address…", "Screen tearing and stutter by matching the monitor's refresh rate to the GPU's frame rate", "GPU temperature", "Internet speed", "Fan noise"],
+["A 144Hz monitor still shows 60Hz when…", "The refresh rate wasn't changed in Windows or the cable/port doesn't support it", "The monitor is definitely broken", "There's not enough RAM", "The BIOS is old"],
+["An HDR400 label on a monitor often…", "Only indicates basic support with limited brightness and contrast compared to HDR1000/OLED", "Equals the best HDR", "Means 400 Hz", "Means 400 nits per pixel"],
+["On Linux with an NVIDIA GPU for gaming, the commonly recommended driver is…", "The NVIDIA proprietary driver, not nouveau", "Only nouveau", "No driver", "The Windows driver via Wine"],
+["Wayland compared to X11 is…", "A modern display protocol replacing X11 with better isolation between apps", "A Linux distro", "A CPU cooler", "A partition format"],
+["Wi-Fi 7 (802.11be) compared with Wi-Fi 6E adds…", "Wider channels (up to 320 MHz) and Multi-Link Operation for better throughput/latency", "Only the 900 MHz band", "A mandatory Ethernet cable", "Removal of the 5 GHz band"]);
+const $=document.getElementById("app");
+const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const KEY="kuisRakitPC.v1",LK="kuisRakitPC.lang";
+let L="id";try{const l=localStorage.getItem(LK);if(l==="en"||l==="id")L=l}catch(e){}
+const MO={urut:"Urut bab",acak:"Acak",baru:"Soal tambahan 2026",lanjut:"Soal lanjutan",lemah:"Latihan soal lemah"},ME={urut:"In chapter order",acak:"Random",baru:"2026 extra questions",lanjut:"Advanced questions",lemah:"Weak-question practice"};
+const M=m=>(L==="en"?ME:MO)[m]||m,CN=()=>L==="en"?CE:C,en=()=>L==="en";
+const U={
+id:{title:"Kuis Merakit PC",file:"kuis-rakit-pc",intro:(n,b,x,c)=>`${n} soal: ${b} soal dari buku <i>The Complete Build Your Own PC Manual</i> (Papercut) dan ${x} soal tambahan yang diperbarui untuk 2026 (DDR5, NVMe, Windows 11, dan lainnya). Total ${c} bab.`,note:"",seq:"Mulai urut bab",rnd:"Mulai acak",nw:n=>`Hanya soal tambahan 2026 (${n})`,adv:n=>`Hanya soal lanjutan (${n})`,wk:n=>`🎯 Latih soal yang masih lemah (${n})`,wk0:"🎯 Belum ada soal lemah (kerjakan kuis dulu)",an:"Analisis kekuatan & kelemahan",anW:"Perlu dilatih",anS:"Unggul",anO:"Cukup",anN:"Belum ada",anSec:"Bagian",anCor:"Benar",anSt:"Status",anAll:"Semua bab",anNote:"Status dihitung dari minimal 3 jawaban: ≥80% unggul, <60% perlu dilatih. Soal lemah = soal yang jawaban terakhirnya salah; benar sekali, soal itu keluar dari daftar. Data tercatat sejak fitur ini ada.",anRs:"Reset statistik",wl:n=>`📝 Daftar soal lemah (${n})`,wsW:"Urut: paling sering salah",wsC:"Urut: sesuai bab",wrg:(w,a)=>`Salah ${w} dari ${a} percobaan`,c4:"Hapus semua statistik kekuatan/kelemahan?",sn:["Merencanakan Build (bab 1–14)","Merakit PC (bab 15–29)","Instal Software (bab 30–40)","Update 2026 (bab 41–47)","2026 Lanjutan (bab 48)"],nostore:"⚠️ Penyimpanan browser tidak tersedia; progres dan riwayat tidak akan tersimpan.",resT:"Lanjutkan kuis",resI:(m,i,n,o)=>`${m} · berhenti di soal ${i} dari ${n} · skor sementara ${o}`,resB:i=>`Lanjutkan dari soal ${i}`,drop:"Buang progres",hist:"Riwayat skor",histI:(n,b)=>`${n} percobaan · skor terbaik ${b}%`,tm:"Waktu",md:"Mode",sc:"Skor",dlH:"Unduh riwayat",clH:"Hapus riwayat",c1:"Progres kuis sebelumnya akan diganti. Lanjutkan?",c2:"Buang progres kuis yang tersimpan?",c3:"Hapus seluruh riwayat skor?",qOf:(i,n,o)=>`Soal ${i} dari ${n} · Skor ${o}`,pause:"⏸ Jeda &amp; ke menu",ok:"✅ Benar!",no:"❌ Kurang tepat.",ans:"Jawaban",next:"Soal berikutnya →",fin:"Lihat hasil",ref:p=>p?`Rujukan: buku hlm. ${p}`:"Materi tambahan (relevan 2026)",loc:"id-ID",res:"Hasil Kuis",t1:"Luar biasa, siap merakit PC! 🎉",t2:"Bagus! Ulas lagi bagian yang salah.",t3:"Terus belajar, baca ulang bab yang masih lemah.",cp:"📋 Salin hasil",dl:"⬇️ Unduh hasil",rs:"Ulangi urut",rr:"Ulangi acak",menu:"Menu utama &amp; riwayat",pc:"Skor per bab",ch:"Bab",cor:"Benar",wr:"Soal yang salah",none:"Tidak ada. Sempurna!",right:"Jawaban benar",tx:{pc:"Skor per bab",wr:"Soal yang salah",last:"Riwayat terakhir",hd:"Riwayat Kuis Merakit PC"},copied:"Hasil disalin ✔",cfail:"Gagal menyalin, gunakan tombol Unduh.",dled:"Berkas diunduh ✔",lang:"🌐 English"},
+en:{title:"PC Building Quiz",file:"pc-building-quiz",intro:(n,b,x,c)=>`${n} questions: ${b} from the book <i>The Complete Build Your Own PC Manual</i> (Papercut) and ${x} extra questions updated for 2026 (DDR5, NVMe, Windows 11, and more). ${c} chapters in total.`,note:`<p class="mu">ℹ️ English mode: the ${D.length-BASE} extra 2026 questions are fully translated; the ${BASE} book questions are still shown in Indonesian for now.</p>`,seq:"Start in chapter order",rnd:"Start random",nw:n=>`2026 extra questions only (${n})`,adv:n=>`Advanced questions only (${n})`,wk:n=>`🎯 Practice my weak questions (${n})`,wk0:"🎯 No weak questions yet (take a quiz first)",an:"Strengths & weaknesses",anW:"Needs practice",anS:"Strong",anO:"Okay",anN:"None yet",anSec:"Section",anCor:"Correct",anSt:"Status",anAll:"All chapters",anNote:"Status is based on at least 3 answers: ≥80% strong, <60% needs practice. A weak question is one whose last answer was wrong; answer it correctly once and it leaves the list. Data is recorded from when this feature was added.",anRs:"Reset statistics",wl:n=>`📝 Weak question list (${n})`,wsW:"Sort: most often wrong",wsC:"Sort: by chapter",wrg:(w,a)=>`Wrong ${w} of ${a} attempts`,c4:"Delete all strength/weakness statistics?",sn:["Planning Your Build (ch. 1–14)","Building Your PC (ch. 15–29)","Installing Software (ch. 30–40)","2026 Updates (ch. 41–47)","2026 Advanced (ch. 48)"],nostore:"⚠️ Browser storage is unavailable; progress and history won't be saved.",resT:"Resume quiz",resI:(m,i,n,o)=>`${m} · stopped at question ${i} of ${n} · current score ${o}`,resB:i=>`Resume from question ${i}`,drop:"Discard progress",hist:"Score history",histI:(n,b)=>`${n} attempts · best score ${b}%`,tm:"Time",md:"Mode",sc:"Score",dlH:"Download history",clH:"Clear history",c1:"Your previous quiz progress will be replaced. Continue?",c2:"Discard the saved quiz progress?",c3:"Delete the entire score history?",qOf:(i,n,o)=>`Question ${i} of ${n} · Score ${o}`,pause:"⏸ Pause &amp; go to menu",ok:"✅ Correct!",no:"❌ Not quite.",ans:"Answer",next:"Next question →",fin:"See results",ref:p=>p?`Reference: book p. ${p}`:"Extra material (relevant for 2026)",loc:"en-US",res:"Quiz Results",t1:"Outstanding, you're ready to build a PC! 🎉",t2:"Good! Review the parts you missed.",t3:"Keep learning, re-read the chapters you're still weak on.",cp:"📋 Copy results",dl:"⬇️ Download results",rs:"Repeat in order",rr:"Repeat random",menu:"Main menu &amp; history",pc:"Score per chapter",ch:"Chapter",cor:"Correct",wr:"Questions missed",none:"None. Perfect!",right:"Correct answer",tx:{pc:"Score per chapter",wr:"Questions missed",last:"Recent history",hd:"PC Building Quiz History"},copied:"Results copied ✔",cfail:"Copy failed, use the Download button.",dled:"File downloaded ✔",lang:"🌐 Bahasa Indonesia"}};
+const T=()=>U[L];
+let S,ST={ver:2,hist:[],prog:null,stats:{}},CAN=true,VIEW="home";
+function V(i){const d=D[i],e=en()&&i>=BASE?EX[i-BASE]:null;return{d,q:e?e[0]:d.q,o:e?e.slice(1):d.o,c:CN()[d.c]}}
+function applyL(){document.documentElement.lang=L;document.title=T().title}
+function setL(l){L=l;try{localStorage.setItem(LK,l)}catch(e){}applyL();if(VIEW==="end"&&S&&S.a)end();else home()}
+const langBtn=()=>`<button onclick="setL('${en()?"id":"en"}')" style="margin-bottom:10px">${T().lang}</button>`;
+function fmt(t){try{return new Date(t).toLocaleString(T().loc,{dateStyle:"medium",timeStyle:"short"})}catch(e){return new Date(t).toISOString()}}
+function ref(d){return T().ref(d.p)}
+function load(){
+  try{const r=JSON.parse(localStorage.getItem(KEY)||"null");if(r&&Array.isArray(r.hist)){const cur=r.ver===2;ST={ver:2,hist:r.hist.slice(-50),prog:cur?(r.prog||null):null,stats:(cur&&r.stats&&typeof r.stats==="object"&&!Array.isArray(r.stats))?r.stats:{}}}}catch(e){}
+  const p=ST.prog;
+  if(p&&!(Array.isArray(p.q)&&p.q.length&&p.q.every(i=>Number.isInteger(i)&&i>=0&&i<D.length)&&Number.isInteger(p.i)&&p.i>=0&&p.i<p.q.length&&Array.isArray(p.a)&&MO[p.m]))ST.prog=null;
+}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(ST));return true}catch(e){CAN=false;return false}}
+function home(){
+  VIEW="home";const t=T(),p=ST.prog,h=ST.hist.slice().reverse();
+  const best=h.length?Math.max(...h.map(x=>Math.round(x.ok/x.n*100))):null;
+  $.innerHTML=`<div class="card">${langBtn()}<h1>🖥️ ${t.title}</h1><p class="mu">${t.intro(D.length,BASE,D.length-BASE,new Set(D.map(d=>d.c)).size)}</p>${t.note}
+  <div class="row"><button class="pri" onclick="go('urut')">${t.seq}</button><button onclick="go('acak')">${t.rnd}</button></div>
+  <div class="row" style="margin-top:8px"><button onclick="go('baru')">${t.nw(ADV-BASE)}</button><button onclick="go('lanjut')">${t.adv(D.length-ADV)}</button></div>
+  <div class="row" style="margin-top:8px"><button ${weakIdx().length?'class="pri" ':'disabled '}onclick="go('lemah')">${weakIdx().length?t.wk(weakIdx().length):t.wk0}</button></div>
+  ${CAN?"":`<p class="mu">${t.nostore}</p>`}</div>`
+  +(p?`<div class="card"><h2>${t.resT}</h2><p class="mu">${t.resI(M(p.m),p.i+1,p.q.length,p.ok)}</p><div class="row"><button class="pri" onclick="resume()">${t.resB(p.i+1)}</button><button onclick="drop()">${t.drop}</button></div></div>`:"")
+  +ana()
+  +wl()
+  +(h.length?`<div class="card"><h2>${t.hist}</h2><p class="mu">${t.histI(h.length,best)}</p><table><tr><th>${t.tm}</th><th>${t.md}</th><th>${t.sc}</th></tr>${h.slice(0,10).map(x=>`<tr><td>${fmt(x.t)}</td><td>${M(x.m)}</td><td>${x.ok}/${x.n} (${Math.round(x.ok/x.n*100)}%)</td></tr>`).join("")}</table><div class="row" style="margin-top:10px"><button onclick="dlHist()">${t.dlH}</button><button onclick="clearHist()">${t.clH}</button></div></div>`:"")
+}
+const gs=k=>{const x=ST.stats[k];return Array.isArray(x)&&x.length>=3?x:null};
+const weakIdx=()=>Object.keys(ST.stats).map(Number).filter(i=>D[i]&&gs(i)&&gs(i)[2]===0);
+const SEC=c=>c<=13?0:c<=28?1:c<=39?2:c<=46?3:4;
+const st=(a,c)=>a<3?0:c/a>=.8?1:c/a<.6?2:3;
+function ana(){
+  const t=T(),C2=CN(),cs={},ss={};let any=false;
+  Object.keys(ST.stats).forEach(k=>{const x=gs(k),d=D[k];if(!x||!d)return;any=true;[[cs,d.c],[ss,SEC(d.c)]].forEach(([o,g])=>{o[g]=o[g]||[0,0];o[g][0]+=x[0];o[g][1]+=x[1]})});
+  if(!any)return"";
+  const lb=["—","💪 "+t.anS,"⚠️ "+t.anW,"👍 "+t.anO],pc=o=>Math.round(o[1]/o[0]*100);
+  const srt=o=>Object.keys(o).sort((x,y)=>o[x][1]/o[x][0]-o[y][1]/o[y][0]);
+  const rows=(o,nm)=>srt(o).map(g=>`<tr><td>${nm(g)}</td><td>${o[g][1]}/${o[g][0]} (${pc(o[g])}%)</td><td>${lb[st(o[g][0],o[g][1])]}</td></tr>`).join("");
+  const W=srt(cs).filter(g=>st(cs[g][0],cs[g][1])===2).slice(0,3),G=srt(cs).filter(g=>st(cs[g][0],cs[g][1])===1).reverse().slice(0,3);
+  const li=a=>a.length?a.map(g=>`${+g+1}. ${C2[g]} (${pc(cs[g])}%)`).join("<br>"):t.anN;
+  return`<div class="card"><h2>📊 ${t.an}</h2><p><b>⚠️ ${t.anW}</b><br>${li(W)}</p><p><b>💪 ${t.anS}</b><br>${li(G)}</p>
+  <table><tr><th>${t.anSec}</th><th>${t.anCor}</th><th>${t.anSt}</th></tr>${rows(ss,g=>t.sn[g])}</table>
+  <details><summary>${t.anAll}</summary><table><tr><th>${t.ch}</th><th>${t.anCor}</th><th>${t.anSt}</th></tr>${rows(cs,g=>`${+g+1}. ${C2[g]}`)}</table></details>
+  <p class="mu">${t.anNote}</p><button onclick="rstStats()">${t.anRs}</button></div>`}
+let WS="w",WO=false;
+function setWS(){WS=WS==="w"?"c":"w";WO=true;home()}
+function wl(){
+  const i=weakIdx();if(!i.length)return"";const t=T();
+  const r=i.map(k=>{const x=gs(k);return{k,a:x[0],w:x[0]-x[1],v:V(k)}});
+  r.sort(WS==="w"?(x,y)=>y.w-x.w||y.w/y.a-x.w/x.a||y.a-x.a||x.k-y.k:(x,y)=>x.k-y.k);
+  return`<div class="card"><details ${WO?"open":""} ontoggle="WO=this.open" style="margin-top:0"><summary>${t.wl(r.length)}</summary>
+  <div style="margin:10px 0"><button onclick="setWS()">${WS==="w"?t.wsW:t.wsC} ⇅</button></div>
+  ${r.map(x=>`<p><b>${x.v.q}</b><br>✅ ${t.right}: ${x.v.o[0]}<br><span class="mu">${x.v.c} · ${t.wrg(x.w,x.a)}</span></p>`).join("")}</details></div>`}
+function rstStats(){ask(T().c4,()=>{ST.stats={};save();home()})}
+function snap(i){ST.prog={q:S.q,i,ok:S.ok,a:S.a,m:S.m};save()}
+function ask(msg,fn){window._cb=fn;const o=document.createElement("div");o.id="dlg";o.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50";o.innerHTML=`<div class="card" style="max-width:360px;margin:0"><p style="margin-top:0">${msg}</p><div class="row"><button class="pri" onclick="dlg(1)">${en()?"Continue":"Lanjutkan"}</button><button onclick="dlg(0)">${en()?"Cancel":"Batal"}</button></div></div>`;document.body.appendChild(o)}
+function dlg(ok){const o=document.getElementById("dlg");if(o)o.remove();const f=window._cb;window._cb=null;if(ok&&f)f()}
+function go(m){if(ST.prog)ask(T().c1,()=>start(m));else start(m)}
+function start(m){
+  let idx=D.map((_,i)=>i);if(m==="baru")idx=idx.filter(i=>i>=BASE&&i<ADV);if(m==="lanjut")idx=idx.filter(i=>i>=ADV);if(m==="acak")idx=sh(idx);if(m==="lemah")idx=sh(weakIdx());if(!idx.length)return;
+  S={q:idx,i:0,ok:0,a:[],m};snap(0);show()}
+function resume(){const p=ST.prog;S={q:p.q,i:p.i,ok:p.ok,a:p.a,m:p.m};show()}
+function drop(){ask(T().c2,()=>{ST.prog=null;save();home()})}
+function clearHist(){ask(T().c3,()=>{ST.hist=[];save();home()})}
+function show(){
+  VIEW="quiz";const t=T(),n=S.q.length,v=V(S.q[S.i]),o=sh(v.o.map((x,k)=>({t:x,k})));S.cur={v,o,done:false};
+  $.innerHTML=`<div class="card"><div class="mu">${t.qOf(S.i+1,n,S.ok)}</div><div class="bar"><i style="width:${S.i/n*100}%"></i></div>
+  <span class="tag">${v.c}</span><h2 style="margin-top:10px">${v.q}</h2><div id="o">${o.map((x,k)=>`<button class="opt" onclick="pick(${k})">${x.t}</button>`).join("")}</div><div id="fb"></div>
+  <div style="margin-top:12px"><button onclick="home()">${t.pause}</button></div></div>`}
+function pick(n){
+  const t=T(),c=S.cur;if(c.done)return;c.done=true;const right=c.o[n].k===0;
+  if(right)S.ok++;S.a.push({q:S.q[S.i],right});{const k=S.q[S.i],x=gs(k)||[0,0,1];ST.stats[k]=[x[0]+1,x[1]+(right?1:0),right?1:0]}
+  [...document.querySelectorAll(".opt")].forEach((b,k)=>{b.disabled=true;if(c.o[k].k===0)b.classList.add("ok");else if(k===n)b.classList.add("no")});
+  const last=S.i===S.q.length-1;
+  if(last){S.t=Date.now();ST.hist.push({t:S.t,ok:S.ok,n:S.q.length,m:S.m});ST.hist=ST.hist.slice(-50);ST.prog=null;save()}
+  else snap(S.i+1);
+  document.getElementById("fb").innerHTML=`<div class="fb" style="background:${right?"var(--okb)":"var(--nob)"}">${right?t.ok:t.no} ${t.ans}: <b>${c.v.o[0]}</b><br><span class="mu">${ref(c.v.d)}</span></div><button class="pri" style="margin-top:12px;width:100%" onclick="${last?"end()":"S.i++;show()"}">${last?t.fin:t.next}</button>`}
+function stats(){const per={};S.a.forEach(x=>{const c=D[x.q].c;per[c]=per[c]||[0,0];per[c][1]++;if(x.right)per[c][0]++});return per}
+function txt(){
+  const t=T(),C2=CN(),n=S.q.length,p=Math.round(S.ok/n*100),per=stats(),wrong=S.a.filter(x=>!x.right);
+  let s=`${t.title} – ${M(S.m)}\n${fmt(S.t||Date.now())}\n${t.sc}: ${S.ok}/${n} (${p}%)\n\n${t.tx.pc}:\n`;
+  s+=Object.keys(per).map(c=>`- ${C2[c]}: ${per[c][0]}/${per[c][1]}`).join("\n");
+  s+=`\n\n${t.tx.wr} (${wrong.length}):\n`+(wrong.length?wrong.map((x,i)=>{const v=V(x.q);return`${i+1}. ${v.q}\n   ${t.right}: ${v.o[0]} (${ref(v.d)})`}).join("\n"):t.none);
+  const h=ST.hist.slice(-10).reverse();
+  s+=`\n\n${t.tx.last}:\n`+h.map(x=>`- ${fmt(x.t)} | ${M(x.m)} | ${x.ok}/${x.n} (${Math.round(x.ok/x.n*100)}%)`).join("\n");
+  return s}
+function toast(m){const e=document.getElementById("tm");if(e)e.textContent=m}
+function copyFb(s){const a=document.createElement("textarea");a.value=s;a.style.cssText="position:fixed;opacity:0";document.body.appendChild(a);a.select();let ok=false;try{ok=document.execCommand("copy")}catch(e){}a.remove();toast(ok?T().copied:T().cfail)}
+function copyRes(){const s=txt();if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(s).then(()=>toast(T().copied),()=>copyFb(s));else copyFb(s)}
+function saveFile(name,s){const b=new Blob([s],{type:"text/plain;charset=utf-8"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+function dlRes(){saveFile("hasil-"+T().file+"-"+new Date().toISOString().slice(0,10)+".txt",txt());toast(T().dled)}
+function dlHist(){saveFile("riwayat-"+T().file+".txt",T().tx.hd+"\n\n"+ST.hist.slice().reverse().map(x=>`${fmt(x.t)} | ${M(x.m)} | ${x.ok}/${x.n} (${Math.round(x.ok/x.n*100)}%)`).join("\n"))}
+function end(){
+  VIEW="end";const t=T(),C2=CN(),n=S.q.length,per=stats(),p=Math.round(S.ok/n*100),wrong=S.a.filter(x=>!x.right);
+  $.innerHTML=`<div class="card">${langBtn()}<h1>${t.res}</h1><p class="mu">${M(S.m)}</p><div class="big">${S.ok}/${n} <span class="mu" style="font-size:1rem">(${p}%)</span></div>
+  <p>${p>=85?t.t1:p>=65?t.t2:t.t3}</p>
+  <div class="row"><button onclick="copyRes()">${t.cp}</button><button onclick="dlRes()">${t.dl}</button></div><p id="tm" class="mu" aria-live="polite"></p>
+  <div class="row"><button class="pri" onclick="go('urut')">${t.rs}</button><button onclick="go('acak')">${t.rr}</button></div><div class="row" style="margin-top:8px"><button onclick="home()">${t.menu}</button></div></div>
+  <div class="card"><h2>${t.pc}</h2><table><tr><th>${t.ch}</th><th>${t.cor}</th></tr>${Object.keys(per).map(c=>`<tr><td>${+c+1}. ${C2[c]}</td><td>${per[c][0]}/${per[c][1]}</td></tr>`).join("")}</table></div>
+  <div class="card"><details><summary>${t.wr} (${wrong.length})</summary>${wrong.map(x=>{const v=V(x.q);return`<p><b>${v.q}</b><br>${t.right}: ${v.o[0]} <span class="mu">(${ref(v.d)})</span></p>`}).join("")||`<p>${t.none}</p>`}</details></div>`}
+load();save();applyL();home();
+</script></body></html>
