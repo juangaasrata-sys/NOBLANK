@@ -100,14 +100,24 @@ const BASE=D.length;
 // ===== Tambahan 2026 (materi di luar buku, tanpa rujukan halaman) =====
 // Bab 2
 Q(1,0,"Memilih antara AMD dan Intel untuk build baru sebaiknya berdasarkan…","Benchmark terbaru dan harga untuk kebutuhan Anda (gaming, kerja, dll.), bukan merek semata","Warna logo","Selalu AMD","Selalu Intel");
+Q(1,0,"Sebelum membeli komponen, cara terbaik memastikan semuanya kompatibel (soket, RAM, panjang GPU, daya PSU)…","Memeriksa daftar spesifikasi dan memakai alat pengecek kompatibilitas seperti PCPartPicker","Menebak dari merek yang sama","Membeli semuanya lalu mencoba satu per satu","Memilih berdasarkan warna LED");
 // Bab 10
 Q(9,0,"Mengapa banyak casing modern tidak lagi menyediakan bay optical drive 5¼ inci?","Instalasi OS dan software kini lewat USB atau unduhan, sehingga drive optik jarang diperlukan","Disc lebih cepat daripada SSD","Optical drive kini wajib berada di dalam PSU","Bay 5¼ inci dilarang oleh standar ATX");
+// Bab 13
+Q(12,0,"Untuk melindungi PC dari lonjakan listrik dan mati mendadak, sebaiknya dicolokkan ke…","Stopkontak ber-surge protector atau UPS","Colokan bercabang apa saja","Kabel ekstensi yang digulung","Langsung ke kabel tanpa ground");
 // Bab 14
 Q(13,0,"NPU (Neural Processing Unit) pada prosesor modern adalah…","Unit khusus yang mempercepat tugas AI dengan daya rendah (mis. pada Intel Core Ultra dan AMD Ryzen AI)","Jenis RAM baru","Konektor daya GPU","Pasta termal khusus");
+// Bab 19
+Q(18,0,"Kabel kipas CPU cooler atau pompa AIO sebaiknya dicolok ke header…","CPU_FAN (atau AIO_PUMP) pada motherboard","Konektor SATA SSD","Port USB casing","Konektor daya GPU");
 // Bab 20
 Q(19,0,"Pada motherboard dengan empat slot DDR5 dan hanya dua modul RAM, umumnya modul dipasang di…","Slot yang ditunjuk manual, biasanya slot ke-2 dan ke-4 dihitung dari CPU (A2 dan B2)","Dua slot yang bersebelahan paling dekat CPU","Hanya slot paling jauh dari CPU","Slot PCIe");
 // Bab 22
 Q(21,0,"Cara memasang SSD M.2 yang benar…","Masukkan miring sekitar 30°, tekan rata, lalu kunci dengan sekrup atau latch M.2","Dimasukkan tegak lurus dari atas","Dilem ke motherboard","Disambung dengan kabel SATA");
+// Bab 26
+Q(25,0,"Kabel CPU 8-pin (EPS) dan kabel PCIe GPU 8-pin tampak mirip, jadi…","Jangan sampai tertukar: pasang EPS ke soket CPU dan PCIe ke GPU sesuai label","Boleh ditukar bebas","Keduanya sama persis","Tidak perlu dipasang");
+// Bab 32
+Q(31,0,"Saat flash/update BIOS, hal yang tidak boleh terjadi adalah…","PC mati atau listrik padam di tengah proses","Menggunakan file dari situs resmi produsen","Membaca petunjuk di manual","Memformat USB ke FAT32 sesuai petunjuk");
+Q(31,0,"Setelah update BIOS, pengaturan seperti XMP/EXPO dan kurva kipas biasanya…","Kembali ke default sehingga perlu diaktifkan lagi","Tersimpan permanen dan tidak berubah","Mengaktifkan overclock otomatis","Terhapus bersama Windows");
 // Bab 34
 Q(33,0,"Drive penyimpanan sistem yang nyaman untuk PC serba guna/gaming di 2026…","SSD NVMe 1TB (500GB sebagai minimum praktis)","32GB","64GB","HDD 500GB");
 // Bab 37
@@ -131,6 +141,8 @@ Q(40,0,"Fitur seperti BIOS Flashback / Q-Flash Plus berguna untuk…","Memperbar
 Q(40,0,"Keunggulan UEFI dibanding BIOS legacy adalah…","Antarmuka grafis dan dukungan boot dari drive GPT berkapasitas besar","Hanya ganti warna layar","Tidak butuh motherboard","Lebih lambat tapi aman");
 Q(40,0,"Intel Core Ultra seri 200S (Arrow Lake) dibanding generasi Core sebelumnya…","Tidak memiliki Hyper-Threading; performa multi-thread mengandalkan P-core dan E-core","Memakai soket AM5","Hanya mendukung DDR4","Tidak punya E-core");
 Q(40,0,"Salah satu alasan platform AM5 menarik untuk build 2026…","Soket yang sama dipakai lintas beberapa generasi Ryzen sehingga CPU bisa di-upgrade tanpa ganti motherboard","AM5 memakai RAM DDR3","AM5 tidak butuh pendingin","AM5 sama dengan LGA 1851");
+Q(40,0,"Pada soket LGA (Intel LGA 1851 dan AMD AM5), kesalahan yang paling merugikan saat memasang CPU adalah…","Memaksa CPU yang salah arah sehingga pin soket bengkok","Memasang CPU terlalu cepat","Memegang CPU di tepinya","Menutup tuas pengunci");
+Q(40,0,"Sebelum menyalakan PC dengan CPU baru atau generasi baru, update BIOS perlu dilakukan jika…","Versi BIOS bawaan board belum mendukung CPU tersebut menurut daftar dukungan produsen","Warna board tidak cocok","CPU memakai pasta termal","RAM terlalu banyak");
 // Bab 42
 Q(41,0,"Modul DDR4 dan DDR5 tidak bisa tertukar karena…","Posisi takik (notch) berbeda sehingga tidak muat di slot yang salah","Hanya beda warna slot","DDR5 lebih tebal","Beda merek saja");
 Q(41,0,"Kapasitas RAM yang praktis untuk PC serba guna/gaming di 2026…","32GB (16GB sebagai minimum)","4GB","2GB","256GB");
@@ -175,6 +187,7 @@ Q(43,0,"Pada tower cooler besar, spesifikasi casing yang harus dicek adalah…",
 Q(43,0,"Kipas PWM 4-pin dibanding kipas DC 3-pin…","Kecepatannya diatur lewat sinyal PWM dengan rentang kontrol lebih luas","Selalu lebih lambat","Hanya bisa 5V","Tidak butuh header");
 Q(43,0,"Header ARGB (5V, 3-pin) dan RGB (12V, 4-pin)…","Tidak boleh tertukar karena bisa merusak LED","Boleh ditukar bebas","Sama persis","Hanya untuk RAM");
 Q(43,0,"Pompa AIO sebaiknya…","Tidak diletakkan di titik tertinggi loop agar udara tidak terjebak","Selalu di titik tertinggi","Dilepas dari header","Dibalik");
+Q(43,0,"Arah panah pada bingkai kipas casing menunjukkan…","Arah aliran udara (panah lain biasanya arah putaran baling-baling)","Merek kipas","Voltase kipas","Panjang kabel");
 // Bab 45
 Q(44,0,"Dukungan reguler Windows 10 (update keamanan gratis untuk pengguna rumahan) telah berakhir pada…","14 Oktober 2025","Tahun 2020","Tahun 2030","Belum ada jadwal");
 Q(44,0,"Persyaratan utama Windows 11 mencakup…","TPM 2.0, Secure Boot, dan UEFI","TPM 1.0 saja","BIOS legacy saja","Tidak ada syarat");
@@ -190,6 +203,9 @@ Q(44,0,"Cara mereset BIOS ke default lewat hardware…","Cabut baterai CR2032 be
 Q(44,0,"Autentikasi dua faktor (2FA) pada akun Microsoft/Google…","Menjaga akun tetap lebih aman walau password bocor","Menggantikan antivirus","Mempercepat PC","Menghapus virus");
 Q(44,0,"Setelah dukungan Windows 10 berakhir, pilihan yang paling aman untuk PC yang memenuhi syarat…","Upgrade ke Windows 11 (gratis bila PC memenuhi syarat)","Terus memakai tanpa pembaruan apa pun","Mematikan firewall","Beralih ke Windows XP");
 Q(44,0,"Pembaruan fitur Windows 11 versi 25H2 untuk PC yang sudah menjalankan 24H2 diberikan lewat…","Enablement package, yaitu pembaruan kecil lewat Windows Update","Instal ulang penuh yang wajib","Pembelian lisensi baru","Penggantian motherboard");
+Q(44,0,"Aktivator atau crack Windows dan software berbayar berisiko karena…","Sering membawa malware seperti trojan, pencuri data, atau ransomware","Membuat RAM lebih cepat","Selalu aman bila antivirus mati","Memperbarui BIOS otomatis");
+Q(44,0,"Saat menginstal Windows, pilihan terbaik untuk drive yang berisi data penting adalah…","Pastikan sudah di-backup, lalu pilih drive/partisi yang benar agar tidak terformat salah","Format semua drive agar rapi","Hapus partisi pertama yang terlihat","Cabut kabel PSU saat instalasi");
+Q(44,0,"Untuk akun penting (email, bank, akun Microsoft/Google), metode 2FA yang lebih aman daripada SMS adalah…","Aplikasi authenticator, passkey, atau kunci keamanan fisik","Menulis kode di sticky note","Memakai password yang sama di semua situs","Mengirim kode lewat chat");
 // Bab 46
 Q(45,0,"Bench test (menyalakan komponen di luar casing)…","Berguna untuk memastikan komponen dasar bekerja sebelum dirakit penuh","Berbahaya dan dilarang","Merusak motherboard","Wajib setelah selesai dirakit");
 Q(45,0,"Mengapa CPU, RAM, M.2, dan cooler sering dipasang sebelum motherboard masuk casing…","Ruang kerja lebih lega dan lebih mudah","Dilarang sesudah itu","Merusak casing","Agar PSU tidak perlu");
@@ -249,10 +265,16 @@ const CE=["10 Reasons to Build a PC","Choosing a System Type","Choosing a Case",
 // English translations of the 2026 extra questions (D index BASE+k). Correct answer stays first.
 const EX=[
 ["Choosing between AMD and Intel for a new build should be based on…", "Current benchmarks and pricing for your needs (gaming, work, etc.), not the brand alone", "Logo color", "Always AMD", "Always Intel"],
+["Before buying parts, the best way to make sure everything is compatible (socket, RAM, GPU length, PSU power)…", "Check the spec sheets and use a compatibility checker such as PCPartPicker", "Guess based on the same brand", "Buy everything and try parts one by one", "Choose by LED color"],
 ["Why do many modern cases no longer offer a 5¼-inch optical drive bay?", "OS and software installs now go through USB or downloads, so optical drives are rarely needed", "Discs are faster than SSDs", "Optical drives must now live inside the PSU", "5¼-inch bays are banned by the ATX standard"],
+["To protect a PC from power surges and sudden outages, plug it into…", "A surge-protected outlet or a UPS", "Any multi-plug adapter", "A coiled extension cord", "An ungrounded cable"],
 ["An NPU (Neural Processing Unit) in modern processors is…", "A dedicated unit that accelerates AI tasks at low power (e.g. in Intel Core Ultra and AMD Ryzen AI)", "A new type of RAM", "A GPU power connector", "A special thermal paste"],
+["The CPU cooler fan or AIO pump cable should be plugged into the…", "CPU_FAN (or AIO_PUMP) header on the motherboard", "SSD SATA connector", "Case USB port", "GPU power connector"],
 ["On a motherboard with four DDR5 slots and only two RAM modules, they are usually installed in…", "The slots named in the manual, usually the 2nd and 4th counting from the CPU (A2 and B2)", "The two adjacent slots closest to the CPU", "Only the slot farthest from the CPU", "A PCIe slot"],
 ["The correct way to install an M.2 SSD…", "Insert at about a 30° angle, press it flat, then secure with the M.2 screw or latch", "Push it straight down from above", "Glue it to the motherboard", "Connect it with a SATA cable"],
+["The 8-pin CPU (EPS) and 8-pin PCIe GPU cables look similar, so…", "Don't swap them: connect EPS to the CPU socket and PCIe to the GPU as labeled", "They can be swapped freely", "They are exactly the same", "Neither needs to be connected"],
+["During a BIOS flash/update, the one thing that must not happen is…", "The PC shutting off or a power cut mid-process", "Using the file from the maker's official site", "Reading the manual's instructions", "Formatting the USB drive as FAT32 per the instructions"],
+["After a BIOS update, settings such as XMP/EXPO and fan curves usually…", "Revert to defaults and must be enabled again", "Are saved permanently and unchanged", "Enable overclocking automatically", "Get erased along with Windows"],
 ["A comfortable system storage size for a general-purpose/gaming PC in 2026…", "A 1TB NVMe SSD (500GB as a practical minimum)", "32GB", "64GB", "A 500GB HDD"],
 ["The safest way to move Windows to a new SSD…", "Clone with the SSD maker's tool or Clonezilla, or do a clean install and restore data from backup", "Copy the Windows folder by hand", "Remove the CMOS battery", "Swap the CPU"],
 ["A free app for extracting ZIP/7z/RAR archives on Windows…", "7-Zip", "Notepad", "Paint", "Calculator"],
@@ -272,6 +294,8 @@ const EX=[
 ["An advantage of UEFI over legacy BIOS is…", "A graphical interface and booting from large GPT drives", "It only changes the screen color", "It needs no motherboard", "Slower but safer"],
 ["Compared with earlier Core generations, Intel Core Ultra 200S (Arrow Lake)…", "Has no Hyper-Threading; multi-thread performance relies on P-cores and E-cores", "Uses socket AM5", "Supports only DDR4", "Has no E-cores"],
 ["One reason AM5 is attractive for a 2026 build…", "The same socket spans several Ryzen generations, so the CPU can be upgraded without changing the motherboard", "AM5 uses DDR3 RAM", "AM5 needs no cooler", "AM5 is the same as LGA 1851"],
+["On LGA sockets (Intel LGA 1851 and AMD AM5), the most costly mistake when installing a CPU is…", "Forcing a misaligned CPU so the socket pins bend", "Installing the CPU too quickly", "Holding the CPU by its edges", "Closing the retention lever"],
+["Before powering on with a new or newer-generation CPU, a BIOS update is needed if…", "The board's shipped BIOS does not yet support that CPU according to the maker's support list", "The board color doesn't match", "The CPU uses thermal paste", "There is too much RAM"],
 ["DDR4 and DDR5 modules can't be mixed up because…", "The notch positions differ, so they won't fit the wrong slot", "Only the slot colors differ", "DDR5 is thicker", "Only the brand differs"],
 ["A practical RAM capacity for a general-purpose/gaming PC in 2026…", "32GB (16GB as a minimum)", "4GB", "2GB", "256GB"],
 ["The function of XMP (Intel) or EXPO (AMD) in the BIOS…", "Applies the RAM's advertised speed profile", "Updates the BIOS", "Sets fan speed", "Disables RAM"],
@@ -313,6 +337,7 @@ const EX=[
 ["A 4-pin PWM fan compared to a 3-pin DC fan…", "Has speed controlled by a PWM signal with a wider control range", "Is always slower", "Only runs on 5V", "Needs no header"],
 ["ARGB (5V, 3-pin) and RGB (12V, 4-pin) headers…", "Must not be swapped, as it can damage the LEDs", "Can be freely swapped", "Are identical", "Are for RAM only"],
 ["An AIO pump should…", "Not be placed at the highest point of the loop so air doesn't get trapped", "Always be at the highest point", "Be unplugged from its header", "Be upside down"],
+["The arrows on a case fan frame show…", "The airflow direction (another arrow usually shows the blade rotation)", "The fan brand", "The fan voltage", "The cable length"],
 ["Regular Windows 10 support (free security updates for home users) ended on…", "October 14, 2025", "2020", "2030", "No schedule yet"],
 ["The main Windows 11 requirements include…", "TPM 2.0, Secure Boot, and UEFI", "TPM 1.0 only", "Legacy BIOS only", "No requirements"],
 ["On a custom-built PC, TPM is usually enabled in the BIOS as…", "fTPM (AMD) or PTT (Intel)", "CSM", "XMP", "PCIe lane"],
@@ -327,6 +352,9 @@ const EX=[
 ["Two-factor authentication (2FA) on a Microsoft/Google account…", "Keeps the account safer even if the password leaks", "Replaces antivirus", "Speeds up the PC", "Removes viruses"],
 ["After Windows 10 support ended, the safest choice for an eligible PC is…", "Upgrade to Windows 11 (free if the PC meets the requirements)", "Keep using it with no updates at all", "Turn off the firewall", "Switch to Windows XP"],
 ["The Windows 11 version 25H2 feature update for PCs already on 24H2 is delivered via…", "An enablement package, a small update through Windows Update", "A mandatory full reinstall", "Buying a new license", "Replacing the motherboard"],
+["Windows and paid-software activators or cracks are risky because…", "They often carry malware such as trojans, info stealers, or ransomware", "They make RAM faster", "They are always safe if antivirus is off", "They update the BIOS automatically"],
+["When installing Windows, the best practice for drives holding important data is…", "Make sure they're backed up, then pick the correct drive/partition so the wrong one isn't wiped", "Format every drive to keep things tidy", "Delete the first partition you see", "Unplug the PSU cable during install"],
+["For important accounts (email, banking, Microsoft/Google), a 2FA method safer than SMS is…", "An authenticator app, a passkey, or a physical security key", "Writing codes on a sticky note", "Reusing the same password on every site", "Sending codes over chat"],
 ["A bench test (powering components outside the case)…", "Is useful to confirm the basic components work before full assembly", "Is dangerous and forbidden", "Damages the motherboard", "Is required after finishing the build"],
 ["Why are the CPU, RAM, M.2, and cooler often installed before the motherboard goes in the case…", "There's more room and it's easier to work", "It's forbidden afterwards", "It damages the case", "So a PSU isn't needed"],
 ["If you forget the CPU power connector (EPS 4+4 pin)…", "The PC won't turn on or won't POST", "No effect", "RAM becomes slow", "Fans stop forever"],
