@@ -1,19 +1,24 @@
-kode,makanan,kkal,protein_g,lemak_g,karbo_g,serat_g,vitA_ug,vitC_mg,vitD_ug,vitE_mg,vitK_ug,B1_mg,B2_mg,B3_mg,B6_mg,folat_ug,B12_ug,kolin_mg,Ca_mg,Fe_mg,Mg_mg,K_mg,Zn_mg,Se_ug,I_ug,sumber
-telur,"Telur ayam",143,12.6,9.5,0.7,,160,,2,1.05,0.3,0.04,0.457,0.075,0.17,47,0.89,294,56,1.75,12,138,1.29,30.7,52,USDA (dari ingatan; per 100 g bagian dapat dimakan)
-kembung,"Ikan kembung",205,19,13.9,,,,,16,1.5,,0.18,0.31,9,0.4,,8.7,65,12,1.6,76,314,0.63,44,50,USDA (dari ingatan; per 100 g bagian dapat dimakan)
-tempe,"Tempe",192,20.3,10.8,7.6,1.4,,,,,,0.08,0.36,2.6,0.22,24,0.08,50,111,2.7,81,412,1.14,,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
-tahu,"Tahu",144,15.8,8.7,2.8,2.3,,,,,,,,,,27,,28,350,2.7,58,237,1.6,17,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
-daun,"Sayur daun",23,3,0.3,3.8,2.4,524,9.8,,2.08,494,0.1,0.24,0.5,0.24,146,,20,136,3.57,87,466,0.76,1.5,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
-wortel,"Wortel",35,0.8,,8.2,3,852,3.6,,1,13.7,,,,0.15,14,,,30,,10,235,,,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
-ubi,"Ubi jalar oranye",90,2,,20.7,3.3,961,19.6,,0.7,,,,,0.29,,,13,38,0.7,27,475,,,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
-jambu,"Jambu biji",68,2.6,1,14,5.4,31,228,,0.7,2.6,,,1.1,0.11,49,,,18,0.26,22,417,0.23,,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
-pisang,"Pisang",89,1.1,0.3,22.8,2.6,,8.7,,,,,,0.67,0.37,20,,10,,,27,358,,,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
-alpukat,"Alpukat",160,2,14.7,8.5,6.7,7,10,,2.07,21,,0.13,1.74,0.26,81,,14,,,29,485,0.64,,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
-kacang,"Kacang tanah sangrai",585,24,49,21,8.5,,,,4.9,,0.15,0.2,13.5,0.47,145,,53,54,2.3,176,658,3.3,7.5,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
-kuaci,"Kuaci",584,21,51,20,8.6,,,,35,,1.48,,8.3,1.35,227,,55,78,5.2,325,645,5,53,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
-teri,"Teri kering",300,55,4,,,,,,,,,,,,,5,80,1200,3.9,,,3,60,80,USDA (dari ingatan; per 100 g bagian dapat dimakan)
-susu,"Susu atau yogurt tawar",61,3.2,3.3,4.8,,46,,,,,,0.17,,,,0.45,14,113,,10,132,0.37,1.9,30,USDA (dari ingatan; per 100 g bagian dapat dimakan)
-minyak,"Minyak untuk menumis",884,,100,,,,,,15,10,,,,,,,,,,,,,,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
-garam,"Garam beryodium",,,,,,,,,,,,,,,,,,,,,,,,1500,USDA (dari ingatan; per 100 g bagian dapat dimakan)
-nasi,"Nasi merah",123,2.7,1,25.6,1.6,,,,,,0.1,,1.5,0.15,4,,9,3,0.56,39,86,0.7,5.8,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
-labu,"labu",574,,,,,,,,,,,,,,,,,,8.8,550,,7.8,,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
+kode,makanan,kkal,protein_g,lemak_g,karbo_g,serat_g,gula_tambahan_g,natrium_mg,vitA_ug,vitC_mg,vitD_ug,vitE_mg,vitK_ug,B1_mg,B2_mg,B3_mg,B6_mg,folat_ug,B12_ug,kolin_mg,Ca_mg,Fe_mg,Mg_mg,K_mg,Zn_mg,Se_ug,I_ug,sumber
+telur,Telur ayam,143,12.6,9.5,0.7,,0,142,160,,2,1.05,0.3,0.04,0.457,0.075,0.17,47,0.89,294,56,1.75,12,138,1.29,30.7,52,USDA (dari ingatan; per 100 g bagian dapat dimakan)
+kembung,Ikan kembung,205,19,13.9,,,0,90,,,16,1.5,,0.18,0.31,9,0.4,,8.7,65,12,1.6,76,314,0.63,44,50,USDA (dari ingatan; per 100 g bagian dapat dimakan)
+tempe,Tempe,192,20.3,10.8,7.6,1.4,0,9,,,,,,0.08,0.36,2.6,0.22,24,0.08,50,111,2.7,81,412,1.14,,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
+tahu,"Tahu (putih, khas Indonesia)",80,10.9,4.7,0.8,0.1,0,2,,,,,,,,,,15,,,223,3.4,30,120,0.8,9,,TKPI (dari ingatan; perlu cek)
+daun,Sayur daun,23,3,0.3,3.8,2.4,0,79,524,9.8,,2.08,494,0.1,0.24,0.5,0.24,146,,20,136,3.57,87,466,0.76,1.5,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
+wortel,Wortel,35,0.8,,8.2,3,0,69,852,3.6,,1,13.7,,,,0.15,14,,,30,,10,235,,,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
+ubi,Ubi jalar oranye,90,2,,20.7,3.3,0,36,961,19.6,,0.7,,,,,0.29,,,13,38,0.7,27,475,,,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
+jambu,Jambu biji,68,2.6,1,14,5.4,0,2,31,228,,0.7,2.6,,,1.1,0.11,49,,,18,0.26,22,417,0.23,,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
+pisang,Pisang,89,1.1,0.3,22.8,2.6,0,1,,8.7,,,,,,0.67,0.37,20,,10,,,27,358,,,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
+alpukat,Alpukat,160,2,14.7,8.5,6.7,0,7,7,10,,2.07,21,,0.13,1.74,0.26,81,,14,,,29,485,0.64,,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
+kacang,Kacang tanah sangrai,585,24,49,21,8.5,0,6,,,,4.9,,0.15,0.2,13.5,0.47,145,,53,54,2.3,176,658,3.3,7.5,,USDA (dari ingatan; per 100 g bagian dapat dimakan); natrium = tanpa garam
+kuaci,Kuaci,584,21,51,20,8.6,0,3,,,,35,,1.48,,8.3,1.35,227,,55,78,5.2,325,645,5,53,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
+teri,Teri kering,300,55,4,,,0,2500,,,,,,,,,,,5,80,1200,3.9,,,3,60,80,"USDA (dari ingatan; per 100 g bagian dapat dimakan); natrium = teri asin, bervariasi"
+susu,Susu atau yogurt tawar,61,3.2,3.3,4.8,,0,43,46,,,,,,0.17,,,,0.45,14,113,,10,132,0.37,1.9,30,USDA (dari ingatan; per 100 g bagian dapat dimakan)
+minyak,Minyak untuk menumis,884,,100,,,0,0,,,,15,10,,,,,,,,,,,,,,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
+garam,Garam beryodium,,,,,,0,38758,,,,,,,,,,,,,,,,,,,1500,USDA (dari ingatan; per 100 g bagian dapat dimakan)
+nasi,Nasi merah,123,2.7,1,25.6,1.6,0,4,,,,,,0.1,,1.5,0.15,4,,9,3,0.56,39,86,0.7,5.8,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
+biji_labu,Biji labu sangrai (pepitas) — BUKAN labu kuning,574,29.8,49.1,14.7,6.5,0,18,,,,,4.5,,,4.4,,57,,,52,8.1,550,788,7.6,9.4,,USDA (dari ingatan; per 100 g bagian dapat dimakan)
+nasi_putih,Nasi putih,180,3,0.3,39.8,0.2,0,1,,,,,,0.05,,,,,,,25,0.4,12,38,0.5,,,TKPI (dari ingatan; perlu cek)
+ayam,"Ayam goreng paha (dengan kulit, tanpa tulang)",262,26,15.4,3,,0,290,20,,,,,,0.2,6.5,0.33,,0.3,70,15,1.4,24,230,2.4,22,,USDA + bumbu (estimasi)
+sayur_kuah,"Sayur berkuah (sop/asem/bening, isi + kuah)",30,1,0.5,5,1.2,1,300,100,8,,,,,,,,20,,,25,0.4,,150,,,,estimasi resep standar
+bakso,Bakso sapi (ultra-olahan),200,12,12,10,,1,600,,,,,,,,,,,1,,,1.5,,180,2,,,estimasi
+gula,Gula pasir,387,,,100,,100,1,,,,,,,,,,,,,,,,,,,,USDA

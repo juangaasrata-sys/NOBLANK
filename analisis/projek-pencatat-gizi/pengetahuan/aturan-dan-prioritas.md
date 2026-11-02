@@ -50,7 +50,7 @@ Disarikan dari artifact "Peta Prioritas Nutrisi". Label bukti: Konsensus kuat / 
 - Siapa berisiko: Orang yang jarang makan sayur, sering berkeringat, memakai diuretik, sedang diare/muntah, atau keto/puasa.
 - Catatan: Inilah alasan anjuran sayur 7–10 cangkir per hari. Penderita penyakit ginjal jangan minum suplemen kalium tanpa dokter.
 
-### Magnesium (Sangat penting; AKG ≈ 330 / 310 mg)
+### Magnesium (Sangat penting; AKG ≈ 360 / 330 mg)
 - Fungsi: Kofaktor lebih dari 300 enzim: energi, relaksasi otot, tidur, gula darah, dan aktivasi vitamin D.
 - Tanda kekurangan: Lelah (paling umum), kram, kedutan kelopak mata, sulit tidur, cemas, sembelit, jantung berdebar.
 - Sumber makanan: Sayuran hijau, almond, biji labu, cokelat hitam ≥70%, alpukat, kacang-kacangan.
