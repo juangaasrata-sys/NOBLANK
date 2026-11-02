@@ -9,6 +9,7 @@
   --bg:#F3F6F2; --surface:#FFFFFF; --ink:#16211B; --muted:#56665C; --line:#D6DED5;
   --accent:#1D6A55; --accent-soft:#DCEDE5; --on-accent:#FFFFFF;
   --warn:#8A5A00; --warn-soft:#FBEFD3;
+  --c-id:#C8102E; --c-nl:#E07B00; --c-kr:#2F5DA8; --c-jp:#7A4FA0; --c-us:#5E6B66; --c-pl1:#3E9B5F; --c-pl2:#C9822B; --c-pl3:#8C7A2E; --c-pl4:#B9A27A;
   --f-display:"Archivo","Arial Narrow",system-ui,sans-serif;
   --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
@@ -17,11 +18,11 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#0E1512; --surface:#15201B; --ink:#E3ECE6; --muted:#9BAEA2; --line:#2A3A32;
   --accent:#62C3A4; --accent-soft:#1D3A30; --on-accent:#0B1611;
-  --warn:#F0C062; --warn-soft:#3A2E14; color-scheme:dark }}
+  --warn:#F0C062; --warn-soft:#3A2E14; --c-id:#FF6B6B; --c-nl:#FFA94D; --c-kr:#74A7F0; --c-jp:#B794E0; --c-us:#A3B1AA; --c-pl1:#5FC08A; --c-pl2:#E9A75A; --c-pl3:#C9B45A; --c-pl4:#D8C49A; color-scheme:dark }}
 :root[data-theme="dark"]{
   --bg:#0E1512; --surface:#15201B; --ink:#E3ECE6; --muted:#9BAEA2; --line:#2A3A32;
   --accent:#62C3A4; --accent-soft:#1D3A30; --on-accent:#0B1611;
-  --warn:#F0C062; --warn-soft:#3A2E14; color-scheme:dark }
+  --warn:#F0C062; --warn-soft:#3A2E14; --c-id:#FF6B6B; --c-nl:#FFA94D; --c-kr:#74A7F0; --c-jp:#B794E0; --c-us:#A3B1AA; --c-pl1:#5FC08A; --c-pl2:#E9A75A; --c-pl3:#C9B45A; --c-pl4:#D8C49A; color-scheme:dark }
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
@@ -44,10 +45,6 @@ header.top{padding-block:40px 28px;display:grid;gap:18px}
 .stats b{font-family:var(--f-mono);font-size:1.25rem;font-variant-numeric:tabular-nums}
 .stats span{font-size:.82rem;color:var(--muted)}
 
-nav.sec{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
-nav.sec .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:8px;scrollbar-width:none}
-nav.sec a{flex:none;text-decoration:none;color:var(--ink);font-size:.9rem;padding:6px 12px;border-radius:999px}
-nav.sec a:hover{background:var(--accent-soft)}
 
 section{padding-block:44px 8px;display:grid;gap:20px;scroll-margin-top:56px}
 .sec-head{display:grid;gap:8px}
@@ -160,12 +157,52 @@ td:first-child{font-weight:700;width:30%}
 .t30 .bar{height:10px;border-radius:99px;background:var(--accent);min-width:2px}
 .t30 .fix{display:block;font-size:.78rem;color:var(--warn);font-weight:400}
 .t30 .tag{font-size:.72rem;color:var(--muted);font-weight:400;margin-left:6px}
+/* tab bar: sticky di atas pada layar lebar, bar bawah di ponsel */
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--bg);border-bottom:1px solid var(--line)}
+.tabs-in{max-width:1080px;margin:0 auto;display:flex;gap:4px;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px))}
+.tab{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;color:var(--muted);font-size:.92rem;padding:8px 10px;border-radius:10px;font-weight:700}
+.tab svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tab:hover{background:var(--accent-soft);color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.subnav{display:flex;gap:6px;overflow-x:auto;padding-block:16px 0;scrollbar-width:none}
+.subnav a{flex:none;font-size:.84rem;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px}
+.subnav a:hover{border-color:var(--accent)}
+[data-tab][hidden]{display:none!important}
+@media (max-width:720px){
+  nav.tabs{position:fixed;top:auto;bottom:0;left:0;right:0;border-bottom:0;border-top:1px solid var(--line);background:var(--surface)}
+  .tabs-in{padding:4px max(8px,env(safe-area-inset-right,0px)) calc(4px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px));gap:2px}
+  .tab{flex-direction:column;gap:2px;font-size:.68rem;padding:6px 2px;font-weight:700}
+  .tab[aria-selected="true"]{background:var(--accent-soft);color:var(--accent)}
+  body{padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}
+  header.top{padding-block:28px 12px}
+}
+/* grafik */
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 14px 12px;display:grid;gap:10px;min-width:0}
+.chart svg{width:100%;height:auto;display:block;overflow:visible}
+.chart .ax{stroke:var(--line);stroke-width:1}
+.chart .axt{fill:var(--muted);font-family:var(--f-mono);font-size:11px}
+.chart .lab{font-family:var(--f-body);font-size:12px;font-weight:700}
+.chart .note{font-size:.84rem;color:var(--muted)}
+.chart .readout{font-size:.92rem;min-height:1.4em}
+.chart .pt{cursor:pointer}
+.seg{cursor:pointer;transition:opacity .15s}
+.seg:hover,.seg:focus-visible{opacity:.85;outline:none}
+.seg.on{stroke:var(--ink);stroke-width:3}
+.plate-wrap{display:grid;grid-template-columns:minmax(220px,340px) 1fr;gap:18px;align-items:start}
+.plate-info{background:var(--accent-soft);border-radius:var(--r);padding:14px 16px;display:grid;gap:8px;min-width:0}
+.plate-info h3{display:flex;align-items:center;gap:8px}
+.plate-info .sw{width:14px;height:14px;border-radius:4px;flex:none}
+.plate-info ul{margin:0;padding-left:18px;display:grid;gap:3px;font-size:.92rem}
+.sides{display:flex;flex-wrap:wrap;gap:8px}
+.side{font:inherit;font-size:.86rem;border:1px dashed var(--accent);background:transparent;color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.side.on{background:var(--accent);color:var(--on-accent);border-style:solid}
+@media (max-width:640px){.plate-wrap{grid-template-columns:1fr}}
 footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;gap:8px;max-width:76ch}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 @media (max-width:420px){.nutr,.habits,.warnlist{grid-template-columns:1fr}}
 </style>
 
-<header class="top wrap">
+<header class="top wrap" data-tab="dasar">
   <p class="eyebrow">Disarikan dari 6 file ringkasan video Dr. Eric Berg</p>
   <h1>Peta Prioritas Nutrisi</h1>
   <p class="lead">Ilmu dari ribuan ringkasan video, sudah dibuang duplikatnya dan diurutkan menurut prioritas, untuk orang yang <b>masih sehat</b> dan ingin tetap sehat. Setiap anjuran diberi label tingkat bukti, supaya terlihat mana yang sejalan dengan konsensus ilmiah dan mana yang khas Dr. Berg.</p>
@@ -181,27 +218,12 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
   </div>
 </header>
 
-<nav class="sec" aria-label="Bagian halaman">
-  <div class="wrap">
-    <a href="#cara-baca">Cara baca</a>
-    <a href="#inti">Inti</a>
-    <a href="#kebiasaan">Kebiasaan</a>
-    <a href="#nutrisi">Nutrisi</a>
-    <a href="#sumber">Sumber terbaik</a>
-    <a href="#top30">Top 30 per nutrisi</a>
-    <a href="#pasangan">Pasangan nutrisi</a>
-    <a href="#jangan-bersamaan">Jangan bersamaan</a>
-    <a href="#sinergi">Sinergi makanan</a>
-    <a href="#berisiko">Siapa berisiko</a>
-    <a href="#indonesia">Indonesia</a>
-    <a href="#hati-hati">Hati-hati</a>
-    <a href="#latihan">Latihan soal</a>
-  </div>
-</nav>
+<nav class="tabs" aria-label="Tab halaman"><div class="tabs-in" role="tablist"><a class="tab" role="tab" id="tab-dasar" href="#dasar" data-t="dasar" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg><span>Dasar</span></a><a class="tab" role="tab" id="tab-nutrisi" href="#nutrisi" data-t="nutrisi" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(120 12 12)"/></svg><span>Nutrisi</span></a><a class="tab" role="tab" id="tab-makanan" href="#makanan" data-t="makanan" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18a9 9 0 0 1-18 0z"/><path d="M8 8c0-2 1.5-2.5 1.5-4M12 8c0-2 1.5-2.5 1.5-4M16 8c0-2 1.5-2.5 1.5-4"/></svg><span>Makanan</span></a><a class="tab" role="tab" id="tab-indonesia" href="#indonesia" data-t="indonesia" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V10M10 20V6M15 20v-7M20 20V4"/></svg><span>Tinggi badan</span></a><a class="tab" role="tab" id="tab-latihan" href="#latihan" data-t="latihan" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3.5" width="16" height="17" rx="2"/><path d="m8 12 2.5 2.5L16 9"/></svg><span>Latihan</span></a></div></nav>
 
 <main class="wrap">
+<div class="subnav" id="subnav" aria-label="Di tab ini"></div>
 
-<section id="cara-baca">
+<section id="cara-baca" data-tab="dasar">
   <div class="sec-head"><p class="eyebrow">Cara membaca</p><h2>Dua label di setiap anjuran</h2></div>
   <div class="legend">
     <div class="box"><span class="tier t1">Sangat penting</span><p>Dampak terbesar untuk kebanyakan orang. Kerjakan ini dulu sebelum yang lain.</p></div>
@@ -216,7 +238,7 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
   </div>
 </section>
 
-<section id="inti">
+<section id="inti" data-tab="dasar">
   <div class="sec-head"><p class="eyebrow">Inti dalam satu menit</p><h2>Tujuh hal yang terus diulang di seluruh video</h2>
   <p class="lead">Dari 3.846 ringkasan, pesan-pesan ini muncul berulang kali dengan bentuk yang berbeda-beda. Urutannya mengikuti seberapa sering dan seberapa kuat penekanannya.</p></div>
   <ol class="core">
@@ -230,14 +252,14 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
   </ol>
 </section>
 
-<section id="kebiasaan">
-  <div class="sec-head"><p class="eyebrow">Bagian 1</p><h2>Kebiasaan, diurutkan menurut prioritas</h2>
+<section id="kebiasaan" data-tab="dasar">
+  <div class="sec-head"><p class="eyebrow">Kebiasaan</p><h2>Kebiasaan, diurutkan menurut prioritas</h2>
   <p class="lead">Persentase menunjukkan berapa bagian dari 3.846 video yang menyinggung tema tersebut.</p></div>
   <div id="habit-root" style="display:grid;gap:32px"></div>
 </section>
 
-<section id="nutrisi">
-  <div class="sec-head"><p class="eyebrow">Bagian 2</p><h2>Nutrisi kunci</h2>
+<section id="nutrisi" data-tab="nutrisi">
+  <div class="sec-head"><p class="eyebrow">Nutrisi kunci</p><h2>Nutrisi kunci</h2>
   <p class="lead">Setiap kartu memuat fungsi, tanda kekurangan, sumber makanan, dan siapa yang berisiko. AKG adalah Angka Kecukupan Gizi Indonesia (Permenkes 28/2019) untuk dewasa 19–29 tahun, laki-laki/perempuan, dibulatkan.</p></div>
   <div class="chips" role="group" aria-label="Saring nutrisi menurut prioritas">
     <button class="chip" id="nf-0" data-f="0" aria-pressed="true">Semua</button>
@@ -248,8 +270,8 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
   <div class="nutr" id="nutr-root"></div>
 </section>
 
-<section id="sumber">
-  <div class="sec-head"><p class="eyebrow">Bagian 2 · lanjutan</p><h2>Fakta dasar dan sumber makanan terbaik</h2>
+<section id="sumber" data-tab="nutrisi">
+  <div class="sec-head"><p class="eyebrow">Fakta dasar</p><h2>Fakta dasar dan sumber makanan terbaik</h2>
   <p class="lead">Disaring dari file "high nutrisi" dan "nutrisi 2". Angka per 100 g sudah dicocokkan dengan data USDA/NIH, dan Tabel Komposisi Pangan Indonesia (TKPI) untuk pangan lokal. Angka yang keliru di file asli diganti atau dibuang. Daftar koreksinya ada di bagian bawah.</p></div>
 
   <h3>Yang tidak bisa dibuat tubuh sendiri</h3>
@@ -308,8 +330,21 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
   </details>
 </section>
 
-<section id="top30">
-  <div class="sec-head"><p class="eyebrow">Bagian 2 · lanjutan</p><h2>Top 30 makanan per nutrisi</h2>
+<section id="piring" data-tab="makanan">
+  <div class="sec-head"><p class="eyebrow">Praktik harian</p><h2>Piring gizi interaktif</h2>
+  <p class="lead">Ketuk tiap bagian piring dan pelengkapnya untuk melihat isinya, contoh makanan lokal, dan nutrisi yang disumbangkan. Bandingkan "Piring tumbuh" (disusun dari data di halaman ini) dengan "Isi Piringku" (pedoman resmi Kemenkes).</p></div>
+  <div class="chips" role="group" aria-label="Pilih model piring"><button class="chip" id="pm-tumbuh" data-pm="tumbuh" aria-pressed="true">Piring tumbuh</button><button class="chip" id="pm-kemenkes" data-pm="kemenkes" aria-pressed="false">Isi Piringku (Kemenkes)</button></div>
+  <div class="plate-wrap">
+    <div style="display:grid;gap:12px">
+      <svg id="plate" viewBox="0 0 300 300" role="group" aria-label="Piring gizi"></svg>
+      <div class="sides" id="sides" role="group" aria-label="Pelengkap piring"></div>
+    </div>
+    <div class="plate-info" id="pinfo" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="top30" data-tab="makanan">
+  <div class="sec-head"><p class="eyebrow">Peringkat</p><h2>Top 30 makanan per nutrisi</h2>
   <p class="lead">Diurutkan dari kandungan tertinggi per 100 g. Data diambil utuh dari file "high nutrisi" (29 nutrisi, ±2.400 baris), lalu duplikatnya dibuang. Angka yang jelas keliru dikoreksi dan diberi tanda ✎. Bumbu kering dan bubuk menempati peringkat atas karena dihitung per 100 g, padahal dimakan hanya beberapa gram. Pakai saringan di bawah untuk melihat makanan sehari-hari saja.</p></div>
   <div style="display:grid;gap:10px">
     <div class="chips" role="group" aria-label="Pilih vitamin" id="t30-vit"></div>
@@ -325,8 +360,8 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
   <p class="lead" style="font-size:.88rem">Catatan data: angka berasal dari file sumber dan hanya dicek secara sampel. Data kromium, fluorida, dan silikon dalam makanan sangat bervariasi, jadi anggap sebagai perkiraan. Daftar omega-3 mencampur ALA nabati (biji rami, chia, kenari, minyak) dengan EPA/DHA ikan, dan ALA hanya sedikit yang diubah tubuh menjadi EPA/DHA. Yodium rumput laut dan garam sangat bergantung pada asal dan pengolahan.</p>
 </section>
 
-<section id="pasangan">
-  <div class="sec-head"><p class="eyebrow">Bagian 3</p><h2>Pasangan yang saling mendukung</h2>
+<section id="pasangan" data-tab="nutrisi">
+  <div class="sec-head"><p class="eyebrow">Kombinasi yang membantu</p><h2>Pasangan yang saling mendukung</h2>
   <p class="lead">Nutrisi-nutrisi ini bekerja lebih baik bila dikonsumsi bersama. Untuk kombinasi yang justru saling menghambat, lihat bagian <a href="#jangan-bersamaan">Jangan bersamaan</a>.</p></div>
   <div class="tbl"><table>
     <thead><tr><th>Pasangan</th><th>Hubungannya</th><th>Praktiknya</th></tr></thead>
@@ -339,8 +374,8 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
   </table></div>
 </section>
 
-<section id="jangan-bersamaan">
-  <div class="sec-head"><p class="eyebrow">Bagian 4</p><h2>Jangan dikonsumsi bersamaan</h2>
+<section id="jangan-bersamaan" data-tab="nutrisi">
+  <div class="sec-head"><p class="eyebrow">Kombinasi yang menghambat</p><h2>Jangan dikonsumsi bersamaan</h2>
   <p class="lead">Kombinasi yang saling menghambat penyerapan atau berinteraksi dengan obat. Untuk makanan sehari-hari biasanya cukup diberi jarak. Aturan ini paling penting bila Anda minum suplemen atau obat rutin.</p></div>
   <div class="chips" role="group" aria-label="Saring kombinasi menurut kategori" id="sepf"></div>
   <div class="sep" id="sep-root"></div>
@@ -357,16 +392,16 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
   </div>
 </section>
 
-<section id="sinergi">
-  <div class="sec-head"><p class="eyebrow">Bagian 5</p><h2>Sinergi makanan</h2>
+<section id="sinergi" data-tab="makanan">
+  <div class="sec-head"><p class="eyebrow">Sinergi</p><h2>Sinergi makanan</h2>
   <p class="lead">19 pasangan makanan dari dua file "Food synergy". Isinya sudah disaring: angka persen dan rujukan jurnal di file asli banyak yang tidak bisa diverifikasi, jadi tidak dicantumkan. Angka hanya ditulis bila studinya nyata. Urutannya dari bukti terkuat.</p></div>
   <div class="chips" role="group" aria-label="Saring sinergi menurut tingkat bukti" id="synf"></div>
   <div class="sep" id="syn-root"></div>
   <p class="lead" style="font-size:.92rem"><b>Pola umumnya:</b> sinergi paling kuat terjadi lewat tiga mekanisme: <b>lemak</b> membantu penyerapan zat larut lemak (karotenoid, vitamin D, kurkumin), <b>vitamin C</b> membantu penyerapan zat besi nabati, dan <b>enzim atau zat pendamping</b> (mirosinase pada mustard, piperin pada lada) mengaktifkan atau menahan pemecahan senyawa aktif. Klaim lain di file sumber, seperti "BDNF naik 50%", belum didukung bukti.</p>
 </section>
 
-<section id="berisiko">
-  <div class="sec-head"><p class="eyebrow">Bagian 6</p><h2>Siapa cenderung kekurangan apa</h2>
+<section id="berisiko" data-tab="nutrisi">
+  <div class="sec-head"><p class="eyebrow">Kelompok berisiko</p><h2>Siapa cenderung kekurangan apa</h2>
   <p class="lead">Orang sehat pun bisa kekurangan nutrisi karena gaya hidup, pola makan, atau obat.</p></div>
   <div class="tbl"><table>
     <thead><tr><th>Kelompok</th><th>Cenderung kurang</th><th>Alasan utama</th></tr></thead>
@@ -388,9 +423,25 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
   </table></div>
 </section>
 
-<section id="indonesia">
-  <div class="sec-head"><p class="eyebrow">Bagian 7 · konteks</p><h2>Gizi, pertumbuhan, dan Indonesia</h2>
+<section id="indonesia" data-tab="indonesia">
+  <div class="sec-head"><p class="eyebrow">Konteks Indonesia</p><h2>Gizi, pertumbuhan, dan Indonesia</h2>
   <p class="lead">Disaring dari PDF "nutrisi" (Belanda, Korea Selatan, Jepang, AS), lalu dikaitkan dengan seluruh data di halaman ini. Teori dan bukti nyata sengaja dipisah: teori menunjukkan potensi, bukti menunjukkan apa yang sudah terbukti.</p></div>
+  <figure class="chart" id="hchart">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+      <h3>Tinggi badan dewasa (cm) menurut tahun lahir</h3>
+      <div class="chips" role="group" aria-label="Pilih jenis kelamin"><button class="chip" id="hc-m" data-sex="m" aria-pressed="true">Pria</button><button class="chip" id="hc-f" data-sex="f" aria-pressed="false">Wanita</button></div>
+    </div>
+    <svg id="hsvg" viewBox="0 0 640 330" role="img" aria-label="Grafik garis tinggi badan dewasa Belanda, AS, Korea Selatan, Jepang, dan Indonesia, kelahiran 1896 sampai 1996"></svg>
+    <p class="readout" id="hread">Ketuk titik pada garis untuk melihat angkanya.</p>
+    <p class="note">Perkiraan rata-rata tinggi dewasa per kelompok tahun lahir, dibulatkan dari ingatan atas data NCD-RisC (eLife, 2016). Bukan angka resmi, jadi cek ulang sebelum dikutip. Garis Indonesia dicetak tebal sebagai pembanding.</p>
+  </figure>
+  <figure class="chart" id="schart">
+    <h3>Prevalensi stunting balita di Indonesia</h3>
+    <svg id="ssvg" viewBox="0 0 640 300" role="img" aria-label="Grafik tren stunting Indonesia 2013 sampai 2024 dengan garis target 14 persen"></svg>
+    <p class="readout" id="sread">Ketuk titik untuk melihat sumber survei.</p>
+    <p class="note">Sumber: Riskesdas (2013, 2018), SSGBI (2019), SSGI (2021, 2022, 2024), SKI (2023), ditulis dari ingatan. Metode survei berbeda-beda, jadi perbandingan antartahun bersifat kasar. Titik 2024 (SSGI, diumumkan 2025) ditampilkan lebih pudar, dan sebaiknya diverifikasi.</p>
+  </figure>
+
 
   <h3>Fakta dari PDF yang bisa dipegang</h3>
   <div class="legend">
@@ -407,7 +458,7 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
     <thead><tr><th>Indikator</th><th>Data</th><th>Kaitan dengan halaman ini</th></tr></thead>
     <tbody>
       <tr><td>Stunting balita</td><td class="mono">37,2% (2013) → 30,8% (2018) → 21,6% (2022) → 21,5% (2023). Target 14%</td><td>Turun cepat, tetapi masih sekitar 1 dari 5 balita. Penurunannya melambat di 2022–2023.</td></tr>
-      <tr><td>Tinggi dewasa</td><td>Termasuk yang terpendek di Asia: pria ±166 cm, wanita ±154 cm (NCD-RisC, kelahiran 1996)</td><td>Ada selisih ±16 cm dengan pria Belanda dan ±9 cm dengan pria Korea.</td></tr>
+      <tr><td>Tinggi dewasa</td><td>Termasuk yang terpendek di Asia Tenggara: pria ±163–165 cm, wanita ±152–154 cm (perkiraan NCD-RisC, kelahiran 1996)</td><td>Selisih ±18 cm dengan pria Belanda dan ±11 cm dengan pria Korea. Lihat grafik di atas.</td></tr>
       <tr><td>Konsumsi susu</td><td>Sekitar 16 kg/kapita/tahun, termasuk rendah di ASEAN</td><td>Sumber kalsium perlu ditutup dari teri, rebon, tahu, dan sayur daun (lihat Top 30 kalsium).</td></tr>
       <tr><td>Konsumsi ikan</td><td>Sekitar 55–57 kg/kapita/tahun, tinggi</td><td>Keunggulan untuk protein, B12, yodium, selenium, dan omega-3. Ikan kecil bertulang juga sumber kalsium.</td></tr>
       <tr><td>Anemia</td><td>±32% usia 15–24 tahun dan ±49% ibu hamil (Riskesdas 2018)</td><td>Zat besi heme, vitamin C, dan pasangan "jangan bersamaan" (teh saat makan).</td></tr>
@@ -420,7 +471,7 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
   <div class="tbl"><table>
     <thead><tr><th>Intervensi</th><th>Secara teori (potensi)</th><th>Secara faktual (yang sudah terbukti)</th></tr></thead>
     <tbody>
-      <tr><td>Pola makan pertumbuhan secara menyeluruh lintas generasi</td><td>Bila Indonesia mengikuti lintasan Korea atau Jepang (±1–2 cm per dekade saat transisi gizi), selisih tinggi ±9 cm dengan Korea bisa menyempit dalam 2–4 generasi.</td><td>Terbukti di Korea, Jepang, dan Belanda, tetapi bersama faktor ekonomi, sanitasi, kesehatan, dan ukuran keluarga. Porsi kenaikan yang murni dari gizi tidak bisa dipisahkan.</td></tr>
+      <tr><td>Pola makan pertumbuhan secara menyeluruh lintas generasi</td><td>Bila Indonesia mengikuti lintasan Korea atau Jepang (±1–2 cm per dekade saat transisi gizi), selisih tinggi ±11 cm dengan Korea bisa menyempit dalam 2–4 generasi.</td><td>Terbukti di Korea, Jepang, dan Belanda, tetapi bersama faktor ekonomi, sanitasi, kesehatan, dan ukuran keluarga. Porsi kenaikan yang murni dari gizi tidak bisa dipisahkan.</td></tr>
       <tr><td>1 telur/hari untuk anak 6–24 bulan</td><td>Protein lengkap, kolin, B12, dan seng di masa tumbuh tercepat, sehingga stunting turun.</td><td>Uji Lulun di Ekuador (2017): stunting turun ±47%. Uji Mazira di Malawi (2020): tidak ada efek. Hasilnya bergantung pada kondisi awal anak.</td></tr>
       <tr><td>Susu sekolah ±200 ml/hari</td><td>Kalsium, protein, dan IGF-1 mempercepat pertumbuhan tulang.</td><td>Meta-analisis: tambahan ±0,4 cm per tahun per ±245 ml susu, lebih besar pada anak yang kurang gizi. Efek MBG di Indonesia belum ada datanya.</td></tr>
       <tr><td>Suplemen kalsium</td><td>Tulang lebih padat dan tinggi bertambah.</td><td>Kepadatan tulang naik sedikit, tetapi efeknya tidak bertahan setelah suplemen dihentikan (tinjauan Cochrane). Tidak terbukti menambah tinggi.</td></tr>
@@ -439,14 +490,14 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
   <p class="lead" style="font-size:.88rem">Angka Indonesia berasal dari Riskesdas, SSGI/SKI, KKP, dan NCD-RisC menurut ingatan saya, dan dibulatkan. Cek ulang ke publikasi resmi sebelum dikutip.</p>
 </section>
 
-<section id="hati-hati">
-  <div class="sec-head"><p class="eyebrow">Bagian 8</p><h2>Klaim yang perlu hati-hati</h2>
+<section id="hati-hati" data-tab="dasar">
+  <div class="sec-head"><p class="eyebrow">Hati-hati</p><h2>Klaim yang perlu hati-hati</h2>
   <p class="lead">Klaim berikut muncul di video, tetapi untuk orang sehat sebaiknya tidak dilakukan tanpa pemeriksaan atau pendampingan tenaga kesehatan.</p></div>
   <div class="warnlist" id="warn-root"></div>
 </section>
 
-<section id="latihan">
-  <div class="sec-head"><p class="eyebrow">Bagian 9</p><h2>Latihan soal</h2>
+<section id="latihan" data-tab="latihan">
+  <div class="sec-head"><p class="eyebrow">Latihan</p><h2>Latihan soal</h2>
   <p class="lead">Soal esai singkat tanpa pilihan ganda. Jawab dulu di kepala atau di kertas, lalu buka jawabannya. Centang “Sudah bisa” untuk melacak kemajuan. Kemajuan tersimpan di browser ini saja.</p></div>
   <div class="qbar">
     <div style="display:grid;gap:8px">
@@ -787,4 +838,130 @@ document.getElementById('shuffle').addEventListener('click',()=>{for(let i=order
 document.getElementById('hidebtn').addEventListener('click',e=>{hideDone=!hideDone;e.target.textContent=hideDone?'Tampilkan semua soal':'Sembunyikan yang sudah bisa';renderQ()});
 document.getElementById('openall').addEventListener('click',e=>{allOpen=!allOpen;e.target.textContent=allOpen?'Tutup semua jawaban':'Buka semua jawaban';renderQ()});
 renderQ();
+
+/* ===== grafik tinggi badan ===== */
+(function(){
+  const Y=[1896,1916,1936,1956,1976,1996];
+  const D={m:{nl:[169.4,172.5,176.5,180,182.3,182.5],us:[171.1,173.5,175.5,176.6,177.3,177.1],kr:[159.8,161,163,166.8,171.8,174.9],jp:[157,158.5,160.5,166,170.3,170.8],id:[158,158.8,159.8,161,163,164]},
+           f:{nl:[155.6,158.5,162.5,166,168.4,168.7],us:[158.5,160.5,162.5,163.4,163.7,163.5],kr:[142.2,144,147.5,153,159,162.3],jp:[143.8,145.5,148,153.5,158,158.3],id:[146.5,147.5,148.5,150,151.5,152.5]}};
+  const NM={nl:'Belanda',us:'AS',kr:'Korea Sel.',jp:'Jepang',id:'Indonesia'};
+  const svg=document.getElementById('hsvg'), rd=document.getElementById('hread');
+  let W=640,cur='m';const H=320,L=40,R=112,T=14,B=34;
+  function draw(sex){cur=sex;W=Math.max(330,Math.min(760,Math.round(svg.getBoundingClientRect().width)||640));svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+    const d=D[sex], lo=sex==='m'?154:140, hi=sex==='m'?186:172;
+    const x=y=>L+(y-1896)/100*(W-L-R), y=v=>T+(hi-v)/(hi-lo)*(H-T-B);
+    let g='';
+    for(let v=lo;v<=hi;v+=sex==='m'?4:4){g+=`<line class="ax" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/><text class="axt" x="${L-6}" y="${y(v)+4}" text-anchor="end">${v}</text>`}
+    Y.forEach(t=>{g+=`<text class="axt" x="${x(t)}" y="${H-12}" text-anchor="middle">${t}</text>`});
+    g+=`<text class="axt" x="${L}" y="${H}" >tahun lahir →</text>`;
+    const order=['us','nl','kr','jp','id'];
+    order.forEach(k=>{const w=k==='id'?3.6:2;const pts=d[k].map((v,i)=>`${x(Y[i])},${y(v)}`).join(' ');
+      g+=`<polyline points="${pts}" fill="none" stroke="var(--c-${k})" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"/>`;
+      d[k].forEach((v,i)=>{g+=`<circle class="pt" tabindex="0" role="button" aria-label="${NM[k]} lahir ${Y[i]}: ${v} cm" data-k="${k}" data-i="${i}" cx="${x(Y[i])}" cy="${y(v)}" r="${k==='id'?5:4}" fill="var(--c-${k})" stroke="var(--surface)" stroke-width="1.5"/>`});});
+    // end labels with collision nudge
+    const labs=order.map(k=>({k,v:d[k][5],yy:y(d[k][5])})).sort((a,b)=>a.yy-b.yy);
+    for(let i=1;i<labs.length;i++){if(labs[i].yy-labs[i-1].yy<15)labs[i].yy=labs[i-1].yy+15}
+    labs.forEach(l=>{g+=`<text class="lab" x="${W-R+8}" y="${l.yy+4}" fill="var(--c-${l.k})">${NM[l.k]} ${l.v.toLocaleString('id-ID')}</text>`});
+    svg.innerHTML=g;
+    const gap=(d.nl[5]-d.id[5]).toFixed(1).replace('.',','), gk=(d.kr[5]-d.id[5]).toFixed(1).replace('.',',');
+    rd.innerHTML=`Kelahiran 1996: selisih Indonesia ±${gap} cm dengan Belanda dan ±${gk} cm dengan Korea Selatan. Korea naik ±${(d.kr[5]-d.kr[0]).toFixed(0)} cm dalam satu abad, Indonesia ±${(d.id[5]-d.id[0]).toFixed(0)} cm.`;
+    svg.onclick=svg.onkeydown=e=>{if(e.type==='keydown'&&e.key!=='Enter'&&e.key!==' ')return;const c=e.target.closest('.pt');if(!c)return;e.preventDefault();const k=c.dataset.k,i=+c.dataset.i;
+      const diff=(d[k][i]-d.id[i]).toFixed(1).replace('.',',');
+      rd.innerHTML=`<b style="color:var(--c-${k})">${NM[k]}</b>, kelahiran ${Y[i]}: ±${d[k][i].toLocaleString('id-ID')} cm${k!=='id'?` (selisih ${diff} cm dari Indonesia pada tahun yang sama)`:''}.`};
+  }
+  document.getElementById('hchart').addEventListener('click',e=>{const b=e.target.closest('[data-sex]');if(!b)return;document.querySelectorAll('[data-sex]').forEach(x=>x.setAttribute('aria-pressed',x===b));draw(b.dataset.sex)});
+  draw('m');
+  new ResizeObserver(()=>{const w=Math.round(svg.getBoundingClientRect().width);if(w&&Math.abs(w-W)>4&&!(W===330&&w<330))draw(cur)}).observe(svg);
+})();
+
+/* ===== grafik stunting ===== */
+(function(){
+  const P=[[2013,37.2,'Riskesdas 2013'],[2018,30.8,'Riskesdas 2018'],[2019,27.7,'SSGBI 2019'],[2021,24.4,'SSGI 2021'],[2022,21.6,'SSGI 2022'],[2023,21.5,'SKI 2023'],[2024,19.8,'SSGI 2024 (perlu verifikasi)']];
+  const svg=document.getElementById('ssvg'),rd=document.getElementById('sread');
+  let W=640;const H=290,L=40,R=16,T=20,B=34,hi=40;
+  function draw(){W=Math.max(330,Math.min(760,Math.round(svg.getBoundingClientRect().width)||640));svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  const x=t=>L+(t-2013)/11*(W-L-R), y=v=>T+(hi-v)/hi*(H-T-B);
+  let g='';
+  for(let v=0;v<=40;v+=10){g+=`<line class="ax" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/><text class="axt" x="${L-6}" y="${y(v)+4}" text-anchor="end">${v}%</text>`}
+  (W<500?[2013,2017,2021,2024]:[2013,2015,2017,2019,2021,2023]).forEach(t=>{g+=`<text class="axt" x="${x(t)}" y="${H-12}" text-anchor="middle">${t}</text>`});
+  g+=`<line x1="${L}" x2="${W-R}" y1="${y(14)}" y2="${y(14)}" stroke="var(--c-pl1)" stroke-width="2" stroke-dasharray="6 5"/><text class="lab" x="${W-R}" y="${y(14)+16}" text-anchor="end" fill="var(--c-pl1)">Target 2024: 14%</text>`;
+  const main=P.slice(0,6), area=main.map(p=>`${x(p[0])},${y(p[1])}`).join(' ');
+  g+=`<polygon points="${x(2013)},${y(0)} ${area} ${x(2023)},${y(0)}" fill="var(--c-id)" opacity=".1"/>`;
+  g+=`<polyline points="${area}" fill="none" stroke="var(--c-id)" stroke-width="3" stroke-linejoin="round"/>`;
+  g+=`<line x1="${x(2023)}" y1="${y(21.5)}" x2="${x(2024)}" y2="${y(19.8)}" stroke="var(--c-id)" stroke-width="2" stroke-dasharray="3 4" opacity=".6"/>`;
+  P.forEach((p,i)=>{const faint=i===6;g+=`<circle class="pt" tabindex="0" role="button" aria-label="${p[2]}: ${p[1]}%" data-i="${i}" cx="${x(p[0])}" cy="${y(p[1])}" r="6" fill="var(--c-id)" opacity="${faint?.5:1}" stroke="var(--surface)" stroke-width="2"/>`;
+    g+=`<text class="lab" x="${x(p[0])}" y="${y(p[1])-11}" text-anchor="middle" fill="var(--ink)" opacity="${faint?.6:1}">${p[1].toLocaleString('id-ID')}</text>`});
+  svg.innerHTML=g;}
+  draw();new ResizeObserver(()=>{const w=Math.round(svg.getBoundingClientRect().width);if(w&&Math.abs(w-W)>4&&!(W===330&&w<330))draw()}).observe(svg);
+  rd.innerHTML='Turun ±15,7 poin dalam 10 tahun (37,2% → 21,5%), tetapi melambat di 2022–2023. Untuk mencapai 14% perlu turun ±7,5 poin lagi.';
+  svg.onclick=svg.onkeydown=e=>{if(e.type==='keydown'&&e.key!=='Enter'&&e.key!==' ')return;const c=e.target.closest('.pt');if(!c)return;e.preventDefault();const p=P[+c.dataset.i];rd.innerHTML=`<b>${p[2]}</b>: ${p[1].toLocaleString('id-ID')}% balita stunting, sekitar ${Math.round(p[1]/10)} dari 10 balita. Selisih dengan target: ${(p[1]-14).toFixed(1).replace('.',',')} poin.`};
+})();
+
+/* ===== piring gizi ===== */
+(function(){
+  const M={
+   tumbuh:{segs:[
+    {k:'sayur',f:.5,c:'--c-pl1',sh:'Sayur',t:'Sayur',p:'½ piring',ex:'Bayam, daun singkong, katuk, kelor, kangkung, sawi, brokoli, kacang panjang',nut:'Vitamin K1, C, folat, kalium, magnesium, kalsium (dari daun), beta-karoten',tip:'Beri sedikit minyak atau santan agar vitamin A dan K terserap. Sayur daun ditambah sumber vitamin C membantu penyerapan zat besi.'},
+    {k:'hewani',f:.25,c:'--c-pl2',sh:'Hewani',t:'Lauk hewani',p:'¼ piring',ex:'Kembung, sarden, teri, tongkol, telur, ayam, daging, kerang',nut:'Protein lengkap, B12, zat besi heme, seng, yodium, selenium, vitamin D, omega-3',tip:'Anak di bawah 2 tahun: usahakan ada protein hewani setiap makan, misalnya 1 telur per hari. Hati cukup 1 kali per minggu.'},
+    {k:'nabati',f:.125,c:'--c-pl3',sh:'Nabati',t:'Lauk nabati',p:'⅛ piring',ex:'Tempe, tahu, kacang hijau, kacang merah, oncom',nut:'Protein, tembaga, mangan, folat, magnesium, kalsium (tahu)',tip:'Tempe adalah hasil fermentasi, sehingga fitatnya lebih rendah dan mineralnya lebih mudah diserap.'},
+    {k:'pokok',f:.125,c:'--c-pl4',sh:'Pokok',t:'Makanan pokok',p:'⅛ piring',ex:'Nasi merah atau putih, ubi, jagung, singkong, kentang, oat',nut:'Energi, B1 (beras utuh), magnesium, serat',tip:'Porsinya kecil di model ini, dan geser ke sayur serta protein. Nasi yang didinginkan lalu dipanaskan lagi memiliki pati resisten lebih tinggi.'}],
+    note:'Disusun dari pola Top 30 dan anjuran Dr. Berg: protein dan sayur diperbesar, makanan pokok diperkecil.'},
+   kemenkes:{segs:[
+    {k:'pokok',f:1/3,c:'--c-pl4',sh:'Pokok',t:'Makanan pokok',p:'⅓ piring',ex:'Nasi, jagung, ubi, singkong, kentang, roti',nut:'Energi dan karbohidrat, serat (bila utuh)',tip:'Isi Piringku: porsi makanan pokok sedikit lebih banyak daripada lauk pauk.'},
+    {k:'sayur',f:1/3,c:'--c-pl1',sh:'Sayur',t:'Sayur',p:'⅓ piring',ex:'Sayur hijau dan berwarna',nut:'Vitamin, mineral, serat',tip:'Sayur lebih banyak daripada buah, sebanyak dua pertiga dari separuh piring.'},
+    {k:'hewani',f:1/6,c:'--c-pl2',sh:'Lauk',t:'Lauk pauk',p:'⅙ piring',ex:'Ikan, telur, ayam, daging, tempe, tahu',nut:'Protein, zat besi, seng, B12',tip:'Gabungkan lauk hewani dan nabati.'},
+    {k:'buah',f:1/6,c:'--c-nl',sh:'Buah',t:'Buah',p:'⅙ piring',ex:'Pepaya, jeruk, jambu biji, pisang',nut:'Vitamin C, kalium, serat',tip:'Buah utuh lebih baik daripada jus.'}],
+    note:'Isi Piringku adalah pedoman resmi Kemenkes, ditambah pesan: minum air putih, cuci tangan, aktivitas fisik, dan pantau berat badan.'}};
+  const SIDES={
+    buah:{t:'Buah',ex:'Jambu biji, pepaya, jeruk, mangga',nut:'Vitamin C (bantu serap zat besi), kalium, serat',tip:'Makan buah utuh, bukan jus.'},
+    biji:{t:'Segenggam kacang atau biji',ex:'Kuaci, wijen, kacang mete, kacang tanah, biji labu',nut:'Magnesium, vitamin E, seng, B1, tembaga',tip:'Makanan paling serbaguna di data (masuk 16–17 dari 29 daftar). Cukup 1 genggam per hari.'},
+    susu:{t:'Susu, yogurt, atau keju',ex:'Susu, yogurt tawar, keju',nut:'Kalsium, protein, K2 (keju), B2',tip:'Bila tidak minum susu, tutup kalsium dari teri, rebon, tahu, dan sayur daun.'},
+    air:{t:'Air putih',ex:'Air putih, teh tanpa gula (di luar waktu makan)',nut:'Hidrasi',tip:'Bukan minuman manis. Teh atau kopi sebaiknya diberi jarak 1 jam dari makan agar zat besi tetap terserap.'}};
+  const svg=document.getElementById('plate'),info=document.getElementById('pinfo'),sides=document.getElementById('sides');
+  let mode='tumbuh',sel=null;
+  function show(o,c){info.innerHTML=`<h3><span class="sw" style="background:var(${c||'--accent'})"></span>${o.t}${o.p?` · ${o.p}`:''}</h3><ul><li><b>Contoh lokal:</b> ${o.ex}</li><li><b>Nutrisi utama:</b> ${o.nut}</li><li><b>Tips:</b> ${o.tip}</li></ul>`}
+  function arc(a0,a1,r){const cx=150,cy=150,p=a=>[cx+r*Math.cos(a),cy+r*Math.sin(a)];const [x0,y0]=p(a0),[x1,y1]=p(a1);return `M${cx},${cy} L${x0},${y0} A${r},${r} 0 ${a1-a0>Math.PI?1:0} 1 ${x1},${y1} Z`}
+  function draw(){
+    const m=M[mode];let a=-Math.PI/2,g=`<circle cx="150" cy="150" r="146" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/><circle cx="150" cy="150" r="132" fill="none" stroke="var(--line)" stroke-width="1"/>`;
+    m.segs.forEach((sg,i)=>{const a1=a+sg.f*2*Math.PI;const mid=(a+a1)/2,lr=sg.f>=.25?72:84;
+      g+=`<path class="seg${sel===i?' on':''}" tabindex="0" role="button" aria-label="${sg.t}, ${sg.p}" data-i="${i}" d="${arc(a,a1,124)}" fill="var(${sg.c})" stroke="var(--surface)" stroke-width="2"/>`;
+      g+=`<text x="${150+lr*Math.cos(mid)}" y="${150+lr*Math.sin(mid)}" text-anchor="middle" style="font:700 ${sg.f>=.25?14:11.5}px var(--f-display);fill:#14211a;pointer-events:none">${sg.sh}</text><text x="${150+lr*Math.cos(mid)}" y="${150+lr*Math.sin(mid)+15}" text-anchor="middle" style="font:500 12px var(--f-mono);fill:#14211a;pointer-events:none">${sg.p.replace(' piring','')}</text>`;a=a1});
+    svg.innerHTML=g;
+    sides.innerHTML=Object.entries(SIDES).filter(([k])=>!(mode==='kemenkes'&&k==='buah')).map(([k,o])=>`<button class="side${sel===k?' on':''}" id="side-${k}" data-s="${k}">+ ${o.t}</button>`).join('');
+    if(sel===null){info.innerHTML=`<h3>${mode==='tumbuh'?'Piring tumbuh':'Isi Piringku'}</h3><p>${m.note}</p><p style="font-size:.9rem;color:var(--muted)">Ketuk bagian piring atau tombol pelengkap untuk detailnya.</p>`}
+  }
+  function pick(t){const sg=t.closest('.seg'),sd=t.closest('[data-s]');
+    if(sg){sel=+sg.dataset.i;draw();show(M[mode].segs[sel],M[mode].segs[sel].c);svg.querySelector(`[data-i="${sel}"]`)?.focus()}
+    else if(sd){sel=sd.dataset.s;draw();show(SIDES[sel]);document.getElementById('side-'+sel)?.focus()}}
+  svg.addEventListener('click',e=>pick(e.target));svg.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(e.target)}});
+  sides.addEventListener('click',e=>pick(e.target));
+  document.getElementById('piring').addEventListener('click',e=>{const b=e.target.closest('[data-pm]');if(!b)return;mode=b.dataset.pm;sel=null;document.querySelectorAll('[data-pm]').forEach(x=>x.setAttribute('aria-pressed',x===b));draw()});
+  draw();
+})();
+
+/* ===== tab ===== */
+(function(){
+  const TABS=['dasar','nutrisi','makanan','indonesia','latihan'];
+  const panes=[...document.querySelectorAll('[data-tab]')];
+  const sub=document.getElementById('subnav');
+  let cur=null;
+  function setTab(t){
+    cur=t;panes.forEach(p=>p.hidden=p.dataset.tab!==t);
+    document.querySelectorAll('.tab').forEach(a=>a.setAttribute('aria-selected',a.dataset.t===t));
+    const secs=panes.filter(p=>p.tagName==='SECTION'&&p.dataset.tab===t);
+    sub.innerHTML=secs.length>1?secs.map(s=>`<a href="#${s.id}">${(s.querySelector('h2')||{}).textContent||s.id}</a>`).join(''):'';
+    try{localStorage.setItem('peta-tab',t)}catch(e){}
+  }
+  function route(scroll){
+    const h=decodeURIComponent(location.hash.slice(1));
+    let t=TABS.includes(h)?h:null,target=null;
+    if(!t){const el=h&&document.getElementById(h);const pane=el&&el.closest('[data-tab]');if(pane){t=pane.dataset.tab;target=el}}
+    if(!t){try{t=localStorage.getItem('peta-tab')}catch(e){};if(!TABS.includes(t))t='dasar'}
+    setTab(t);
+    if(scroll!==false){if(target&&!TABS.includes(h)){requestAnimationFrame(()=>target.scrollIntoView({block:'start'}))}else window.scrollTo(0,0)}
+  }
+  document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const h=a.getAttribute('href').slice(1);if(!h)return;e.preventDefault();if(location.hash==='#'+h){route()}else{location.hash=h}});
+  window.addEventListener('hashchange',()=>route());
+  route(false);
+})();
 </script>
