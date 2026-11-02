@@ -140,6 +140,7 @@ td:first-child{font-weight:700;width:30%}
 .sep{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
 .pair{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;gap:8px;align-content:start;min-width:0}
 .pair h3 .x{color:var(--warn);font-weight:800;margin:0 .25em}
+.pair h3 .plus{color:var(--accent);font-weight:800;margin:0 .25em}
 .pair .meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .pair .cat{font-size:.76rem;color:var(--muted)}
 .pair p{font-size:.92rem}
@@ -168,7 +169,8 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
     <div><b>21</b><span>kebiasaan berprioritas</span></div>
     <div><b>19</b><span>nutrisi kunci</span></div>
     <div><b>19</b><span>kombinasi yang jangan bersamaan</span></div>
-    <div><b>68</b><span>latihan soal esai</span></div>
+    <div><b>19</b><span>sinergi makanan</span></div>
+    <div><b>75</b><span>latihan soal esai</span></div>
   </div>
 </header>
 
@@ -180,6 +182,7 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
     <a href="#nutrisi">Nutrisi</a>
     <a href="#pasangan">Pasangan nutrisi</a>
     <a href="#jangan-bersamaan">Jangan bersamaan</a>
+    <a href="#sinergi">Sinergi makanan</a>
     <a href="#berisiko">Siapa berisiko</a>
     <a href="#hati-hati">Hati-hati</a>
     <a href="#latihan">Latihan soal</a>
@@ -267,8 +270,16 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
   </div>
 </section>
 
+<section id="sinergi">
+  <div class="sec-head"><p class="eyebrow">Bagian 5</p><h2>Sinergi makanan</h2>
+  <p class="lead">19 pasangan makanan dari dua file "Food synergy". Isinya sudah disaring: angka persen dan rujukan jurnal di file asli banyak yang tidak bisa diverifikasi, jadi tidak dicantumkan. Angka hanya ditulis bila studinya nyata. Urutannya dari bukti terkuat.</p></div>
+  <div class="chips" role="group" aria-label="Saring sinergi menurut tingkat bukti" id="synf"></div>
+  <div class="sep" id="syn-root"></div>
+  <p class="lead" style="font-size:.92rem"><b>Pola umumnya:</b> sinergi paling kuat terjadi lewat tiga mekanisme: <b>lemak</b> membantu penyerapan zat larut lemak (karotenoid, vitamin D, kurkumin), <b>vitamin C</b> membantu penyerapan zat besi nabati, dan <b>enzim atau zat pendamping</b> (mirosinase pada mustard, piperin pada lada) mengaktifkan atau menahan pemecahan senyawa aktif. Klaim lain di file sumber, seperti "BDNF naik 50%", belum didukung bukti.</p>
+</section>
+
 <section id="berisiko">
-  <div class="sec-head"><p class="eyebrow">Bagian 5</p><h2>Siapa cenderung kekurangan apa</h2>
+  <div class="sec-head"><p class="eyebrow">Bagian 6</p><h2>Siapa cenderung kekurangan apa</h2>
   <p class="lead">Orang sehat pun bisa kekurangan nutrisi karena gaya hidup, pola makan, atau obat.</p></div>
   <div class="tbl"><table>
     <thead><tr><th>Kelompok</th><th>Cenderung kurang</th><th>Alasan utama</th></tr></thead>
@@ -291,20 +302,20 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
 </section>
 
 <section id="hati-hati">
-  <div class="sec-head"><p class="eyebrow">Bagian 6</p><h2>Klaim yang perlu hati-hati</h2>
+  <div class="sec-head"><p class="eyebrow">Bagian 7</p><h2>Klaim yang perlu hati-hati</h2>
   <p class="lead">Klaim berikut muncul di video, tetapi untuk orang sehat sebaiknya tidak dilakukan tanpa pemeriksaan atau pendampingan tenaga kesehatan.</p></div>
   <div class="warnlist" id="warn-root"></div>
 </section>
 
 <section id="latihan">
-  <div class="sec-head"><p class="eyebrow">Bagian 7</p><h2>Latihan soal</h2>
+  <div class="sec-head"><p class="eyebrow">Bagian 8</p><h2>Latihan soal</h2>
   <p class="lead">Soal esai singkat tanpa pilihan ganda. Jawab dulu di kepala atau di kertas, lalu buka jawabannya. Centang “Sudah bisa” untuk melacak kemajuan. Kemajuan tersimpan di browser ini saja.</p></div>
   <div class="qbar">
     <div style="display:grid;gap:8px">
       <div class="chips" role="group" aria-label="Saring soal menurut kategori" id="qcat"></div>
       <div class="chips" role="group" aria-label="Saring soal menurut prioritas" id="qtier"></div>
     </div>
-    <div class="progress"><div class="bar"><i id="pbar"></i></div><span id="ptext">0 dari 68 sudah bisa</span>
+    <div class="progress"><div class="bar"><i id="pbar"></i></div><span id="ptext">0 dari 75 sudah bisa</span>
       <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="shuffle">Acak urutan</button><button class="btn" id="hidebtn">Sembunyikan yang sudah bisa</button><button class="btn" id="openall">Buka semua jawaban</button></div>
     </div>
   </div>
@@ -404,6 +415,28 @@ const SEP=[
  {c:'Dengan obat',e:'k',a:'Jeruk bali (grapefruit)',b:'Beberapa statin & obat lain',w:'Jeruk bali menghambat enzim CYP3A4 yang memecah obat, sehingga kadar obat dalam darah bisa naik berlebihan.',g:'Hindari bila obat Anda termasuk daftarnya',x:'Contohnya simvastatin. Cek brosur obat atau tanya apoteker.'},
 ];
 
+const SYN=[
+ {e:'k',t:2,a:'Kunyit',b:'Lada hitam',w:'Piperin dalam lada menghambat pemecahan kurkumin di hati dan usus. Pada manusia, 20 mg piperin menaikkan kadar kurkumin dalam darah sekitar 20 kali lipat (Shoba dkk., 1998).',g:'Masak kunyit dengan sejumput lada dan sedikit minyak, misalnya pada kari, opor, atau sayur.',x:'Kurkumin juga larut lemak. Piperin dosis suplemen dapat memengaruhi kadar obat lain.'},
+ {e:'k',t:2,a:'Alpukat',b:'Tomat (guacamole + salsa)',w:'Karotenoid seperti likopen dan beta-karoten larut lemak. Menambahkan alpukat ke salsa terbukti menaikkan penyerapan karotenoid beberapa kali lipat (Unlu dkk., 2005).',g:'Salad tomat dengan alpukat atau minyak zaitun, sambal tomat dimakan bersama lauk berlemak.',x:'Berlaku juga untuk wortel, ubi oranye, dan sayuran hijau: selalu beri sedikit lemak.'},
+ {e:'k',t:2,a:'Lemon',b:'Bayam',w:'Vitamin C mengubah zat besi nonheme ke bentuk yang lebih mudah diserap.',g:'Peras lemon atau jeruk nipis di atas tumis atau salad bayam.',x:'Oksalat bayam tetap membatasi penyerapan. Jangan minum teh/kopi bersamaan.'},
+ {e:'k',t:2,a:'Paprika',b:'Kacang hitam',w:'Vitamin C dari paprika membantu penyerapan zat besi nonheme dari kacang. Kacang juga memberi serat dan protein.',g:'Tumis kacang dengan paprika, atau salad kacang merah/hitam dengan paprika segar.',x:'Rendam kacang 8–12 jam untuk menurunkan fitat.'},
+ {e:'k',t:2,a:'Beras',b:'Kacang-kacangan',w:'Asam amino keduanya saling melengkapi: beras rendah lisin tapi cukup metionin, kacang sebaliknya. Bersama-sama menjadi protein lengkap.',g:'Nasi dengan tempe atau tahu, nasi merah dengan kacang merah, bubur kacang hijau.',x:'Penting terutama bagi vegetarian. Tidak harus dalam satu piring, cukup dalam hari yang sama.'},
+ {e:'s',t:2,a:'Brokoli matang',b:'Bubuk mustard',w:'Memasak merusak enzim mirosinase yang membentuk sulforaphane. Mustard (atau lobak, kecambah brokoli mentah) menyediakan enzim itu kembali, sehingga sulforaphane terbentuk lebih banyak.',g:'Taburkan sedikit bubuk mustard pada brokoli kukus, atau kukus brokoli sebentar saja.',x:'Kecambah brokoli juga sering disebut di video Dr. Berg sebagai sumber sulforaphane.'},
+ {e:'s',t:3,a:'Teh hijau',b:'Lemon',w:'Pada uji pencernaan buatan, asam dan vitamin C dari sitrus menjaga katekin teh agar tidak rusak, sehingga lebih banyak yang tersedia untuk diserap.',g:'Tambahkan perasan lemon ke teh hijau hangat (bukan mendidih).',x:'Buktinya terutama dari uji laboratorium. Teh tetap diberi jarak dari makanan sumber zat besi.'},
+ {e:'s',t:3,a:'Oat',b:'Yogurt',w:'Serat beta-glukan oat bersifat prebiotik (makanan bakteri baik), sedangkan yogurt memberi probiotik. Gabungannya disebut sinbiotik. Protein yogurt juga membuat kenyang lebih lama.',g:'Overnight oats dengan yogurt tanpa gula, ditambah buah beri atau kacang.',x:'Pilih yogurt tawar, karena yogurt rasa buah umumnya tinggi gula.'},
+ {e:'s',t:3,a:'Bawang putih',b:'Ikan berlemak',w:'Keduanya bermanfaat untuk jantung. Studi kecil (Adler & Holub, 1997) menunjukkan gabungan bawang putih + minyak ikan menurunkan kolesterol dan trigliserida lebih baik daripada masing-masing.',g:'Pepes atau panggang ikan kembung, sarden, atau tongkol dengan bawang putih. Ikan 2–3 kali seminggu.',x:'Keduanya sedikit mengencerkan darah. Hati-hati bila memakai warfarin atau aspirin.'},
+ {e:'s',t:3,a:'Jamur',b:'Telur',w:'Kuning telur memberi lemak, kolin, dan vitamin D3. Jamur memberi ergotioneina (antioksidan), selenium, dan vitamin D2 bila dijemur atau terpapar UV. Lemak telur membantu penyerapan zat larut lemak dari jamur.',g:'Omelet atau orak-arik jamur. Jemur jamur 30–60 menit di bawah matahari sebelum dimasak untuk menaikkan vitamin D2.',x:'Selalu masak jamur. Persentase penyerapan di file sumber tidak bisa diverifikasi.'},
+ {e:'s',t:3,a:'Kakao',b:'Kopi',w:'Studi kecil menemukan kakao + kafein meningkatkan fokus, sementara flavanol kakao meredam rasa gelisah akibat kafein.',g:'Kopi dengan sedikit bubuk kakao murni tanpa gula.',x:'Tetap tanpa gula, dan hindari di sore hari agar tidur tidak terganggu.'},
+ {e:'b',t:3,a:'Bawang merah',b:'Cuka apel',w:'Cuka dapat sedikit menurunkan lonjakan gula darah setelah makan. Bawang merah kaya kuersetin dan prebiotik. Sinergi khusus keduanya belum diteliti dengan baik.',g:'Acar bawang merah dalam cuka apel, atau dressing salad.',x:'Klaim "detoks hati" dan angka penurunan 35–40% di file sumber tidak terverifikasi. Jangan minum cuka saat perut kosong bila lambung sensitif.'},
+ {e:'b',t:3,a:'Blueberry',b:'Walnut',w:'Antosianin blueberry dan omega-3 nabati (ALA) walnut masing-masing punya bukti baik untuk otak dan pembuluh darah. Belum ada bukti bahwa gabungannya bekerja lebih kuat.',g:'Camilan sesekali atau topping yogurt tanpa gula.',x:'Bagus sebagai pengganti camilan manis.'},
+ {e:'b',t:3,a:'Raspberry',b:'Cokelat hitam',w:'Antosianin beri dan flavanol kakao sama-sama antioksidan. Bukti sinergi langsung belum ada.',g:'Beberapa kotak cokelat hitam ≥70% (15–25 g) dengan segenggam raspberry.',x:'Pilih cokelat yang rendah gula.'},
+ {e:'b',t:3,a:'Cottage cheese',b:'Stroberi',w:'Protein kasein yang dicerna lambat, ditambah vitamin C dan serat dari stroberi, membuat kenyang lebih lama dan lonjakan gula darahnya rendah.',g:'Sarapan atau camilan berprotein.',x:'Manfaatnya datang dari masing-masing makanan, bukan dari interaksi khusus. Dr. Berg menilai cottage cheese ramah keto.'},
+ {e:'b',t:3,a:'Keju kambing',b:'Telur',w:'Protein, kolin, B12, kalsium, dan K2 lengkap dalam satu menu.',g:'Orak-arik telur dengan sayur dan sedikit keju kambing.',x:'Lebih tepat disebut menu padat gizi daripada sinergi penyerapan.'},
+ {e:'b',t:3,a:'Pisang',b:'Cokelat hitam',w:'Kalium dari pisang dan magnesium serta flavanol dari kakao. Klaim efek mood (triptofan, anandamida) di file sumber lemah.',g:'Sesekali sebagai pengganti kue manis.',x:'Pisang matang cukup tinggi gula. Dr. Berg membatasi buah manis.'},
+ {e:'b',t:3,a:'Ubi ungu',b:'Minyak kelapa',w:'Ubi ungu kaya antosianin dan pati resisten (lebih banyak bila didinginkan). Lemak memperlambat pengosongan lambung sehingga lonjakan gula darahnya lebih landai. Antosianin larut air, jadi klaim bahwa lemak menaikkan penyerapannya lemah.',g:'Ubi kukus yang didinginkan, lalu dimakan dengan sedikit VCO.',x:'MCT berlebih bisa menyebabkan diare. Mulai dari 1 sdm.'},
+ {e:'b',t:'w',a:'Keju fermentasi',b:'Anggur merah',w:'Keju matang memberi K2 dan polifenol anggur bersifat antioksidan. Tetapi alkohol tetap penguras B1, magnesium, seng, dan folat, dan tidak dianjurkan untuk mulai diminum demi kesehatan.',g:'Ambil manfaat K2 dari keju saja. Polifenol bisa didapat dari beri, kakao, atau teh.',x:'Angka "kognisi +20–25%" di file sumber tidak terverifikasi. Bertentangan dengan anjuran membatasi alkohol.'},
+];
+
 const Q=[
  // Gejala kekurangan
  ['Gejala kekurangan',1,'Bila tubuh defisiensi vitamin B12, gejalanya apa saja?','Kesemutan atau mati rasa di tangan dan kaki, lelah dan lemas karena anemia, pucat, lidah merah licin atau sariawan, sulit mengingat, dan mood turun. Bila dibiarkan bisa terjadi gangguan keseimbangan dan kerusakan saraf permanen.'],
@@ -470,6 +503,14 @@ const Q=[
  ['Jangan bersamaan',2,'Mengapa susu, antasida, atau suplemen mineral tidak boleh diminum bersamaan dengan antibiotik seperti doksisiklin atau ciprofloxacin?','Kalsium, magnesium, besi, dan seng mengikat antibiotik di usus sehingga obat tidak terserap dan tidak bekerja. Beri jarak 2–6 jam sesuai petunjuk obat.'],
  ['Jangan bersamaan',3,'Mengapa bayam bukan sumber kalsium yang baik walaupun kandungan kalsiumnya tinggi?','Bayam tinggi oksalat yang mengikat kalsium, sehingga hanya sedikit yang terserap. Teri, sarden bertulang, susu, dan tahu lebih baik.'],
  ['Jangan bersamaan',3,'Apa hubungan putih telur mentah dengan biotin?','Putih telur mentah mengandung avidin yang mengikat biotin sehingga tidak terserap. Memasak telur menonaktifkan avidin.'],
+ // Sinergi makanan
+ ['Sinergi makanan',2,'Mengapa kunyit sebaiknya dimasak dengan lada hitam?','Piperin dalam lada menghambat pemecahan kurkumin, sehingga kadar kurkumin dalam darah naik sekitar 20 kali lipat (Shoba dkk., 1998). Kurkumin juga larut lemak, jadi masak dengan sedikit minyak.'],
+ ['Sinergi makanan',2,'Mengapa salad tomat atau wortel sebaiknya diberi alpukat atau minyak zaitun?','Karotenoid (likopen, beta-karoten) larut lemak. Lemak membantu penyerapannya beberapa kali lipat.'],
+ ['Sinergi makanan',2,'Mengapa bayam atau kacang sebaiknya dimakan dengan lemon, jambu biji, atau paprika?','Vitamin C meningkatkan penyerapan zat besi nonheme dari tumbuhan.'],
+ ['Sinergi makanan',2,'Mengapa nasi dengan tempe atau kacang disebut protein lengkap?','Beras rendah lisin tapi cukup metionin, sedangkan kacang sebaliknya. Bersama-sama, asam amino esensialnya saling melengkapi.'],
+ ['Sinergi makanan',3,'Mengapa menaburkan bubuk mustard pada brokoli matang menambah sulforaphane?','Memasak merusak enzim mirosinase yang membentuk sulforaphane. Mustard mengandung mirosinase, sehingga sulforaphane tetap bisa terbentuk.'],
+ ['Sinergi makanan',3,'Apa itu sinbiotik? Beri contoh menu.','Gabungan prebiotik (makanan bakteri baik, misalnya serat oat) dan probiotik (bakteri baik, misalnya yogurt). Contohnya overnight oats dengan yogurt tawar.'],
+ ['Sinergi makanan',3,'Mengapa jamur sebaiknya dijemur sebelum dimasak, dan apa pasangan yang cocok?','Paparan UV menaikkan vitamin D2 pada jamur. Pasangkan dengan telur, karena lemaknya membantu penyerapan vitamin D dan zat larut lemak lain.'],
  // Angka penting
  ['Angka penting',1,'Berapa kebutuhan kalium harian orang dewasa?','Sekitar 4.700 mg per hari, baik menurut AKG Indonesia 2019 maupun Dr. Berg.'],
  ['Angka penting',1,'Berapa AKG vitamin D, dan berapa batas atas aman tanpa pengawasan?','AKG sekitar 15 mcg (600 IU), dengan batas atas 4.000 IU per hari. Dr. Berg sering menyebut 10.000 IU, jadi cek kadar 25(OH)D dulu sebelum dosis tinggi.'],
@@ -513,6 +554,18 @@ document.querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>
     <div class="meta">${evBadge(s.e)}<span class="cat">${s.c}</span></div><p>${s.w}</p><div class="gap"><b>Saran:</b> ${s.g}</div><p class="pct" style="font-family:var(--f-body);font-size:.86rem">${s.x}</p></article>`).join('')};
   fEl.addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(!b)return;fEl.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));render(b.dataset.s)});
   render('Semua');
+})();
+
+/* render sinergi */
+(function(){
+  const fEl=document.getElementById('synf'), root=document.getElementById('syn-root');
+  const opts=[['all','Semua'],['k',EV.k],['s',EV.s],['b','Bukti lemah / klaim']];
+  fEl.innerHTML=opts.map(([v,l],i)=>`<button class="chip" id="yf-${v}" data-y="${v}" aria-pressed="${i===0}">${l} <span class="pct">${v==='all'?SYN.length:SYN.filter(s=>s.e===v).length}</span></button>`).join('');
+  const tb=t=>t==='w'?'<span class="tier tw">Hati-hati</span>':tierBadge(t);
+  const render=v=>{root.innerHTML=SYN.filter(s=>v==='all'||s.e===v).map(s=>`<article class="pair"><h3>${s.a}<span class="plus" aria-label="ditambah">+</span>${s.b}</h3>
+    <div class="meta">${tb(s.t)}${evBadge(s.e)}</div><p>${s.w}</p><div class="gap"><b>Praktiknya:</b> ${s.g}</div><p class="pct" style="font-family:var(--f-body);font-size:.86rem">${s.x}</p></article>`).join('')};
+  fEl.addEventListener('click',e=>{const b=e.target.closest('[data-y]');if(!b)return;fEl.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));render(b.dataset.y)});
+  render('all');
 })();
 
 /* render warnings */
