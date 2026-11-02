@@ -1,0 +1,357 @@
+<title>Piring Telur</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: kalkulator — panel pengaturan + piring berdampingan di layar lebar, bertumpuk di ponsel; detail, jadwal makan, dan batang gizi di bawah */
+:root{
+  --bg:#F6F4EE; --surface:#FFFFFF; --ink:#1C1A16; --muted:#6A6458; --line:#E2DDD2;
+  --accent:#B7791F; --accent-soft:#F6EBD6; --ok:#2F7D4F; --warn:#9A5B00; --warn-soft:#FBEFD3; --bad:#B23A2B;
+  --s-telur:#E3A72F; --s-ikan:#3F7CAC; --s-lauk:#8C7A2E; --s-daun:#3E9B5F; --s-oranye:#E07B39; --s-buah:#C2456B; --s-pokok:#C9B48A; --s-tabur:#7A5C43;
+  --t-telur:#1C1A16; --t-ikan:#FFFFFF; --t-lauk:#FFFFFF; --t-daun:#FFFFFF; --t-oranye:#1C1A16; --t-buah:#FFFFFF; --t-pokok:#1C1A16; --t-tabur:#FFFFFF;
+  --f-display:"Bricolage Grotesque",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --r:12px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#13120F; --surface:#1D1B17; --ink:#EEE9DF; --muted:#A8A090; --line:#34302A;
+  --accent:#F2C14E; --accent-soft:#3A2F17; --ok:#5FC08A; --warn:#F0C062; --warn-soft:#3A2E14; --bad:#FF8A7A;
+  --s-telur:#F2C14E; --s-ikan:#6EA8D6; --s-lauk:#C9B45A; --s-daun:#5FC08A; --s-oranye:#F0A36A; --s-buah:#E57A9A; --s-pokok:#D8C49A; --s-tabur:#B08B6C;
+  --t-telur:#13120F; --t-ikan:#13120F; --t-lauk:#13120F; --t-daun:#13120F; --t-oranye:#13120F; --t-buah:#13120F; --t-pokok:#13120F; --t-tabur:#13120F; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#13120F; --surface:#1D1B17; --ink:#EEE9DF; --muted:#A8A090; --line:#34302A;
+  --accent:#F2C14E; --accent-soft:#3A2F17; --ok:#5FC08A; --warn:#F0C062; --warn-soft:#3A2E14; --bad:#FF8A7A;
+  --s-telur:#F2C14E; --s-ikan:#6EA8D6; --s-lauk:#C9B45A; --s-daun:#5FC08A; --s-oranye:#F0A36A; --s-buah:#E57A9A; --s-pokok:#D8C49A; --s-tabur:#B08B6C;
+  --t-telur:#13120F; --t-ikan:#13120F; --t-lauk:#13120F; --t-daun:#13120F; --t-oranye:#13120F; --t-buah:#13120F; --t-pokok:#13120F; --t-tabur:#13120F; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);line-height:1.12;margin:0;text-wrap:balance}
+h1{font-size:clamp(2rem,6vw,3.2rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.3rem,3vw,1.7rem);font-weight:750}
+h3{font-size:1.08rem;font-weight:700}
+p{margin:0}
+.muted{color:var(--muted)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+header.top{padding-block:32px 18px;display:grid;gap:10px}
+header.top .lead{max-width:64ch;color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:14px;align-content:start;min-width:0}
+.grid-top{display:grid;grid-template-columns:minmax(280px,360px) 1fr;gap:16px;align-items:start}
+@media (max-width:820px){.grid-top{grid-template-columns:1fr}}
+/* controls */
+.ctl{display:grid;gap:6px}
+.ctl .row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.ctl label{font-weight:700;font-size:.92rem}
+.ctl output{font-family:var(--f-mono);font-size:.95rem}
+input[type=range]{width:100%;accent-color:var(--accent);height:28px}
+.eggs{display:flex;gap:6px}
+.eggbtn{all:unset;cursor:pointer;width:34px;height:42px;display:grid;place-items:center;border-radius:8px}
+.eggbtn:focus-visible{outline:2px solid var(--accent)}
+.eggbtn svg{width:26px;height:34px}
+.seg-ctl{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg-ctl button{flex:1;font:inherit;font-size:.88rem;padding:8px 6px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg-ctl button+button{border-left:1px solid var(--line)}
+.seg-ctl button[aria-pressed="true"]{background:var(--ink);color:var(--bg);font-weight:700}
+.hint{font-size:.8rem;color:var(--muted)}
+.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.summary div{background:var(--bg);border-radius:8px;padding:8px 10px;display:grid}
+.summary b{font-family:var(--f-mono);font-size:1.05rem}
+.summary span{font-size:.76rem;color:var(--muted)}
+/* plate */
+.plate-area{display:grid;grid-template-columns:minmax(240px,400px) 1fr;gap:16px;align-items:start}
+@media (max-width:640px){.plate-area{grid-template-columns:1fr}}
+#plate{width:100%;height:auto;display:block}
+.slice{cursor:pointer;transition:opacity .15s}
+.slice:hover,.slice:focus-visible{opacity:.86;outline:none}
+.slice.on{stroke:var(--ink);stroke-width:3}
+.legend{display:grid;gap:4px}
+.lg{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:14px 1fr auto;gap:8px;align-items:center;padding:6px 8px;border-radius:8px;font-size:.9rem}
+.lg:hover,.lg[aria-pressed="true"]{background:var(--accent-soft)}
+.lg:focus-visible{outline:2px solid var(--accent)}
+.lg i{width:14px;height:14px;border-radius:4px}
+.lg .g{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.sides{display:flex;flex-wrap:wrap;gap:6px}
+.sidebtn{font:inherit;font-size:.84rem;border:1px dashed var(--accent);background:transparent;color:var(--ink);border-radius:999px;padding:5px 11px;cursor:pointer}
+.sidebtn[aria-pressed="true"]{background:var(--accent);color:var(--bg);border-style:solid}
+/* info */
+.info{border-left:4px solid var(--accent);background:var(--surface);border-radius:var(--r);padding:16px;display:grid;gap:10px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.info table{border-collapse:collapse;width:100%;font-size:.92rem}
+.info td{padding:5px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.info td.g{font-family:var(--f-mono);text-align:right;white-space:nowrap;padding-left:10px}
+.info td .u{display:block;font-size:.78rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:.82rem;padding:3px 10px;border-radius:999px;background:var(--accent-soft)}
+/* meals */
+.meals{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.meal{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;display:grid;gap:6px;align-content:start}
+.meal ul{margin:0;padding-left:18px;font-size:.9rem;display:grid;gap:2px}
+/* bars */
+.bars{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:6px 22px}
+.bar{display:grid;grid-template-columns:110px 1fr 3.4rem;gap:8px;align-items:center;font-size:.88rem}
+.bar .tr{position:relative;height:12px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar .fl{position:absolute;inset:0 auto 0 0;border-radius:6px;transition:width .3s}
+.bar .egg{position:absolute;inset:0 auto 0 0;background:var(--s-telur);border-radius:6px 0 0 6px;transition:width .3s}
+.bar .v{font-family:var(--f-mono);font-size:.8rem;text-align:right}
+.alerts{display:grid;gap:8px}
+.alert{background:var(--warn-soft);border-radius:10px;padding:10px 14px;font-size:.92rem}
+.alert b{color:var(--warn)}
+.tips{display:grid;gap:6px;margin:0;padding-left:20px;font-size:.92rem}
+section{display:grid;gap:12px;padding-block:22px 4px}
+footer{padding-block:32px 48px;color:var(--muted);font-size:.84rem;display:grid;gap:6px;max-width:78ch}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<header class="top wrap">
+  <p class="eyebrow">Kalkulator pola makan berbasis telur</p>
+  <h1>Piring Telur</h1>
+  <p class="lead">Atur jumlah telur per hari dan data tubuh Anda. Piring akan menghitung ulang porsi harian supaya kebutuhan gizi tetap terpenuhi. Ketuk tiap bagian piring untuk melihat makanan spesifik, beratnya, penggantinya, dan nutrisi yang ditutupnya.</p>
+</header>
+
+<main class="wrap">
+  <div class="grid-top">
+    <div class="card" id="controls">
+      <div class="ctl">
+        <div class="row"><label id="lab-egg">Telur per hari</label><output id="o-egg" class="mono"></output></div>
+        <div class="eggs" role="group" aria-labelledby="lab-egg" id="eggs"></div>
+        <input type="range" id="egg" min="1" max="6" step="1" aria-labelledby="lab-egg">
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="bb">Berat badan</label><output id="o-bb" for="bb"></output></div>
+        <input type="range" id="bb" min="35" max="150" step="1">
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="tb">Tinggi badan</label><output id="o-tb" for="tb"></output></div>
+        <input type="range" id="tb" min="140" max="200" step="1">
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="usia">Usia</label><output id="o-usia" for="usia"></output></div>
+        <input type="range" id="usia" min="18" max="80" step="1">
+      </div>
+      <div class="ctl">
+        <label id="lab-sex">Jenis kelamin</label>
+        <div class="seg-ctl" role="group" aria-labelledby="lab-sex"><button id="sex-P" data-sex="P">Perempuan</button><button id="sex-L" data-sex="L">Laki-laki</button></div>
+      </div>
+      <div class="ctl">
+        <label id="lab-act">Aktivitas</label>
+        <div class="seg-ctl" role="group" aria-labelledby="lab-act"><button id="act-1" data-act="1.375">Ringan</button><button id="act-2" data-act="1.55">Sedang</button><button id="act-3" data-act="1.725">Berat</button></div>
+        <p class="hint" id="act-hint"></p>
+      </div>
+      <div class="ctl">
+        <label id="lab-std">Standar pembanding</label>
+        <div class="seg-ctl" role="group" aria-labelledby="lab-std"><button id="std-dv" data-std="dv">Daily Value (FDA)</button><button id="std-akg" data-std="akg">AKG Indonesia</button></div>
+      </div>
+      <div class="summary" id="summary"></div>
+    </div>
+
+    <div class="card">
+      <div class="plate-area">
+        <div style="display:grid;gap:10px">
+          <svg id="plate" viewBox="0 0 300 300" role="group" aria-label="Piring harian, ukuran bagian berdasarkan berat makanan"></svg>
+          <div class="sides" id="sides" role="group" aria-label="Pelengkap di luar piring"></div>
+        </div>
+        <div style="display:grid;gap:8px">
+          <h3>Isi piring harian</h3>
+          <p class="hint">Ukuran bagian = berat makanan per hari (tanpa minuman). Ketuk untuk detail.</p>
+          <div class="legend" id="legend"></div>
+        </div>
+      </div>
+      <div class="alerts" id="alerts"></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="info" id="info" aria-live="polite"></div>
+  </section>
+
+  <section>
+    <h2>Pembagian ke waktu makan</h2>
+    <div class="meals" id="meals"></div>
+  </section>
+
+  <section>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap">
+      <h2>Kecukupan gizi harian</h2>
+      <p class="hint"><span style="display:inline-block;width:10px;height:10px;background:var(--s-telur);border-radius:3px"></span> bagian dari telur · garis penuh = total dari piring</p>
+    </div>
+    <div class="bars" id="bars"></div>
+    <div class="card" id="gapcard"><h3>Cara menutup kekurangan</h3><ul class="tips" id="tips"></ul></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p><b>Cara menghitung.</b> Energi dihitung dengan rumus Mifflin-St Jeor dikali faktor aktivitas. Target protein 1,0 g/kg berat badan (minimal 50 g). Sayur daun minimal ±300 g dan buah tetap, berapa pun telurnya, karena telur tidak menyumbang vitamin C, serat, dan hampir tidak menyumbang kalium atau magnesium. Ikan ±70 g per hari (rata-rata, misalnya 100 g di 5 hari per minggu) dipertahankan untuk vitamin D dan omega-3. Tempe dan tahu menutup sisa protein, dan nasi merah menyesuaikan sisa energi.</p>
+  <p><b>Batasan.</b> Kandungan gizi per 100 g berasal dari ingatan atas data USDA. AKG mengacu pada Permenkes 28/2019 untuk dewasa 19–29 tahun, dibulatkan, jadi perlu verifikasi. Ini perkiraan untuk edukasi, bukan resep diet. Tidak untuk anak, ibu hamil atau menyusui, atau penderita penyakit ginjal, diabetes, atau kolesterol tinggi, karena kebutuhan mereka berbeda dan perlu didampingi tenaga kesehatan.</p>
+</footer>
+
+<script>
+/* ===== data per 100 g ===== */
+const F={
+ telur:{kcal:143,prot:12.6,fat:9.5,carb:.7,A:160,D:2,E:1.05,K:.3,B1:.04,B2:.457,B3:.075,B6:.17,fol:47,B12:.89,kol:294,Ca:56,Fe:1.75,Mg:12,Ka:138,Zn:1.29,Se:30.7,I:52},
+ kembung:{kcal:205,prot:19,fat:13.9,D:16,E:1.5,B1:.18,B2:.31,B3:9,B6:.4,B12:8.7,kol:65,Ca:12,Fe:1.6,Mg:76,Ka:314,Zn:.63,Se:44,I:50},
+ tempe:{kcal:192,prot:20.3,fat:10.8,carb:7.6,fib:1.4,B1:.08,B2:.36,B3:2.6,B6:.22,fol:24,B12:.08,kol:50,Ca:111,Fe:2.7,Mg:81,Ka:412,Zn:1.14},
+ tahu:{kcal:144,prot:15.8,fat:8.7,carb:2.8,fib:2.3,fol:27,kol:28,Ca:350,Fe:2.7,Mg:58,Ka:237,Zn:1.6,Se:17},
+ daun:{kcal:23,prot:3,fat:.3,carb:3.8,fib:2.4,A:524,C:9.8,E:2.08,K:494,B1:.1,B2:.24,B3:.5,B6:.24,fol:146,kol:20,Ca:136,Fe:3.57,Mg:87,Ka:466,Zn:.76,Se:1.5},
+ wortel:{kcal:35,prot:.8,carb:8.2,fib:3,A:852,C:3.6,E:1,K:13.7,B6:.15,fol:14,Ca:30,Mg:10,Ka:235},
+ ubi:{kcal:90,prot:2,carb:20.7,fib:3.3,A:961,C:19.6,E:.7,B6:.29,kol:13,Ca:38,Fe:.7,Mg:27,Ka:475},
+ jambu:{kcal:68,prot:2.6,fat:1,carb:14,fib:5.4,A:31,C:228,E:.7,K:2.6,B3:1.1,B6:.11,fol:49,Ca:18,Fe:.26,Mg:22,Ka:417,Zn:.23},
+ pisang:{kcal:89,prot:1.1,fat:.3,carb:22.8,fib:2.6,C:8.7,B3:.67,B6:.37,fol:20,kol:10,Mg:27,Ka:358},
+ alpukat:{kcal:160,prot:2,fat:14.7,carb:8.5,fib:6.7,A:7,C:10,E:2.07,K:21,B2:.13,B3:1.74,B6:.26,fol:81,kol:14,Mg:29,Ka:485,Zn:.64},
+ kacang:{kcal:585,prot:24,fat:49,carb:21,fib:8.5,E:4.9,B1:.15,B2:.2,B3:13.5,B6:.47,fol:145,kol:53,Ca:54,Fe:2.3,Mg:176,Ka:658,Zn:3.3,Se:7.5},
+ kuaci:{kcal:584,prot:21,fat:51,carb:20,fib:8.6,E:35,B1:1.48,B3:8.3,B6:1.35,fol:227,kol:55,Ca:78,Fe:5.2,Mg:325,Ka:645,Zn:5,Se:53},
+ teri:{kcal:300,prot:55,fat:4,B12:5,kol:80,Ca:1200,Fe:3.9,Se:60,I:80,Zn:3},
+ susu:{kcal:61,prot:3.2,fat:3.3,carb:4.8,A:46,B2:.17,B12:.45,kol:14,Ca:113,Mg:10,Ka:132,Zn:.37,Se:1.9,I:30},
+ minyak:{kcal:884,fat:100,E:15,K:10},
+ garam:{I:1500},
+ nasi:{kcal:123,prot:2.7,fat:1,carb:25.6,fib:1.6,B1:.1,B3:1.5,B6:.15,fol:4,kol:9,Ca:3,Fe:.56,Mg:39,Ka:86,Zn:.7,Se:5.8},
+ labu:{kcal:574,Mg:550,Zn:7.8,Fe:8.8}
+};
+const NUT=[['prot','Protein','g'],['fib','Serat','g'],['A','Vitamin A','µg'],['C','Vitamin C','mg'],['D','Vitamin D','µg'],['E','Vitamin E','mg'],['K','Vitamin K','µg'],['B1','Vitamin B1','mg'],['B2','Vitamin B2','mg'],['B3','Vitamin B3','mg'],['B6','Vitamin B6','mg'],['fol','Folat','µg'],['B12','Vitamin B12','µg'],['kol','Kolin','mg'],['Ca','Kalsium','mg'],['Fe','Zat besi','mg'],['Mg','Magnesium','mg'],['Ka','Kalium','mg'],['Zn','Seng','mg'],['Se','Selenium','µg'],['I','Yodium','µg']];
+const DV={fib:28,A:900,C:90,D:20,E:15,K:120,B1:1.2,B2:1.3,B3:16,B6:1.7,fol:400,B12:2.4,kol:550,Ca:1300,Fe:18,Mg:420,Ka:4700,Zn:11,Se:55,I:150};
+const AKG={L:{fib:37,A:650,C:90,D:15,E:15,K:65,B1:1.2,B2:1.3,B3:16,B6:1.3,fol:400,B12:4,kol:550,Ca:1000,Fe:9,Mg:330,Ka:4700,Zn:11,Se:30,I:150},
+           P:{fib:32,A:600,C:75,D:15,E:15,K:55,B1:1.1,B2:1.1,B3:14,B6:1.3,fol:400,B12:4,kol:425,Ca:1000,Fe:18,Mg:310,Ka:4700,Zn:8,Se:24,I:150}};
+/* ===== bagian piring ===== */
+const SEGS=[
+ {k:'telur',n:'Telur',items:['telur']},
+ {k:'ikan',n:'Ikan',items:['kembung']},
+ {k:'lauk',n:'Tempe & tahu',items:['tempe','tahu']},
+ {k:'daun',n:'Sayur daun',items:['daun']},
+ {k:'oranye',n:'Sayur oranye',items:['wortel','ubi']},
+ {k:'buah',n:'Buah',items:['jambu','pisang','alpukat']},
+ {k:'pokok',n:'Nasi merah',items:['nasi']},
+ {k:'tabur',n:'Kacang, biji & teri',items:['kacang','kuaci','teri']}];
+const LBL={telur:'Telur ayam',kembung:'Ikan kembung (atau sarden, tongkol, salmon)',tempe:'Tempe',tahu:'Tahu',daun:'Sayur daun: bayam, kangkung, daun singkong, katuk',wortel:'Wortel',ubi:'Ubi jalar oranye',jambu:'Jambu biji',pisang:'Pisang',alpukat:'Alpukat',nasi:'Nasi merah (boleh campur nasi putih)',kacang:'Kacang tanah sangrai',kuaci:'Kuaci (biji bunga matahari kupas)',teri:'Teri kering',susu:'Susu atau yogurt tawar',minyak:'Minyak untuk menumis',garam:'Garam beryodium'};
+const URT={telur:[50,'butir'],kembung:[100,'ekor sedang (±100 g daging)'],tempe:[50,'potong sedang'],tahu:[50,'potong sedang'],daun:[100,'mangkuk matang'],wortel:[60,'buah sedang'],ubi:[100,'buah sedang'],jambu:[100,'buah sedang'],pisang:[120,'buah sedang'],alpukat:[100,'setengah buah'],nasi:[100,'centong'],kacang:[15,'sendok makan'],kuaci:[10,'sendok makan'],teri:[10,'sendok makan'],susu:[250,'gelas'],minyak:[5,'sendok teh'],garam:[5,'sendok teh']};
+const SUB={telur:'Bila bosan: telur bebek atau puyuh (5 butir puyuh ≈ 1 telur ayam).',ikan:'Sarden kaleng, tongkol, bandeng, lele, atau salmon. Ikan berlemak paling banyak vitamin D dan omega-3.',lauk:'Kacang merah atau kacang hijau rebus (2× berat tempe), oncom, atau ayam tanpa kulit.',daun:'Kangkung, daun singkong, katuk, kelor, sawi, brokoli. Variasikan setiap hari.',oranye:'Labu kuning, paprika merah, tomat.',buah:'Jambu biji ↔ jeruk, pepaya, atau mangga (vitamin C). Pisang ↔ melon. Alpukat ↔ segenggam kacang.',pokok:'Ubi, singkong, jagung, kentang, atau oat. Nasi yang didinginkan memiliki pati resisten lebih tinggi.',tabur:'Biji labu atau wijen (pengganti kuaci). Rebon (pengganti teri). Kacang mete atau almond.'};
+const ROLE={telur:'Protein lengkap, B12, B2, kolin, selenium, yodium, biotin. Tidak mengandung vitamin C dan serat.',ikan:'Vitamin D dan omega-3, yang paling sulit dari sumber lain, serta B12, selenium, dan yodium.',lauk:'Protein nabati, kalsium (tahu), magnesium, folat. Tempe adalah fermentasi sehingga mineralnya lebih mudah diserap.',daun:'Penutup terbesar celah telur: vitamin K, folat, kalium, magnesium, vitamin A, zat besi nabati, serat.',oranye:'Vitamin A (beta-karoten), kalium, serat.',buah:'Vitamin C (telur 0%) yang juga membantu penyerapan zat besi, ditambah kalium dan serat.',pokok:'Energi. Porsinya mengikuti sisa kebutuhan kalori Anda.',tabur:'Vitamin B1, E, magnesium, seng (kacang dan kuaci), serta kalsium (teri). Porsi kecil, gizi besar.'};
+const MEALSPLIT={telur:[[1,0,0],[2,0,0],[2,0,1],[2,1,1],[2,1,2],[2,2,2]]};
+/* ===== state ===== */
+const DEF={egg:3,bb:55,tb:157,usia:30,sex:'P',act:1.375,std:'dv'};
+let S={...DEF};
+try{Object.assign(S,JSON.parse(localStorage.getItem('piring-telur-v1')||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem('piring-telur-v1',JSON.stringify(S))}catch(e){}};
+let sel='telur', shown=null, plan=null;
+/* ===== perhitungan ===== */
+function tot(list){const t={};list.forEach(([f,g])=>{for(const[n,v]of Object.entries(F[f]))t[n]=(t[n]||0)+v*g/100});return t}
+function build(e,s,lauk,pokok){return {telur:50*e,kembung:70,tempe:lauk*.7,tahu:lauk*.3,daun:300*Math.max(1,s),wortel:60*s,ubi:100*s,jambu:100,pisang:120*s,alpukat:50*s,kacang:15*s,kuaci:20*s,teri:20,susu:250*Math.min(s,1.2),minyak:10*s,garam:5,nasi:pokok}}
+function compute(){
+  const bmr=10*S.bb+6.25*S.tb-5*S.usia+(S.sex==='L'?5:-161), tdee=bmr*S.act, pt=Math.max(50,S.bb);
+  let s=Math.min(1.8,Math.max(.8,tdee/1900)),lauk=50,pokok=200;
+  for(let i=0;i<40;i++){
+    let g=build(S.egg,s,lauk,pokok),t=tot(Object.entries(g));
+    lauk=Math.min(300,Math.max(50,lauk+(pt-t.prot)/.189));
+    g=build(S.egg,s,lauk,0);t=tot(Object.entries(g));pokok=(tdee-t.kcal)/1.23;
+    if(pokok>600&&s<1.8){s=Math.min(1.8,s+.05);continue}
+    if(pokok<80&&s>.8){s=Math.max(.8,s-.05);continue}
+    pokok=Math.min(600,Math.max(80,pokok));
+  }
+  const g=build(S.egg,s,lauk,pokok), t=tot(Object.entries(g)), te=tot([['telur',g.telur]]);
+  return {tdee,pt,s,g,t,te,bmi:S.bb/((S.tb/100)**2)};
+}
+const ref=n=>n==='prot'?plan.pt:(S.std==='dv'?DV[n]:AKG[S.sex][n]);
+const fmt=(v,d=0)=>(+v.toFixed(d)).toLocaleString('id-ID');
+const urt=(f,g)=>{const[u,l]=URT[f];const q=g/u;const r=q<1?(Math.round(q*4)/4):(Math.round(q*2)/2);return `±${fmt(r,2)} ${l}`};
+/* ===== render: kontrol ===== */
+const $=id=>document.getElementById(id);
+function eggIcons(){$('eggs').innerHTML=[1,2,3,4,5,6].map(i=>`<button class="eggbtn" id="eggb-${i}" data-e="${i}" aria-label="${i} telur" aria-pressed="${i===S.egg}"><svg viewBox="0 0 26 34"><path d="M13 1.5C7 1.5 2 11 2 19.5 2 27 7 32.5 13 32.5S24 27 24 19.5C24 11 19 1.5 13 1.5Z" fill="${i<=S.egg?'var(--s-telur)':'transparent'}" stroke="${i<=S.egg?'var(--s-telur)':'var(--line)'}" stroke-width="2"/>${i<=S.egg?'<circle cx="13" cy="20" r="5" fill="var(--surface)" opacity=".35"/>':''}</svg></button>`).join('')}
+function syncControls(){
+  $('egg').value=S.egg;$('o-egg').textContent=`${S.egg} butir`;eggIcons();
+  $('bb').value=S.bb;$('o-bb').textContent=`${S.bb} kg`;$('tb').value=S.tb;$('o-tb').textContent=`${S.tb} cm`;$('usia').value=S.usia;$('o-usia').textContent=`${S.usia} tahun`;
+  document.querySelectorAll('[data-sex]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.sex===S.sex));
+  document.querySelectorAll('[data-act]').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.act===+S.act));
+  document.querySelectorAll('[data-std]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.std===S.std));
+  $('act-hint').textContent={1.375:'Kerja duduk, olahraga ringan 1–3×/minggu',1.55:'Banyak bergerak atau olahraga 3–5×/minggu',1.725:'Kerja fisik berat atau olahraga hampir setiap hari'}[S.act];
+}
+/* ===== render: piring dengan animasi ===== */
+function fracs(){const w=SEGS.map(sg=>sg.items.reduce((a,f)=>a+plan.g[f],0));const T=w.reduce((a,b)=>a+b,0);return {w,f:w.map(x=>x/T),T}}
+let anim=null;
+function drawPlate(target){
+  const from=shown||target, t0=performance.now(), dur=matchMedia('(prefers-reduced-motion: reduce)').matches?0:320;
+  cancelAnimationFrame(anim);
+  const step=now=>{const k=dur?Math.min(1,(now-t0)/dur):1,e=1-Math.pow(1-k,3);const cur=target.map((v,i)=>from[i]+(v-from[i])*e);paint(cur);if(k<1)anim=requestAnimationFrame(step);else shown=target};
+  anim=requestAnimationFrame(step);
+}
+function paint(fr){
+  const cx=150,cy=150,R=128;let a=-Math.PI/2,g=`<circle cx="150" cy="150" r="148" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/><circle cx="150" cy="150" r="136" fill="none" stroke="var(--line)"/>`,labels='';
+  fr.forEach((f,i)=>{const sg=SEGS[i];const a1=a+f*2*Math.PI;if(f>0.0005){
+    const p=t=>[cx+R*Math.cos(t),cy+R*Math.sin(t)];const[x0,y0]=p(a),[x1,y1]=p(a1);
+    g+=`<path class="slice${sel===sg.k?' on':''}" tabindex="0" role="button" aria-label="${sg.n}, ${Math.round(f*100)} persen piring" data-k="${sg.k}" d="M${cx},${cy} L${x0},${y0} A${R},${R} 0 ${f>.5?1:0} 1 ${x1},${y1} Z" fill="var(--s-${sg.k})" stroke="var(--surface)" stroke-width="2"/>`;
+    if(f>=.075){const m=(a+a1)/2,r=f>.25?78:88,tx=cx+r*Math.cos(m),ty=cy+r*Math.sin(m);labels+=`<text x="${tx}" y="${ty}" text-anchor="middle" style="font:700 ${f>.2?14:12}px var(--f-display);fill:var(--t-${sg.k});pointer-events:none">${{telur:'Telur',ikan:'Ikan',lauk:'Tempe',daun:'Daun',oranye:'Oranye',buah:'Buah',pokok:'Nasi',tabur:'Kacang'}[sg.k]}</text><text x="${tx}" y="${ty+14}" text-anchor="middle" style="font:500 11px var(--f-mono);fill:var(--t-${sg.k});pointer-events:none">${Math.round(f*100)}%</text>`}
+  }a=a1});
+  $('plate').innerHTML=g+labels;
+}
+function renderLegend(){
+  const {w,f}=fracs();
+  $('legend').innerHTML=SEGS.map((sg,i)=>`<button class="lg" id="lg-${sg.k}" data-k="${sg.k}" aria-pressed="${sel===sg.k}"><i style="background:var(--s-${sg.k})"></i><span>${sg.n}</span><span class="g">${fmt(w[i])} g · ${Math.round(f[i]*100)}%</span></button>`).join('');
+  $('sides').innerHTML=[['susu',`Susu/yogurt ${fmt(plan.g.susu)} ml`],['minyak',`Minyak ${fmt(plan.g.minyak)} g`],['garam','Garam beryodium 5 g'],['air','Air putih']].map(([k,l])=>`<button class="sidebtn" id="side-${k}" data-k="${k}" aria-pressed="${sel===k}">+ ${l}</button>`).join('');
+}
+/* ===== render: info bagian ===== */
+function contrib(items){const t=tot(items.map(f=>[f,plan.g[f]]));return NUT.map(([n,l])=>[l,100*(t[n]||0)/ref(n)]).filter(x=>x[1]>=8).sort((a,b)=>b[1]-a[1]).slice(0,5)}
+function renderInfo(){
+  const box=$('info');
+  if(['susu','minyak','garam','air'].includes(sel)){
+    const T={susu:['Susu atau yogurt tawar',`${fmt(plan.g.susu)} ml per hari (${urt('susu',plan.g.susu)}), sebaiknya sebagai camilan sore.`,'Kalsium, B2, B12, protein. Bila tidak minum susu: tambah 1 potong tahu dan 10 g teri.',['susu']],
+             minyak:['Minyak',`${fmt(plan.g.minyak)} g per hari (${urt('minyak',plan.g.minyak)}) untuk menumis sayur dan orak-arik telur.`,'Membantu penyerapan vitamin A, D, E, K dari sayur dan telur. Lebih baik ditumis atau dikukus daripada digoreng berendam.',['minyak']],
+             garam:['Garam beryodium','±5 g per hari (1 sendok teh), sudah termasuk garam di masakan.','Sumber yodium utama. Pastikan berlabel "beryodium". Jangan melebihi 5 g bila tekanan darah tinggi.',['garam']],
+             air:['Air putih','±8 gelas per hari, lebih banyak bila banyak berkeringat.','Bukan minuman manis. Teh atau kopi diberi jarak ±1 jam dari makan agar zat besi telur dan sayur tetap terserap.',[]]}[sel];
+    const c=T[3].length?contrib(T[3]):[];
+    box.innerHTML=`<h2>${T[0]}</h2><p>${T[1]}</p><p class="muted">${T[2]}</p>${c.length?`<div class="chips">${c.map(([l,p])=>`<span class="chip">${l} ${Math.round(p)}%</span>`).join('')}</div>`:''}`;return}
+  const sg=SEGS.find(x=>x.k===sel);const tg=sg.items.reduce((a,f)=>a+plan.g[f],0);
+  const c=contrib(sg.items);
+  const rows=sg.items.map(f=>`<tr><td>${LBL[f]}<span class="u">${urt(f,plan.g[f])}</span></td><td class="g">${fmt(plan.g[f])} g</td></tr>`).join('');
+  let extra='';
+  if(sel==='telur'){const d=MEALSPLIT.telur[S.egg-1];extra=`<p><b>Pembagian:</b> pagi ${d[0]}, siang ${d[1]}, malam ${d[2]} butir. Masak direbus, orak-arik, atau dikukus. Jangan dimakan mentah.</p><p class="muted">Kolesterol dari telur ±${fmt(186*S.egg)} mg/hari.</p>`}
+  if(sel==='ikan')extra=`<p class="muted">Angka ini rata-rata harian. Praktiknya bisa 1 porsi ikan (±100 g) di 5 hari dalam seminggu.</p>`;
+  box.innerHTML=`<div style="display:flex;align-items:center;gap:10px"><span style="width:16px;height:16px;border-radius:4px;background:var(--s-${sel})"></span><h2>${sg.n} · ${fmt(tg)} g/hari</h2></div>
+  <p>${ROLE[sel]}</p><table>${rows}</table>${extra}
+  <p><b>Menyumbang terbesar</b> (dari kebutuhan harian):</p><div class="chips">${c.map(([l,p])=>`<span class="chip">${l} ${Math.round(p)}%</span>`).join('')||'<span class="chip">Energi</span>'}</div>
+  <p class="muted"><b>Pengganti setara:</b> ${SUB[sel]}</p>`;
+}
+/* ===== render: makan ===== */
+function renderMeals(){
+  const g=plan.g,d=MEALSPLIT.telur[S.egg-1],L=(f,x)=>`${LBL[f].split(':')[0].split(' (')[0]} ${fmt(x)} g`;
+  const M=[['Pagi',[`${d[0]} telur orak-arik atau dadar dengan ${fmt(g.daun*.3)} g sayur daun`,L('nasi',g.nasi*.3),L('jambu',g.jambu)]],
+           ['Siang',[...(d[1]?[`${d[1]} telur rebus`]:[]),`Ikan kembung ${fmt(g.kembung)} g (atau 100 g, 5×/minggu)`,L('tempe',g.tempe*.6),`Tumis sayur daun ${fmt(g.daun*.4)} g dan wortel ${fmt(g.wortel)} g`,L('nasi',g.nasi*.4),L('pisang',g.pisang)]],
+           ['Camilan sore',[`Susu/yogurt ${fmt(g.susu)} ml`,`Kacang tanah ${fmt(g.kacang)} g dan kuaci ${fmt(g.kuaci)} g`]],
+           ['Malam',[...(d[2]?[`${d[2]} telur (rebus/kukus)`]:[]),`Sayur bening daun ${fmt(g.daun*.3)} g`,`Teri ${fmt(g.teri)} g dan tahu ${fmt(g.tahu)} g${g.tempe*.4>5?`, tempe ${fmt(g.tempe*.4)} g`:''}`,L('ubi',g.ubi),L('nasi',g.nasi*.3),L('alpukat',g.alpukat)]]];
+  $('meals').innerHTML=M.map(([t,l])=>`<div class="meal"><h3>${t}</h3><ul>${l.map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('');
+}
+/* ===== render: batang & celah ===== */
+const TIP={fib:['jambu','jambu biji',.054],A:['wortel','wortel',8.52],C:['jambu','jambu biji',2.28],E:['kuaci','kuaci',.35],K:['daun','sayur daun',4.94],B1:['kuaci','kuaci',.0148],B2:['telur','telur',.00457],B3:['kacang','kacang tanah',.135],B6:['pisang','pisang',.0037],fol:['daun','sayur daun',1.46],B12:['kembung','ikan kembung',.087],kol:['telur','telur',2.94],Ca:['teri','teri kering',12],Fe:['daun','sayur daun (+ jambu biji)',.0357],Mg:['labu','biji labu',5.5],Ka:['pisang','pisang',3.58],Zn:['labu','biji labu',.078],Se:['kembung','ikan kembung',.44],I:['garam','—',0],prot:['tempe','tempe',.203]};
+function renderBars(){
+  const t=plan.t,te=plan.te;
+  $('bars').innerHTML=NUT.map(([n,l,u])=>{const r=ref(n),p=100*(t[n]||0)/r,pe=100*(te[n]||0)/r,col=p>=100?'var(--ok)':p>=70?'var(--accent)':'var(--bad)';
+    return `<div class="bar" title="${l}: ${fmt(t[n]||0,1)} ${u} dari ${fmt(r,1)} ${u}"><span>${l}</span><div class="tr"><div class="fl" style="width:${Math.min(100,p)}%;background:${col};opacity:.35"></div><div class="egg" style="width:${Math.min(100,pe)}%"></div><div class="fl" style="width:${Math.min(100,p)}%;background:transparent;box-shadow:inset 0 0 0 2px ${col}"></div></div><span class="v" style="color:${col}">${Math.round(p)}%</span></div>`}).join('');
+  const gaps=NUT.map(([n,l,u])=>[n,l,u,100*(t[n]||0)/ref(n)]).filter(x=>x[3]<100).sort((a,b)=>a[3]-b[3]);
+  $('tips').innerHTML=gaps.length?gaps.slice(0,7).map(([n,l,u,p])=>{const def=ref(n)-(t[n]||0);
+    if(n==='D')return `<li><b>Vitamin D ${Math.round(p)}%</b>: berjemur 10–30 menit di pagi atau siang hari (sumber utama vitamin D), atau tambah ikan kembung ±${fmt(Math.min(150,def/.16))} g.</li>`;
+    if(n==='I')return `<li><b>Yodium ${Math.round(p)}%</b>: pastikan garam berlabel beryodium, dan tambah ikan laut.</li>`;
+    const [f,nm,per]=TIP[n];const gr=def/per;
+    return `<li><b>${l} ${Math.round(p)}%</b> (kurang ${fmt(def,def<10?1:0)} ${u}): tambah ${nm} ±${fmt(gr)} g${URT[f]?` (${urt(f,gr)})`:''}${gr>150?' — jumlahnya besar, jadi kombinasikan beberapa sumber atau konsultasikan ke ahli gizi':''}.</li>`}).join('')
+   :'<li>Semua nutrisi yang dipantau sudah ≥100% dari standar. Pertahankan variasi sayur dan lauk.</li>';
+}
+function renderSummary(){
+  const t=plan.t,b=plan.bmi;const cat=b<17?'kurus berat':b<18.5?'kurus':b<=25?'normal':b<=27?'gemuk ringan':'gemuk berat';
+  $('summary').innerHTML=[[`${fmt(plan.tdee)}`,'kebutuhan energi (kkal)'],[`${fmt(t.kcal)}`,'energi dari piring (kkal)'],[`${fmt(t.prot)} g`,`protein (target ${fmt(plan.pt)} g)`],[`${fmt(b,1)}`,`IMT · ${cat}`],[`${Math.round(400*t.prot/t.kcal)}/${Math.round(900*t.fat/t.kcal)}/${Math.round(400*t.carb/t.kcal)}`,'% energi P/L/K'],[`${fmt(t.fib)} g`,'serat']].map(([v,l])=>`<div><b>${v}</b><span>${l}</span></div>`).join('');
+  const A=[];
+  if(S.egg>3)A.push(`<b>Lebih dari 3 telur per hari.</b> Data jangka panjangnya terbatas. Cek profil lipid secara berkala, dan jangan jadikan kebiasaan bila Anda menderita diabetes atau LDL tinggi. Kolesterol dari telur ±${fmt(186*S.egg)} mg/hari.`);
+  if(900*t.fat/t.kcal>40)A.push(`<b>Lemak ±${Math.round(900*t.fat/t.kcal)}% energi</b>, di atas pedoman umum (20–35%). Bila ingin menurunkannya, pakai susu rendah lemak dan kurangi alpukat atau minyak.`);
+  if(t.kcal>plan.tdee+80)A.push(`<b>Porsi minimum sudah melebihi kebutuhan energi Anda</b> (${fmt(t.kcal)} vs ${fmt(plan.tdee)} kkal). Kurangi nasi atau minyak, dan pertimbangkan menurunkan jumlah telur.`);
+  if(t.kcal<plan.tdee-80)A.push(`<b>Energi masih kurang ${fmt(plan.tdee-t.kcal)} kkal.</b> Tambah porsi nasi atau ubi, atau camilan kacang.`);
+  if(b<18.5||b>27)A.push(`<b>IMT ${cat}.</b> Kalkulator ini menghitung kebutuhan untuk menjaga berat saat ini. Untuk menaikkan atau menurunkan berat badan, sebaiknya didampingi tenaga gizi.`);
+  $('alerts').innerHTML=A.map(x=>`<div class="alert">${x}</div>`).join('');
+}
+function update(){plan=compute();syncControls();renderSummary();renderLegend();drawPlate(fracs().f);renderInfo();renderMeals();renderBars();save()}
+/* ===== interaksi ===== */
+['bb','tb','usia','egg'].forEach(id=>$(id).addEventListener('input',e=>{S[id]=+e.target.value;update()}));
+$('controls').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.e){S.egg=+b.dataset.e}else if(b.dataset.sex){S.sex=b.dataset.sex}else if(b.dataset.act){S.act=+b.dataset.act}else if(b.dataset.std){S.std=b.dataset.std}else return;update()});
+function pick(k){sel=k;renderLegend();paint(shown||fracs().f);renderInfo();if(innerWidth<820)$('info').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'})}
+$('plate').addEventListener('click',e=>{const s=e.target.closest('.slice');if(s)pick(s.dataset.k)});
+$('plate').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.closest('.slice')){e.preventDefault();pick(e.target.dataset.k)}});
+$('legend').addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(b)pick(b.dataset.k)});
+$('sides').addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(b)pick(b.dataset.k)});
+update();
+</script>
