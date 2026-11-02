@@ -1,0 +1,487 @@
+<title>Peta Prioritas Nutrisi</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: buku catatan gizi — kolom bacaan sempit, kartu nutrisi seperti label "nilai gizi", tingkat prioritas dikodekan lewat isi/garis badge */
+:root{
+  --bg:#F3F6F2; --surface:#FFFFFF; --ink:#16211B; --muted:#56665C; --line:#D6DED5;
+  --accent:#1D6A55; --accent-soft:#DCEDE5; --on-accent:#FFFFFF;
+  --warn:#8A5A00; --warn-soft:#FBEFD3;
+  --f-display:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1512; --surface:#15201B; --ink:#E3ECE6; --muted:#9BAEA2; --line:#2A3A32;
+  --accent:#62C3A4; --accent-soft:#1D3A30; --on-accent:#0B1611;
+  --warn:#F0C062; --warn-soft:#3A2E14; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0E1512; --surface:#15201B; --ink:#E3ECE6; --muted:#9BAEA2; --line:#2A3A32;
+  --accent:#62C3A4; --accent-soft:#1D3A30; --on-accent:#0B1611;
+  --warn:#F0C062; --warn-soft:#3A2E14; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(2.1rem,6vw,3.4rem);font-weight:800;font-stretch:112%;letter-spacing:-.01em}
+h2{font-size:clamp(1.5rem,3.6vw,2.05rem);font-weight:780;font-stretch:108%}
+h3{font-size:1.12rem;font-weight:700;font-stretch:104%}
+p{margin:0}
+.lead{max-width:66ch;color:var(--muted);font-size:1.06rem}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+header.top{padding-block:40px 28px;display:grid;gap:18px}
+.stats{display:flex;flex-wrap:wrap;gap:10px 28px;padding-top:6px}
+.stats div{display:grid}
+.stats b{font-family:var(--f-mono);font-size:1.25rem;font-variant-numeric:tabular-nums}
+.stats span{font-size:.82rem;color:var(--muted)}
+
+nav.sec{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.sec .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:8px;scrollbar-width:none}
+nav.sec a{flex:none;text-decoration:none;color:var(--ink);font-size:.9rem;padding:6px 12px;border-radius:999px}
+nav.sec a:hover{background:var(--accent-soft)}
+
+section{padding-block:44px 8px;display:grid;gap:20px;scroll-margin-top:56px}
+.sec-head{display:grid;gap:8px}
+
+/* legend */
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.legend .box{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;gap:6px;align-content:start}
+.legend .box p{font-size:.9rem;color:var(--muted)}
+
+/* tier badges: P1 terisi, P2 tint, P3 garis */
+.tier{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:999px;white-space:nowrap;border:1.5px solid var(--accent)}
+.t1{background:var(--accent);color:var(--on-accent)}
+.t2{background:var(--accent-soft);color:var(--ink);border-color:var(--accent-soft)}
+.t3{background:transparent;color:var(--accent);border-style:dashed}
+.tw{background:var(--warn-soft);color:var(--warn);border-color:var(--warn-soft)}
+.ev{font-size:.74rem;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:1px 7px;white-space:nowrap}
+.ev.k::before{content:"● ";color:var(--accent)}
+.ev.s::before{content:"◐ ";color:var(--accent)}
+.ev.b::before{content:"○ ";color:var(--accent)}
+
+/* core principles */
+.core{counter-reset:c;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2px 28px;max-width:100%}
+.core li{list-style:none;counter-increment:c;display:grid;grid-template-columns:2.2rem 1fr;gap:8px;padding:12px 0;border-top:1px solid var(--line)}
+.core li::before{content:counter(c);font-family:var(--f-display);font-weight:800;font-size:1.5rem;color:var(--accent);line-height:1.1}
+.core{padding:0;margin:0}
+.core b{display:block}
+.core span{color:var(--muted);font-size:.93rem}
+
+/* habits */
+.tiergroup{display:grid;gap:12px}
+.tiergroup>header{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.tiergroup>header p{color:var(--muted);font-size:.92rem}
+.habits{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.habit{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:8px;align-content:start;min-width:0}
+.habit .meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.habit p{font-size:.94rem}
+.habit .how{color:var(--muted);font-size:.9rem}
+.pct{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+
+/* nutrient cards */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;font-size:.88rem;padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.nutr{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);display:grid;align-content:start;min-width:0;overflow:hidden}
+.card .hd{padding:14px 16px 10px;display:grid;gap:6px;border-bottom:3px solid var(--ink)}
+.card .hd .row{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.card .akg{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+.card dl{margin:0;padding:6px 16px 14px;display:grid}
+.card dt{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);padding-top:10px}
+.card dd{margin:2px 0 0;font-size:.92rem}
+.card dd.note{color:var(--muted);font-size:.86rem;border-left:2px solid var(--line);padding-left:10px}
+
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.92rem}
+th,td{text-align:left;vertical-align:top;padding:10px 14px;border-bottom:1px solid var(--line)}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:700;width:30%}
+
+/* caution */
+.warnlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.warn{background:var(--warn-soft);border-radius:var(--r);padding:14px 16px;display:grid;gap:6px;align-content:start}
+.warn b{color:var(--warn)}
+.warn p{font-size:.92rem}
+
+/* quiz */
+.qbar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.qbar .chips{gap:6px}
+.progress{display:grid;gap:6px;min-width:220px}
+.progress .bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.progress .bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.progress span{font-size:.85rem;color:var(--muted)}
+.btn{font:inherit;font-size:.88rem;padding:7px 14px;border-radius:8px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.btn:hover{background:var(--accent-soft)}
+.qlist{display:grid;gap:10px;padding:0;margin:0;list-style:none}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;gap:10px}
+.q.done{border-color:var(--accent)}
+.q .top{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.q .num{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.q .cat{font-size:.76rem;color:var(--muted)}
+.q .txt{font-weight:700;font-size:1.02rem}
+.q .ans{background:var(--accent-soft);border-radius:8px;padding:12px 14px;font-size:.94rem}
+.q .act{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.q label{display:inline-flex;gap:6px;align-items:center;font-size:.88rem;color:var(--muted);cursor:pointer}
+.q input[type=checkbox]{accent-color:var(--accent);width:18px;height:18px}
+
+footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;gap:8px;max-width:76ch}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+@media (max-width:420px){.nutr,.habits,.warnlist{grid-template-columns:1fr}}
+</style>
+
+<header class="top wrap">
+  <p class="eyebrow">Disarikan dari 6 file ringkasan video Dr. Eric Berg</p>
+  <h1>Peta Prioritas Nutrisi</h1>
+  <p class="lead">Ilmu dari ribuan ringkasan video, sudah dibuang duplikatnya dan diurutkan menurut prioritas, untuk orang yang <b>masih sehat</b> dan ingin tetap sehat. Setiap anjuran diberi label tingkat bukti, supaya terlihat mana yang sejalan dengan konsensus ilmiah dan mana yang khas Dr. Berg.</p>
+  <div class="stats">
+    <div><b>3.846</b><span>ringkasan video dianalisis</span></div>
+    <div><b>44%</b><span>video menyinggung gula</span></div>
+    <div><b>21</b><span>kebiasaan berprioritas</span></div>
+    <div><b>19</b><span>nutrisi kunci</span></div>
+    <div><b>61</b><span>latihan soal esai</span></div>
+  </div>
+</header>
+
+<nav class="sec" aria-label="Bagian halaman">
+  <div class="wrap">
+    <a href="#cara-baca">Cara baca</a>
+    <a href="#inti">Inti</a>
+    <a href="#kebiasaan">Kebiasaan</a>
+    <a href="#nutrisi">Nutrisi</a>
+    <a href="#pasangan">Pasangan nutrisi</a>
+    <a href="#berisiko">Siapa berisiko</a>
+    <a href="#hati-hati">Hati-hati</a>
+    <a href="#latihan">Latihan soal</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section id="cara-baca">
+  <div class="sec-head"><p class="eyebrow">Cara membaca</p><h2>Dua label di setiap anjuran</h2></div>
+  <div class="legend">
+    <div class="box"><span class="tier t1">Sangat penting</span><p>Dampak terbesar untuk kebanyakan orang. Kerjakan ini dulu sebelum yang lain.</p></div>
+    <div class="box"><span class="tier t2">Penting</span><p>Langkah berikutnya setelah dasar beres, atau sangat penting bagi kelompok tertentu.</p></div>
+    <div class="box"><span class="tier t3">Cukup bermanfaat</span><p>Tambahan kecil. Boleh dicoba, tapi jangan jadi fokus utama.</p></div>
+    <div class="box"><span class="tier tw">Hati-hati</span><p>Klaim dari video yang berisiko bagi orang sehat bila dilakukan tanpa pengawasan.</p></div>
+  </div>
+  <div class="legend">
+    <div class="box"><span class="ev k">Konsensus kuat</span><p>Sejalan dengan pedoman gizi umum (WHO, Kemenkes) dan bukti ilmiah luas.</p></div>
+    <div class="box"><span class="ev s">Bukti sedang</span><p>Didukung sebagian penelitian. Manfaatnya bisa berbeda antar orang.</p></div>
+    <div class="box"><span class="ev b">Khas Dr. Berg</span><p>Ditekankan Dr. Berg, tetapi buktinya masih terbatas atau diperdebatkan.</p></div>
+  </div>
+</section>
+
+<section id="inti">
+  <div class="sec-head"><p class="eyebrow">Inti dalam satu menit</p><h2>Tujuh hal yang terus diulang di seluruh video</h2>
+  <p class="lead">Dari 3.846 ringkasan, pesan-pesan ini muncul berulang kali dengan bentuk yang berbeda-beda. Urutannya mengikuti seberapa sering dan seberapa kuat penekanannya.</p></div>
+  <ol class="core">
+    <li><div><b>Turunkan gula dan karbohidrat olahan</b><span>Tema nomor satu (44% video). Menurut Dr. Berg, gula adalah pemicu utama hampir semua masalah metabolik.</span></div></li>
+    <li><div><b>Jaga insulin tetap rendah</b><span>Insulin dibahas di 35% video. Caranya: tidak ngemil terus-menerus dan memberi jeda antarwaktu makan.</span></div></li>
+    <li><div><b>Sayuran dalam jumlah besar</b><span>Sumber utama kalium, magnesium, vitamin C, K1, dan serat. Dr. Berg menyarankan 7–10 cangkir per hari.</span></div></li>
+    <li><div><b>Cukupi mineral dan vitamin kunci</b><span>Vitamin D, kalium, magnesium, seng, B1, dan B12 paling sering disebut sebagai nutrisi yang kurang.</span></div></li>
+    <li><div><b>Protein dan lemak dari makanan utuh</b><span>Telur, ikan, daging, dan produk susu fermentasi. Protein cukup, tidak berlebihan.</span></div></li>
+    <li><div><b>Tidur, matahari, gerak, stres</b><span>Kortisol (hormon stres) disebut di 30% video. Tidur dan kelola stres sama pentingnya dengan makanan.</span></div></li>
+    <li><div><b>Waspadai penguras nutrisi</b><span>Alkohol, gula, beberapa obat (obat maag, metformin, antibiotik), dan stres menguras vitamin dan mineral tertentu.</span></div></li>
+  </ol>
+</section>
+
+<section id="kebiasaan">
+  <div class="sec-head"><p class="eyebrow">Bagian 1</p><h2>Kebiasaan, diurutkan menurut prioritas</h2>
+  <p class="lead">Persentase menunjukkan berapa bagian dari 3.846 video yang menyinggung tema tersebut.</p></div>
+  <div id="habit-root" style="display:grid;gap:32px"></div>
+</section>
+
+<section id="nutrisi">
+  <div class="sec-head"><p class="eyebrow">Bagian 2</p><h2>Nutrisi kunci</h2>
+  <p class="lead">Setiap kartu memuat fungsi, tanda kekurangan, sumber makanan, dan siapa yang berisiko. AKG adalah Angka Kecukupan Gizi Indonesia (Permenkes 28/2019) untuk dewasa 19–29 tahun, laki-laki/perempuan, dibulatkan.</p></div>
+  <div class="chips" role="group" aria-label="Saring nutrisi menurut prioritas">
+    <button class="chip" id="nf-0" data-f="0" aria-pressed="true">Semua</button>
+    <button class="chip" id="nf-1" data-f="1" aria-pressed="false">Sangat penting</button>
+    <button class="chip" id="nf-2" data-f="2" aria-pressed="false">Penting</button>
+    <button class="chip" id="nf-3" data-f="3" aria-pressed="false">Cukup bermanfaat</button>
+  </div>
+  <div class="nutr" id="nutr-root"></div>
+</section>
+
+<section id="pasangan">
+  <div class="sec-head"><p class="eyebrow">Bagian 3</p><h2>Pasangan dan penghambat nutrisi</h2>
+  <p class="lead">Nutrisi saling memengaruhi. Pasangan di bawah ini paling sering muncul di video.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Pasangan</th><th>Hubungannya</th><th>Praktiknya</th></tr></thead>
+    <tbody>
+      <tr><td>Vitamin D3 + K2 + magnesium</td><td>Magnesium dibutuhkan untuk mengaktifkan vitamin D. Vitamin D menaikkan penyerapan kalsium, dan K2 membantu mengarahkan kalsium ke tulang.</td><td>Kalau minum D3, pastikan asupan magnesium dan K2 (keju, kuning telur, makanan fermentasi) cukup.</td></tr>
+      <tr><td>Vitamin C + zat besi nabati</td><td>Vitamin C meningkatkan penyerapan zat besi dari tumbuhan.</td><td>Makan bayam atau kacang bersama jambu biji, jeruk, atau tomat.</td></tr>
+      <tr><td>Teh/kopi ↔ zat besi</td><td>Tanin menghambat penyerapan zat besi.</td><td>Beri jarak sekitar satu jam antara teh/kopi dan waktu makan.</td></tr>
+      <tr><td>Lemak + vitamin A, D, E, K</td><td>Keempatnya larut lemak dan butuh lemak serta empedu agar terserap.</td><td>Makan sayur dengan sedikit minyak zaitun, telur, atau alpukat.</td></tr>
+      <tr><td>Seng ↔ tembaga</td><td>Suplemen seng dosis tinggi jangka panjang menurunkan tembaga.</td><td>Hindari suplemen seng di atas 40 mg/hari dalam jangka panjang.</td></tr>
+      <tr><td>Kalsium ↔ zat besi</td><td>Keduanya bersaing saat diserap.</td><td>Kalau minum suplemen, jangan diminum bersamaan.</td></tr>
+      <tr><td>Karbohidrat ↔ vitamin B1</td><td>Makin banyak karbohidrat yang dimakan, makin banyak B1 yang dipakai untuk mengubahnya jadi energi.</td><td>Pola makan tinggi nasi putih, tepung, dan gula menaikkan kebutuhan B1.</td></tr>
+      <tr><td>Asam fitat ↔ mineral</td><td>Fitat dalam biji-bijian dan kacang mengikat seng, besi, magnesium, dan kalsium.</td><td>Rendam, kecambahkan, atau fermentasi. Tempe adalah contoh fermentasi yang menurunkan fitat.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="berisiko">
+  <div class="sec-head"><p class="eyebrow">Bagian 4</p><h2>Siapa cenderung kekurangan apa</h2>
+  <p class="lead">Orang sehat pun bisa kekurangan nutrisi karena gaya hidup, pola makan, atau obat.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Kelompok</th><th>Cenderung kurang</th><th>Alasan utama</th></tr></thead>
+    <tbody>
+      <tr><td>Orang kota / pekerja kantoran</td><td>Vitamin D, magnesium, kalium, omega-3, vitamin B</td><td>Banyak di dalam ruangan, makanan cepat saji, sedikit sayur, stres, banyak kopi</td></tr>
+      <tr><td>Pemakan tinggi nasi putih, tepung, dan gula</td><td>Vitamin B1, magnesium, kalium</td><td>Karbohidrat olahan miskin mineral tetapi menaikkan kebutuhan B1</td></tr>
+      <tr><td>Vegetarian / vegan</td><td>B12, zat besi, seng, omega-3 (DHA), yodium, kalsium, vitamin D</td><td>B12 aktif hampir hanya ada di makanan hewani, dan fitat menghambat mineral</td></tr>
+      <tr><td>Lansia</td><td>B12, vitamin D, protein, kalsium, magnesium</td><td>Asam lambung menurun, dan kulit tua kurang efisien membuat vitamin D</td></tr>
+      <tr><td>Pengguna obat maag (PPI) jangka panjang</td><td>B12, magnesium, zat besi, kalsium, seng</td><td>Asam lambung dibutuhkan untuk menyerap mineral dan B12</td></tr>
+      <tr><td>Pengguna metformin</td><td>B12</td><td>Metformin menurunkan penyerapan B12</td></tr>
+      <tr><td>Peminum alkohol</td><td>B1, magnesium, seng, folat</td><td>Alkohol menghambat penyerapan dan mempercepat pembuangan</td></tr>
+      <tr><td>Perempuan haid, hamil, menyusui</td><td>Zat besi, folat, yodium, kolin, DHA, vitamin D</td><td>Kehilangan darah dan kebutuhan janin</td></tr>
+      <tr><td>Pengguna pil KB</td><td>B2, B6, B12, folat, magnesium</td><td>Hormon sintetis memengaruhi metabolisme vitamin B</td></tr>
+      <tr><td>Perokok</td><td>Vitamin C</td><td>Stres oksidatif dari asap menghabiskan vitamin C</td></tr>
+      <tr><td>Setelah antibiotik</td><td>Vitamin K, bakteri baik usus</td><td>Bakteri usus ikut membuat vitamin K</td></tr>
+      <tr><td>Olahraga berat, keringat banyak, keto/puasa</td><td>Natrium, kalium, magnesium</td><td>Elektrolit hilang lewat keringat dan urin</td></tr>
+      <tr><td>Kulit gelap, sering tertutup pakaian atau tabir surya</td><td>Vitamin D</td><td>Produksi vitamin D di kulit lebih sedikit</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="hati-hati">
+  <div class="sec-head"><p class="eyebrow">Bagian 5</p><h2>Klaim yang perlu hati-hati</h2>
+  <p class="lead">Klaim berikut muncul di video, tetapi untuk orang sehat sebaiknya tidak dilakukan tanpa pemeriksaan atau pendampingan tenaga kesehatan.</p></div>
+  <div class="warnlist" id="warn-root"></div>
+</section>
+
+<section id="latihan">
+  <div class="sec-head"><p class="eyebrow">Bagian 6</p><h2>Latihan soal</h2>
+  <p class="lead">Soal esai singkat tanpa pilihan ganda. Jawab dulu di kepala atau di kertas, lalu buka jawabannya. Centang “Sudah bisa” untuk melacak kemajuan. Kemajuan tersimpan di browser ini saja.</p></div>
+  <div class="qbar">
+    <div style="display:grid;gap:8px">
+      <div class="chips" role="group" aria-label="Saring soal menurut kategori" id="qcat"></div>
+      <div class="chips" role="group" aria-label="Saring soal menurut prioritas" id="qtier"></div>
+    </div>
+    <div class="progress"><div class="bar"><i id="pbar"></i></div><span id="ptext">0 dari 61 sudah bisa</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="shuffle">Acak urutan</button><button class="btn" id="hidebtn">Sembunyikan yang sudah bisa</button><button class="btn" id="openall">Buka semua jawaban</button></div>
+    </div>
+  </div>
+  <ol class="qlist" id="qroot"></ol>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <p><b>Sumber.</b> Disarikan dari 3.846 ringkasan video YouTube Dr. Eric Berg DC (6 file txt, nomor video 1–4108). Ringkasannya dibuat AI, lalu di halaman ini diberi pembanding dengan pedoman gizi umum dan AKG Indonesia 2019. Persentase berasal dari pencocokan kata kunci di seluruh teks.</p>
+  <p><b>Catatan.</b> Dr. Berg adalah chiropractor (DC), bukan dokter medis. Materi ini untuk edukasi dan bukan pengganti pemeriksaan. Jangan memulai suplemen dosis tinggi atau menghentikan obat tanpa berkonsultasi dengan dokter.</p>
+</footer>
+
+<script>
+const EV={k:'Konsensus kuat',s:'Bukti sedang',b:'Khas Dr. Berg'};
+const TN={1:'Sangat penting',2:'Penting',3:'Cukup bermanfaat'};
+const tierBadge=t=>`<span class="tier t${t}">${TN[t]}</span>`;
+const evBadge=e=>`<span class="ev ${e}">${EV[e]}</span>`;
+
+const HABITS=[
+ {t:1,e:'k',p:'44% video',h:'Kurangi gula tambahan dan minuman manis',w:'Gula adalah tema paling dominan di seluruh file. Gula menaikkan insulin, memicu ngemil, dan menguras B1, magnesium, serta kalium.',c:'Jangan menyetok makanan manis di rumah. Ganti minuman manis dengan air atau teh tanpa gula. Waspadai gula tersembunyi di label: sirup, maltodekstrin, fruktosa.'},
+ {t:1,e:'k',p:'21% video',h:'Kurangi karbohidrat olahan',w:'Tepung, roti putih, kue, sereal, dan nasi berlebih cepat menjadi gula darah dan miskin mineral.',c:'Kecilkan porsi nasi. Isi setengah piring dengan sayur dan seperempat dengan protein.'},
+ {t:1,e:'k',p:'29% video',h:'Sayuran dalam jumlah besar setiap hari',w:'Sumber kalium, magnesium, vitamin C, K1, folat, dan serat. Dr. Berg menyarankan 7–10 cangkir per hari, sedangkan WHO minimal 400 g buah dan sayur.',c:'Ada sayur di setiap makan: lalapan, sayur bening, tumis, atau salad besar. Variasikan warnanya.'},
+ {t:1,e:'k',p:'29% video',h:'Protein cukup di setiap makan',w:'Protein membangun otot, rambut, kulit, enzim, dan hormon, dan membuat kenyang lebih lama.',c:'Telur, ikan, ayam, daging, tempe, tahu. Dr. Berg: sekitar 3–6 ons (85–170 g) sumber protein per makan.'},
+ {t:1,e:'k',p:'21% video',h:'Tidur 7–9 jam',w:'Kurang tidur menaikkan kortisol, gula darah, dan rasa lapar.',c:'Jam tidur yang konsisten. Kurangi layar dan kafein di sore hingga malam hari.'},
+ {t:1,e:'k',p:'17% video',h:'Bergerak setiap hari, plus latihan kekuatan',w:'Otot adalah tempat utama gula darah dipakai. Gerak juga menurunkan stres dan memperbaiki tidur.',c:'Jalan kaki setiap hari dan latihan beban atau body-weight 2–3 kali seminggu.'},
+ {t:1,e:'s',p:'7% video, tapi diulang sebagai langkah no. 1',h:'Berhenti ngemil, beri jeda antarwaktu makan',w:'Menurut Dr. Berg, ini perubahan terpenting untuk menurunkan insulin. Setiap kali makan, insulin naik, dan jeda memberi tubuh waktu untuk membakar lemak.',c:'Makan hanya saat lapar. Tiga kali makan tanpa camilan, terutama tanpa camilan malam.'},
+ {t:2,e:'k',p:'5% video',h:'Kurangi makanan ultra-olahan dan gorengan',w:'Makanan ultra-olahan tinggi gula, tepung, dan minyak, tetapi miskin nutrisi. Dr. Berg juga menyoroti minyak biji (tinggi omega-6), yang manfaat-risikonya masih diperdebatkan.',c:'Masak sendiri lebih sering. Hindari minyak goreng yang dipakai berulang.'},
+ {t:2,e:'s',p:'31% video',h:'Puasa intermiten ringan',w:'Tema kedua terbesar. Untuk menurunkan berat badan, efeknya kira-kira setara dengan mengurangi kalori, dan banyak orang merasa lebih mudah menjalaninya.',c:'Mulai dari jeda 12 jam (misalnya pukul 19.00–07.00), lalu 14:10, lalu 16:8 bila nyaman. Tidak perlu memaksakan diri.'},
+ {t:2,e:'k',p:'10% video',h:'Ikan berlemak 2 kali seminggu',w:'Sumber omega-3 (EPA/DHA) untuk otak, jantung, dan mata, juga vitamin D.',c:'Sarden, kembung, tongkol, salmon, atau teri.'},
+ {t:2,e:'s',p:'6% video',h:'Berjemur secukupnya',w:'Cara utama tubuh membuat vitamin D. Orang yang banyak di dalam ruangan paling berisiko kekurangan.',c:'Sekitar 10–30 menit di bawah sinar matahari pagi atau siang, dengan lengan terbuka. Jangan sampai kulit terbakar.'},
+ {t:2,e:'s',p:'30% video',h:'Kelola stres',w:'Kortisol tinggi menaikkan gula darah, menimbun lemak perut, mengganggu tidur, dan menguras B1, kalium, serta magnesium.',c:'Jalan di alam, latihan napas, batasi berita dan media sosial, aktivitas fisik di luar ruangan.'},
+ {t:2,e:'k',p:'11% video',h:'Batasi alkohol',w:'Alkohol menguras B1, magnesium, seng, dan folat, dan menjadi beban utama bagi hati.',c:'Lebih jarang lebih baik. Tidak minum adalah pilihan paling aman.'},
+ {t:2,e:'s',p:'9% video',h:'Makanan fermentasi',w:'Mendukung bakteri baik usus. Sebagian juga mengandung K2 dan vitamin C.',c:'Tempe, yogurt tanpa gula, kefir, sauerkraut, kimchi.'},
+ {t:3,e:'s',p:'7% video',h:'Cuka sari apel sebelum makan',w:'Dapat sedikit menurunkan lonjakan gula darah setelah makan.',c:'1–2 sendok makan dalam segelas air, diencerkan. Minum dengan sedotan agar email gigi terlindungi.'},
+ {t:3,e:'b',p:'5% video',h:'Air lemon',w:'Dr. Berg menyebutnya baik untuk batu ginjal (sitrat) dan sebagai pengganti minuman manis.',c:'Perasan lemon di air putih. Bilas mulut sesudahnya.'},
+ {t:3,e:'s',p:'2–4% video',h:'Rempah: kunyit, jahe, bawang putih, kayu manis',w:'Memiliki efek antiinflamasi dan antioksidan ringan.',c:'Pakai sebagai bumbu harian, bukan sebagai obat.'},
+ {t:3,e:'s',p:'5% video',h:'Teh hijau dan kopi tanpa gula, secukupnya',w:'Mengandung polifenol. Kopi tanpa gula juga tidak memutus jeda puasa.',c:'Jangan diminum bersamaan dengan makan bila sedang menjaga zat besi. Hindari kafein di sore hari.'},
+ {t:3,e:'b',p:'6% video',h:'Ragi nutrisi (nutritional yeast)',w:'Dr. Berg sering merekomendasikannya sebagai sumber vitamin B alami.',c:'Taburkan di telur, sup, atau salad.'},
+ {t:3,e:'b',p:'1% video',h:'Paparan dingin',w:'Diklaim melatih mitokondria dan ketahanan stres. Buktinya masih terbatas.',c:'Bilas air dingin 30–60 detik di akhir mandi. Tidak dianjurkan bagi penderita penyakit jantung.'},
+ {t:3,e:'b',p:'12% video',h:'Organik dan grass-fed bila terjangkau',w:'Disebut di 446 video. Dampaknya untuk kesehatan lebih kecil daripada sekadar makan cukup sayur dan protein.',c:'Prioritaskan anggaran untuk sayur dan protein dulu, baru kualitas organiknya.'},
+];
+
+const NUTR=[
+ {t:1,n:'Protein',akg:'AKG ≈ 65 / 60 g',pct:'29%',f:'Membangun dan memperbaiki otot, rambut, kuku, kulit, tulang, enzim, dan hormon. Membuat kenyang lebih lama.',s:'Rambut rontok/rapuh, kuku rapuh, otot mengecil, mudah lapar, luka lama sembuh, bengkak.',src:'Telur, ikan, ayam, daging, keju, yogurt, tempe, tahu.',r:'Lansia, diet ketat, vegetarian yang kurang terencana.',note:'Dr. Berg: protein moderat, sekitar 3–6 ons sumber protein per makan, tidak berlebihan.'},
+ {t:1,n:'Kalium',akg:'AKG ≈ 4.700 mg',pct:'17%',f:'Mengatur tekanan darah dan cairan, kerja otot dan jantung, saraf, serta sensitivitas insulin.',s:'Lelah, lemah otot, kram, jantung berdebar, sembelit, tekanan darah cenderung naik.',src:'Sayuran hijau (bayam, kangkung), alpukat, kacang-kacangan, ikan, tomat, kentang, pisang.',r:'Orang yang jarang makan sayur, sering berkeringat, memakai diuretik, sedang diare/muntah, atau keto/puasa.',note:'Inilah alasan anjuran sayur 7–10 cangkir per hari. Penderita penyakit ginjal jangan minum suplemen kalium tanpa dokter.'},
+ {t:1,n:'Magnesium',akg:'AKG ≈ 330 / 310 mg',pct:'15%',f:'Kofaktor lebih dari 300 enzim: energi, relaksasi otot, tidur, gula darah, dan aktivasi vitamin D.',s:'Lelah (paling umum), kram, kedutan kelopak mata, sulit tidur, cemas, sembelit, jantung berdebar.',src:'Sayuran hijau, almond, biji labu, cokelat hitam ≥70%, alpukat, kacang-kacangan.',r:'Peminum alkohol, pemakan makanan olahan dan gula, orang yang stres, pengguna PPI atau diuretik, orang yang banyak berkeringat.',note:'Bentuk glisinat atau sitrat umumnya lebih nyaman di perut. Dosis suplemen berlebih menyebabkan diare.'},
+ {t:1,n:'Vitamin D',akg:'AKG ≈ 15 mcg (600 IU)',pct:'19%',f:'Penyerapan kalsium untuk tulang, sistem imun, kekuatan otot, dan suasana hati.',s:'Nyeri tulang dan punggung bawah, nyeri/lemah otot, lelah, mood turun, sering sakit. Jangka panjang: tulang rapuh.',src:'Sinar matahari (utama). Ikan berlemak, kuning telur, minyak ikan kod. Sulit dipenuhi dari makanan saja.',r:'Pekerja dalam ruangan, kulit gelap, lansia, berat badan berlebih, sering tertutup pakaian, gangguan penyerapan lemak.',note:'Dr. Berg sering menyebut 10.000 IU/hari. Batas atas aman tanpa pengawasan adalah 4.000 IU/hari. Cek kadar 25(OH)D sebelum dosis tinggi.'},
+ {t:1,n:'Vitamin B12',akg:'AKG ≈ 4,0 mcg',pct:'5%',f:'Kesehatan saraf, pembentukan sel darah merah, dan DNA.',s:'Kesemutan/mati rasa di tangan dan kaki, lelah, pucat (anemia), lidah merah licin, sariawan, sulit mengingat, mood turun.',src:'Hanya dari makanan hewani: hati, kerang, ikan, daging, telur, susu.',r:'Vegan/vegetarian, lansia, penderita gastritis atau H. pylori, pengguna metformin atau PPI jangka panjang, peminum alkohol.',note:'Kekurangan yang lama bisa merusak saraf secara permanen. Asupan asam folat tinggi dapat menutupi tanda anemianya.'},
+ {t:2,n:'Vitamin B1 (tiamin)',akg:'AKG ≈ 1,2 / 1,1 mg',pct:'11%',f:'Mengubah karbohidrat menjadi energi. Penting untuk saraf, jantung, dan otak.',s:'Lelah, gelisah/cemas, sulit tidur, kesemutan atau kaki terasa terbakar, sulit fokus, berdebar. Kekurangan berat menyebabkan beriberi.',src:'Ragi nutrisi, biji bunga matahari, kacang-kacangan, beras merah atau beras utuh, ikan, daging.',r:'Pemakan tinggi nasi putih, tepung, dan gula. Juga peminum alkohol, peminum teh/kopi berlebih, dan pemakan ikan mentah.',note:'Christiaan Eijkman menemukan kaitan beras putih poles dengan beriberi di Batavia, yang berujung pada Nobel 1929.'},
+ {t:2,n:'Seng (zinc)',akg:'AKG ≈ 11 / 8 mg',pct:'11%',f:'Sistem imun, penyembuhan luka, indera perasa dan penciuman, testosteron, kulit, rambut, prostat.',s:'Sering sakit, luka lama sembuh, rasa dan penciuman berkurang, rambut rontok, jerawat, nafsu makan turun.',src:'Tiram, kerang, daging merah, biji labu, telur, keju.',r:'Vegetarian (fitat), peminum alkohol, pengguna PPI atau diuretik, lansia.',note:'Suplemen seng dosis tinggi jangka panjang dapat menyebabkan kekurangan tembaga.'},
+ {t:2,n:'Omega-3 (EPA/DHA)',akg:'Anjuran: ikan berlemak 2×/minggu',pct:'10%',f:'Membran sel otak dan mata, jantung, dan meredam peradangan.',s:'Tanda tidak khas: kulit dan mata kering, sulit konsentrasi, mood naik-turun.',src:'Sarden, kembung, tongkol, salmon, teri, minyak ikan kod.',r:'Orang yang jarang makan ikan, vegan, pemakan makanan olahan tinggi minyak biji.',note:'Dr. Berg menekankan rasio omega-6:omega-3 yang mendekati seimbang. Di pola makan modern rasionya bisa 20:1.'},
+ {t:2,n:'Yodium',akg:'AKG ≈ 150 mcg (hamil 220)',pct:'4%',f:'Bahan baku hormon tiroid yang mengatur metabolisme, dan penting untuk perkembangan otak janin.',s:'Gondok, mudah kedinginan, kulit dan rambut kering, lesu, berat badan naik.',src:'Garam beryodium, rumput laut, ikan laut, kerang, telur.',r:'Ibu hamil dan menyusui, serta orang yang memakai garam non-yodium (garam laut atau himalaya).',note:'Dr. Berg menganjurkan garam laut, padahal garam laut umumnya rendah yodium. Pastikan yodium didapat dari sumber lain.'},
+ {t:2,n:'Vitamin C',akg:'AKG ≈ 90 / 75 mg',pct:'8%',f:'Pembentukan kolagen (gusi, kulit, pembuluh darah), imun, antioksidan, dan penyerapan zat besi nabati.',s:'Gusi berdarah, mudah memar, luka lama sembuh, sering sakit, lelah.',src:'Jambu biji, pepaya, jeruk, paprika, cabai, brokoli, kubis/sauerkraut, beri.',r:'Perokok, orang yang sering stres, dan orang yang jarang makan buah atau sayur segar.',note:'Dr. Berg juga mengklaim konsumsi gula tinggi bersaing dengan vitamin C untuk masuk ke sel.'},
+ {t:2,n:'Vitamin K (K1 & K2)',akg:'AKG ≈ 65 / 55 mcg',pct:'8%',f:'K1 untuk pembekuan darah. K2 membantu mengarahkan kalsium ke tulang, bukan ke pembuluh darah.',s:'Mudah memar, mimisan, gusi berdarah. Jangka panjang: kepadatan tulang turun.',src:'K1: sayuran hijau. K2: keju, kuning telur, mentega, natto, makanan fermentasi.',r:'Pengguna antibiotik, orang dengan gangguan empedu atau penyerapan lemak.',note:'Pengguna obat pengencer darah warfarin jangan mengubah asupan vitamin K tanpa dokter.'},
+ {t:2,n:'Vitamin A',akg:'AKG ≈ 650 / 600 mcg RE',pct:'8%',f:'Penglihatan (terutama dalam gelap), imun, kulit, dan lapisan mukosa.',s:'Rabun senja, mata kering, kulit kasar/kering, sering infeksi.',src:'Retinol: hati, minyak ikan kod, kuning telur, mentega. Beta-karoten: wortel, ubi oranye, sayuran hijau.',r:'Orang yang jarang makan produk hewani, atau punya gangguan penyerapan lemak.',note:'Konversi beta-karoten menjadi retinol berbeda-beda antar orang. Retinol dosis tinggi berbahaya saat hamil.'},
+ {t:2,n:'Zat besi',akg:'AKG ≈ 9 / 18 mg',pct:'8%',f:'Mengangkut oksigen dalam darah dan menghasilkan energi.',s:'Kekurangan: lelah, pucat, sesak saat beraktivitas, ingin mengunyah es, kuku cekung, rambut rontok.',src:'Heme (mudah diserap): daging merah, hati, kerang. Non-heme: bayam, kacang, tempe, dimakan dengan vitamin C.',r:'Kekurangan: perempuan haid atau hamil, vegetarian. Kelebihan: laki-laki dan perempuan pascamenopause yang minum suplemen tanpa indikasi.',note:'Dr. Berg memperingatkan kelebihan zat besi dari makanan yang diperkaya, karena tubuh hanya membuang sekitar 1 mg/hari. Jangan minum suplemen besi tanpa cek lab.'},
+ {t:2,n:'Kalsium',akg:'AKG ≈ 1.000 mg',pct:'16%',f:'Tulang, gigi, kontraksi otot, dan saraf.',s:'Kram otot, kesemutan di sekitar bibir, tulang rapuh.',src:'Susu, keju, yogurt, ikan teri dan sarden bertulang, tahu, sayuran hijau.',r:'Orang yang tidak minum susu, kekurangan vitamin D, pengguna PPI.',note:'Penyerapan dan penempatannya bergantung pada vitamin D, K2, dan magnesium. Utamakan sumber makanan daripada suplemen dosis besar.'},
+ {t:2,n:'Folat',akg:'AKG ≈ 400 mcg',pct:'3%',f:'Pembentukan DNA dan sel darah, serta mencegah cacat tabung saraf pada janin.',s:'Lelah, anemia, sariawan.',src:'Sayuran berdaun hijau tua, kacang-kacangan, hati, alpukat.',r:'Perempuan yang merencanakan kehamilan, peminum alkohol, pengguna pil KB.',note:'Dr. Berg menyarankan bentuk metilfolat bagi pemilik varian gen MTHFR.'},
+ {t:3,n:'Kolin',akg:'AKG ≈ 550 / 425 mg',pct:'3%',f:'Mengangkut lemak keluar dari hati, dan bahan baku neurotransmiter memori.',s:'Kekurangan dapat menyebabkan perlemakan hati.',src:'Kuning telur (sumber terbaik sehari-hari), hati, ikan, daging.',r:'Orang yang tidak makan telur atau produk hewani, ibu hamil.',note:'Dr. Berg sangat menekankan kolin untuk perlemakan hati. Datanya: kolin muncul 13 kali lebih sering di video tentang hati berlemak.'},
+ {t:3,n:'Selenium',akg:'AKG ≈ 30 / 24 mcg',pct:'4%',f:'Mengubah hormon tiroid T4 menjadi T3 yang aktif, dan antioksidan.',s:'Tidak khas. Dikaitkan dengan masalah tiroid.',src:'Kacang Brazil (1–2 butir sudah cukup), ikan, telur, daging.',r:'Orang yang tinggal di daerah dengan tanah rendah selenium.',note:'Selenium berlebih beracun. Jangan makan banyak kacang Brazil setiap hari.'},
+ {t:3,n:'Vitamin B2 (riboflavin)',akg:'AKG ≈ 1,3 / 1,1 mg',pct:'2%',f:'Produksi energi, dan kesehatan kulit serta mata.',s:'Sudut bibir pecah-pecah, lidah meradang, mata sensitif cahaya.',src:'Telur, susu, hati, jamur, almond, sayuran hijau.',r:'Pengguna pil KB, peminum alkohol, orang yang jarang makan produk hewani.',note:'Riboflavin dosis tinggi dipelajari untuk pencegahan migrain.'},
+ {t:3,n:'Tembaga',akg:'AKG ≈ 900 / 900 mcg',pct:'3%',f:'Pembentukan kolagen, pigmen rambut dan kulit, sel darah, dan energi.',s:'Anemia yang tidak membaik dengan zat besi, uban dini, lemah.',src:'Hati, kerang, kacang mete, cokelat hitam, biji-bijian.',r:'Orang yang minum suplemen seng dosis tinggi dalam jangka panjang.',note:'Keseimbangan seng dan tembaga lebih penting daripada menambah salah satunya.'},
+];
+
+const WARN=[
+ ['Vitamin D 10.000–50.000 IU/hari tanpa cek kadar','Batas atas aman tanpa pengawasan adalah 4.000 IU/hari. Dosis besar jangka panjang bisa menyebabkan kelebihan kalsium darah. Cek kadar 25(OH)D dulu.'],
+ ['Menghentikan statin, metformin, obat maag, atau pengencer darah sendiri','Video sering mengkritik obat-obat ini. Diskusikan dengan dokter, dan minta cek B12 atau magnesium bila memakai metformin atau PPI.'],
+ ['Puasa panjang (48–72 jam ke atas) dan OMAD untuk pemula','Untuk orang sehat, jeda 12–16 jam sudah memberi sebagian besar manfaatnya. Puasa panjang perlu pendampingan.'],
+ ['Keto ketat untuk semua orang','Tidak untuk ibu hamil/menyusui, anak, penderita penyakit ginjal, penderita diabetes yang memakai insulin atau sulfonilurea, atau orang dengan riwayat gangguan makan, kecuali dengan dokter.'],
+ ['“Kolesterol LDL tidak berbahaya”','Pandangan ini masih bertentangan dengan konsensus kardiologi. Pantau profil lipid secara berkala.'],
+ ['Mengganti garam beryodium sepenuhnya dengan garam laut','Garam laut umumnya rendah yodium. Bagi penderita hipertensi, anjuran memperbanyak garam juga tidak cocok.'],
+ ['Suplemen seng, selenium, atau zat besi dosis tinggi jangka panjang','Seng berlebih menurunkan tembaga. Selenium dan zat besi berlebih bersifat toksik.'],
+ ['Menghindari semua buah','Bagi orang sehat, buah utuh bermanfaat karena mengandung serat dan vitamin C. Yang perlu dibatasi adalah jus buah dan minuman manis.'],
+ ['Susu mentah dan diet karnivora jangka panjang','Susu mentah berisiko membawa bakteri patogen. Diet karnivora jangka panjang minim serat dan vitamin C, dan buktinya masih sedikit.'],
+];
+
+const Q=[
+ // Gejala kekurangan
+ ['Gejala kekurangan',1,'Bila tubuh defisiensi vitamin B12, gejalanya apa saja?','Kesemutan atau mati rasa di tangan dan kaki, lelah dan lemas karena anemia, pucat, lidah merah licin atau sariawan, sulit mengingat, dan mood turun. Bila dibiarkan bisa terjadi gangguan keseimbangan dan kerusakan saraf permanen.'],
+ ['Gejala kekurangan',1,'Apa tanda-tanda tubuh kekurangan magnesium?','Lelah (paling umum), kram dan kedutan otot (misalnya kelopak mata), sulit tidur, mudah cemas atau tegang, sembelit, dan jantung berdebar.'],
+ ['Gejala kekurangan',1,'Apa tanda-tanda kekurangan kalium?','Lelah, otot lemah, kram, jantung berdebar atau tidak teratur, sembelit, dan tekanan darah cenderung naik.'],
+ ['Gejala kekurangan',1,'Apa tanda-tanda kekurangan vitamin D?','Nyeri tulang dan punggung bawah, nyeri atau lemah otot, lelah, mood turun, dan sering sakit. Jangka panjang tulang menjadi rapuh (osteoporosis atau osteomalasia).'],
+ ['Gejala kekurangan',2,'Bila kekurangan vitamin B1 (tiamin), gejalanya apa?','Lelah, gelisah atau cemas, sulit tidur, kesemutan atau kaki terasa terbakar, sulit fokus, dan jantung berdebar. Kekurangan berat disebut beriberi.'],
+ ['Gejala kekurangan',2,'Apa tanda kekurangan seng (zinc)?','Sering sakit, luka lama sembuh, indera perasa dan penciuman menurun, rambut rontok, jerawat, dan nafsu makan turun.'],
+ ['Gejala kekurangan',2,'Apa tanda kekurangan yodium?','Gondok (pembesaran tiroid), mudah kedinginan, kulit dan rambut kering, lesu, dan berat badan naik. Pada ibu hamil, kekurangan yodium mengganggu perkembangan otak janin.'],
+ ['Gejala kekurangan',2,'Gusi mudah berdarah dan kulit mudah memar menandakan kekurangan nutrisi apa?','Terutama vitamin C, karena dibutuhkan untuk kolagen gusi dan pembuluh darah. Mudah memar dan mimisan juga bisa menandakan kekurangan vitamin K1.'],
+ ['Gejala kekurangan',2,'Rabun senja dan mata kering berkaitan dengan kekurangan vitamin apa?','Vitamin A. Retinol dibutuhkan untuk pigmen penglihatan dalam gelap dan untuk menjaga mata tetap lembap.'],
+ ['Gejala kekurangan',2,'Pucat, sesak saat beraktivitas, dan ingin mengunyah es menandakan kekurangan apa?','Zat besi (anemia defisiensi besi). Keinginan mengunyah es disebut pagofagia.'],
+ ['Gejala kekurangan',2,'Kram otot disertai kesemutan di sekitar bibir bisa menandakan kekurangan apa?','Kalsium. Magnesium yang rendah juga bisa menimbulkan gejala serupa dan sering menyertai kalsium rendah.'],
+ ['Gejala kekurangan',3,'Sudut bibir pecah-pecah sering dikaitkan dengan kekurangan apa?','Vitamin B2 (riboflavin). Bisa juga B6, B12, zat besi, atau seng.'],
+ // Sumber makanan
+ ['Sumber makanan',1,'Dari mana sumber vitamin B12, dan mengapa vegan berisiko kekurangan?','B12 aktif hampir hanya ada di makanan hewani: hati, kerang, ikan, daging, telur, susu. Tumbuhan tidak membuat B12, jadi vegan perlu makanan yang diperkaya atau suplemen.'],
+ ['Sumber makanan',1,'Sebutkan minimal lima makanan tinggi kalium.','Sayuran hijau (bayam, kangkung), alpukat, kacang-kacangan, ikan seperti salmon, tomat, kentang, dan pisang.'],
+ ['Sumber makanan',1,'Sebutkan makanan sumber magnesium.','Sayuran hijau, almond, biji labu, cokelat hitam (≥70%), alpukat, dan kacang-kacangan.'],
+ ['Sumber makanan',1,'Apa sumber utama vitamin D, dan mengapa sulit dipenuhi dari makanan saja?','Sumber utamanya sinar matahari yang mengenai kulit. Hanya sedikit makanan yang mengandungnya (ikan berlemak, kuning telur, minyak ikan kod), dan jumlahnya kecil.'],
+ ['Sumber makanan',2,'Sebutkan ikan yang mudah didapat di Indonesia dan kaya omega-3. Berapa kali seminggu dianjurkan?','Sarden, kembung, tongkol, salmon, dan teri. Dianjurkan sekitar 2 kali seminggu.'],
+ ['Sumber makanan',2,'Apa sumber makanan seng terbaik?','Tiram dan kerang, daging merah, biji labu, telur, dan keju.'],
+ ['Sumber makanan',2,'Sebutkan buah atau sayur lokal yang tinggi vitamin C.','Jambu biji, pepaya, jeruk, paprika, cabai, brokoli, dan kubis.'],
+ ['Sumber makanan',2,'Apa beda retinol dan beta-karoten sebagai sumber vitamin A?','Retinol adalah vitamin A aktif dari makanan hewani (hati, kuning telur, mentega, minyak ikan kod). Beta-karoten berasal dari tumbuhan (wortel, ubi oranye) dan harus diubah tubuh dulu, dengan efisiensi yang berbeda-beda antar orang.'],
+ ['Sumber makanan',2,'Apa beda sumber vitamin K1 dan K2?','K1 berasal dari sayuran hijau. K2 berasal dari keju, kuning telur, mentega, natto, dan makanan fermentasi, dan sebagian dibuat oleh bakteri usus.'],
+ ['Sumber makanan',2,'Dari mana kita mendapatkan yodium?','Garam beryodium, rumput laut, ikan laut, kerang, dan telur.'],
+ ['Sumber makanan',3,'Apa sumber kolin terbaik, dan apa fungsinya?','Kuning telur dan hati. Kolin membantu mengangkut lemak keluar dari hati (mencegah perlemakan hati) dan menjadi bahan neurotransmiter memori.'],
+ // Siapa berisiko
+ ['Siapa berisiko',1,'Orang kota atau pekerja kantoran cenderung kekurangan nutrisi apa? Mengapa?','Vitamin D karena banyak di dalam ruangan. Magnesium dan kalium karena sedikit sayur, banyak makanan olahan, dan stres. Juga omega-3 karena jarang makan ikan, dan vitamin B karena stres, kafein, dan karbohidrat olahan.'],
+ ['Siapa berisiko',1,'Vegetarian atau vegan berisiko kekurangan nutrisi apa saja?','B12, zat besi, seng, omega-3 (DHA), yodium, kalsium, vitamin D, dan kadang protein.'],
+ ['Siapa berisiko',1,'Mengapa lansia lebih berisiko kekurangan B12 dan vitamin D?','Asam lambung menurun dengan usia sehingga B12 dari makanan sulit dilepas dan diserap. Kulit yang menua juga kurang efisien membuat vitamin D.'],
+ ['Siapa berisiko',2,'Pengguna obat maag golongan PPI dalam jangka panjang berisiko kekurangan apa?','B12, magnesium, zat besi, kalsium, dan seng, karena penyerapannya butuh asam lambung.'],
+ ['Siapa berisiko',2,'Obat diabetes apa yang dikenal menurunkan kadar B12?','Metformin. Penggunanya dianjurkan cek kadar B12 secara berkala.'],
+ ['Siapa berisiko',2,'Peminum alkohol cenderung kekurangan nutrisi apa?','Vitamin B1 (tiamin), magnesium, seng, dan folat.'],
+ ['Siapa berisiko',2,'Nutrisi apa yang paling perlu diperhatikan perempuan haid, hamil, atau menyusui?','Zat besi, folat, yodium, kolin, DHA, dan vitamin D.'],
+ ['Siapa berisiko',2,'Mengapa pemakan tinggi nasi putih, tepung, dan gula rentan kekurangan B1? Apa kaitannya dengan sejarah Indonesia?','Tubuh memakai B1 untuk mengubah karbohidrat menjadi energi, sementara beras poles kehilangan B1 di kulit arinya. Christiaan Eijkman meneliti di Batavia dan menemukan bahwa beras poles memicu beriberi. Penemuan ini berujung pada Nobel 1929.'],
+ ['Siapa berisiko',2,'Mengapa orang berkulit gelap butuh paparan matahari lebih lama?','Melanin menyaring UVB, sehingga produksi vitamin D di kulit lebih lambat.'],
+ ['Siapa berisiko',3,'Perokok cenderung kekurangan vitamin apa?','Vitamin C, karena asap rokok meningkatkan stres oksidatif yang menghabiskan vitamin C.'],
+ ['Siapa berisiko',3,'Setelah minum antibiotik, nutrisi apa yang bisa terganggu?','Vitamin K (sebagian dibuat bakteri usus) dan keseimbangan bakteri baik usus. Makanan fermentasi membantu pemulihannya.'],
+ ['Siapa berisiko',3,'Pengguna pil KB cenderung kekurangan apa?','Vitamin B2, B6, B12, folat, dan magnesium.'],
+ // Penguras & interaksi
+ ['Penguras & interaksi',1,'Mengapa gula dan karbohidrat olahan disebut menguras nutrisi?','Keduanya hampir tanpa vitamin dan mineral (kalori kosong), tetapi metabolismenya memakai B1, magnesium, dan kalium. Gula juga memicu lonjakan insulin dan keinginan ngemil.'],
+ ['Penguras & interaksi',2,'Sebutkan hal-hal yang menguras magnesium.','Alkohol, gula dan makanan olahan, stres kronis, keringat berlebih, obat diuretik, dan obat maag PPI.'],
+ ['Penguras & interaksi',2,'Mengapa vitamin D sebaiknya didampingi magnesium dan K2?','Magnesium dibutuhkan untuk mengaktifkan vitamin D. Vitamin D menaikkan penyerapan kalsium, dan K2 membantu mengarahkan kalsium ke tulang, bukan ke pembuluh darah.'],
+ ['Penguras & interaksi',2,'Bagaimana meningkatkan penyerapan zat besi dari sayur dan kacang? Apa yang menghambatnya?','Makan bersama sumber vitamin C (jambu biji, jeruk, tomat). Penghambatnya adalah teh atau kopi yang diminum saat makan, kalsium dosis besar, dan asam fitat.'],
+ ['Penguras & interaksi',2,'Vitamin apa saja yang larut lemak, dan apa konsekuensinya?','Vitamin A, D, E, dan K. Penyerapannya butuh lemak dan empedu, jadi sebaiknya dimakan bersama sumber lemak.'],
+ ['Penguras & interaksi',3,'Apa akibat minum suplemen seng dosis tinggi dalam jangka panjang?','Dapat menyebabkan kekurangan tembaga, yang bisa berujung pada anemia dan masalah saraf.'],
+ ['Penguras & interaksi',3,'Apa itu asam fitat, dan bagaimana mengurangi efeknya?','Senyawa dalam biji-bijian dan kacang yang mengikat seng, besi, magnesium, dan kalsium. Efeknya berkurang dengan perendaman, perkecambahan, atau fermentasi, misalnya tempe.'],
+ // Kebiasaan
+ ['Kebiasaan',1,'Menurut keseluruhan materi, kebiasaan apa yang paling ditekankan Dr. Berg sebagai langkah pertama?','Berhenti ngemil (makan hanya saat lapar) dan membuang gula, dengan tujuan menurunkan insulin.'],
+ ['Kebiasaan',1,'Mengapa ngemil terus-menerus dianggap merugikan?','Setiap kali makan, insulin naik. Bila terus ngemil, insulin jarang turun sehingga tubuh sulit membakar lemak cadangan.'],
+ ['Kebiasaan',1,'Berapa banyak sayuran per hari yang dianjurkan Dr. Berg, dan apa tujuan utamanya?','7–10 cangkir per hari, terutama untuk memenuhi kalium dan magnesium, ditambah serat dan vitamin. WHO menganjurkan minimal 400 g buah dan sayur per hari.'],
+ ['Kebiasaan',1,'Sebutkan empat kebiasaan non-makanan yang konsisten muncul sebagai fondasi kesehatan.','Tidur cukup (7–9 jam), terkena sinar matahari, bergerak atau jalan kaki setiap hari, dan mengelola stres.'],
+ ['Kebiasaan',2,'Sebutkan urutan langkah bertahap memperbaiki pola makan versi Dr. Berg.','(1) Berhenti ngemil, (2) buang gula, (3) tambah lemak sehat agar kenyang, (4) perbanyak sayur, (5) protein secukupnya, lalu (6) kurangi frekuensi makan bertahap dari 3 kali menjadi 2 kali.'],
+ ['Kebiasaan',2,'Apa itu puasa intermiten, dan bagaimana pola aman untuk pemula yang sehat?','Mengatur jeda waktu tanpa makan. Mulai dari 12 jam semalam (12:12), lalu 14:10, lalu 16:8 bila nyaman. Selama jeda boleh minum air dan teh atau kopi tanpa gula.'],
+ ['Kebiasaan',2,'Bagaimana stres kronis memengaruhi gula darah dan lemak perut?','Kortisol menaikkan gula darah dan insulin, mendorong penimbunan lemak perut, mengganggu tidur, dan menguras B1, kalium, serta magnesium.'],
+ ['Kebiasaan',2,'Apa saran tentang minyak goreng dan lemak dalam materi ini?','Kurangi minyak yang dipakai berulang dan makanan olahan tinggi minyak biji (omega-6), lalu perbanyak omega-3 dari ikan. Dr. Berg lebih menyukai mentega, minyak zaitun, dan minyak kelapa. Manfaat-risiko minyak biji masih diperdebatkan.'],
+ ['Kebiasaan',3,'Apa itu autofagi, dan kapan meningkat?','Proses daur ulang komponen sel yang rusak. Proses ini meningkat saat puasa atau jeda makan yang cukup panjang dan saat berolahraga.'],
+ ['Kebiasaan',3,'Mengapa makanan fermentasi dianjurkan? Sebutkan contoh lokal.','Makanan fermentasi mendukung bakteri baik usus, dan sebagian mengandung K2 dan vitamin C. Contohnya tempe, yogurt, kefir, kimchi, dan sauerkraut.'],
+ // Angka penting
+ ['Angka penting',1,'Berapa kebutuhan kalium harian orang dewasa?','Sekitar 4.700 mg per hari, baik menurut AKG Indonesia 2019 maupun Dr. Berg.'],
+ ['Angka penting',1,'Berapa AKG vitamin D, dan berapa batas atas aman tanpa pengawasan?','AKG sekitar 15 mcg (600 IU), dengan batas atas 4.000 IU per hari. Dr. Berg sering menyebut 10.000 IU, jadi cek kadar 25(OH)D dulu sebelum dosis tinggi.'],
+ ['Angka penting',2,'Berapa porsi protein per makan menurut Dr. Berg?','Sekitar 3–6 ons (85–170 g) makanan sumber protein per makan: moderat, tidak berlebihan.'],
+ ['Angka penting',2,'Mengapa kelebihan zat besi bisa menumpuk di tubuh?','Tubuh tidak punya jalur khusus membuang zat besi, hanya sekitar 1 mg per hari lewat sel yang luruh. Kelebihannya menumpuk di hati dan jaringan lain.'],
+ ['Angka penting',3,'Berapa target karbohidrat bersih harian pada keto versi Dr. Berg, dan bagaimana menghitungnya?','20–50 g per hari. Karbohidrat bersih adalah total karbohidrat dikurangi serat.'],
+ // Hati-hati
+ ['Hati-hati',1,'Mengapa tidak boleh menghentikan statin, metformin, atau obat maag sendiri walau sering dikritik di video?','Obat-obat itu mengendalikan risiko serius (serangan jantung, gula darah, perdarahan lambung). Diskusikan dengan dokter, dan minta cek B12 atau magnesium bila perlu.'],
+ ['Hati-hati',1,'Siapa yang sebaiknya tidak menjalankan keto ketat atau puasa panjang tanpa dokter?','Ibu hamil atau menyusui, anak-anak, penderita penyakit ginjal, penderita diabetes yang memakai insulin atau sulfonilurea, orang dengan berat badan kurang, dan orang dengan riwayat gangguan makan.'],
+ ['Hati-hati',2,'Apa risiko mengganti garam beryodium sepenuhnya dengan garam laut atau himalaya?','Garam laut umumnya rendah yodium, sehingga ada risiko kekurangan yodium yang berdampak pada tiroid, apalagi saat hamil.'],
+ ['Hati-hati',2,'Apakah orang sehat harus menghindari buah?','Tidak. Buah utuh memberi serat, vitamin C, dan kalium. Yang perlu dibatasi adalah jus buah dan minuman manis. Dr. Berg membatasi buah terutama untuk menjaga ketosis.'],
+];
+
+/* render habits */
+(function(){
+  const root=document.getElementById('habit-root');
+  const desc={1:'Fondasi. Kalau hanya sanggup mengubah sedikit, mulai dari sini.',2:'Langkah berikutnya setelah fondasi berjalan.',3:'Tambahan kecil, boleh dicoba.'};
+  root.innerHTML=[1,2,3].map(t=>`<div class="tiergroup"><header>${tierBadge(t)}<p>${desc[t]}</p></header><div class="habits">${
+    HABITS.filter(h=>h.t===t).map(h=>`<article class="habit"><h3>${h.h}</h3><div class="meta">${evBadge(h.e)}<span class="pct">${h.p}</span></div><p>${h.w}</p><p class="how"><b>Caranya:</b> ${h.c}</p></article>`).join('')
+  }</div></div>`).join('');
+})();
+
+/* render nutrients */
+function renderNutr(f){
+  document.getElementById('nutr-root').innerHTML=NUTR.filter(x=>!f||x.t===f).map(x=>`
+  <article class="card"><div class="hd"><div class="row"><h3>${x.n}</h3>${tierBadge(x.t)}</div><span class="akg">${x.akg} · disebut di ${x.pct} video</span></div>
+  <dl><dt>Fungsi</dt><dd>${x.f}</dd><dt>Tanda kekurangan</dt><dd>${x.s}</dd><dt>Sumber makanan</dt><dd>${x.src}</dd><dt>Siapa berisiko</dt><dd>${x.r}</dd><dt>Catatan</dt><dd class="note">${x.note}</dd></dl></article>`).join('');
+}
+renderNutr(0);
+document.querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('[data-f]').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+  renderNutr(+b.dataset.f);
+}));
+
+/* render warnings */
+document.getElementById('warn-root').innerHTML=WARN.map(([h,p])=>`<div class="warn"><span class="tier tw">Hati-hati</span><b>${h}</b><p>${p}</p></div>`).join('');
+
+/* quiz */
+const KEY='peta-nutrisi-done-v1';
+let done=new Set();
+try{done=new Set(JSON.parse(localStorage.getItem(KEY)||'[]'))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify([...done]))}catch(e){}};
+const items=Q.map((q,i)=>({id:i+1,cat:q[0],t:q[1],q:q[2],a:q[3]}));
+let order=items.map(x=>x.id), fCat='Semua', fTier=0, hideDone=false, allOpen=false;
+const cats=['Semua',...new Set(items.map(x=>x.cat))];
+const catEl=document.getElementById('qcat'), tierEl=document.getElementById('qtier');
+catEl.innerHTML=cats.map((c,i)=>`<button class="chip" id="qc-${i}" data-c="${c}" aria-pressed="${c==='Semua'}">${c}</button>`).join('');
+tierEl.innerHTML=[0,1,2,3].map(t=>`<button class="chip" id="qt-${t}" data-t="${t}" aria-pressed="${t===0}">${t?TN[t]:'Semua prioritas'}</button>`).join('');
+catEl.addEventListener('click',e=>{const b=e.target.closest('[data-c]');if(!b)return;fCat=b.dataset.c;catEl.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));renderQ()});
+tierEl.addEventListener('click',e=>{const b=e.target.closest('[data-t]');if(!b)return;fTier=+b.dataset.t;tierEl.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));renderQ()});
+function renderQ(){
+  const root=document.getElementById('qroot');
+  const list=order.map(id=>items[id-1]).filter(x=>(fCat==='Semua'||x.cat===fCat)&&(!fTier||x.t===fTier)&&!(hideDone&&done.has(x.id)));
+  root.innerHTML=list.length?list.map(x=>`<li class="q${done.has(x.id)?' done':''}" data-id="${x.id}">
+    <div class="top"><span class="num">Soal ${x.id}</span>${tierBadge(x.t)}<span class="cat">${x.cat}</span></div>
+    <p class="txt">${x.q}</p>
+    <div class="ans" id="ans-${x.id}" ${allOpen?'':'hidden'}><b>Jawaban:</b> ${x.a}</div>
+    <div class="act"><button class="btn" data-toggle="${x.id}" aria-expanded="${allOpen}" aria-controls="ans-${x.id}">${allOpen?'Tutup jawaban':'Lihat jawaban'}</button>
+    <label><input type="checkbox" id="done-${x.id}" data-done="${x.id}" ${done.has(x.id)?'checked':''}> Sudah bisa</label></div></li>`).join('')
+  :'<li class="q"><p>Tidak ada soal untuk saringan ini. Ubah saringan, atau matikan “Sembunyikan yang sudah bisa”.</p></li>';
+  const n=done.size;document.getElementById('ptext').textContent=`${n} dari ${items.length} sudah bisa`;
+  document.getElementById('pbar').style.width=(100*n/items.length)+'%';
+}
+document.getElementById('qroot').addEventListener('click',e=>{
+  const b=e.target.closest('[data-toggle]');if(!b)return;
+  const a=document.getElementById('ans-'+b.dataset.toggle);a.hidden=!a.hidden;
+  b.textContent=a.hidden?'Lihat jawaban':'Tutup jawaban';b.setAttribute('aria-expanded',!a.hidden);
+});
+document.getElementById('qroot').addEventListener('change',e=>{
+  const c=e.target.closest('[data-done]');if(!c)return;const id=+c.dataset.done;
+  c.checked?done.add(id):done.delete(id);save();
+  if(hideDone&&c.checked){renderQ()}else{c.closest('.q').classList.toggle('done',c.checked);renderQ()}
+});
+document.getElementById('shuffle').addEventListener('click',()=>{for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}renderQ()});
+document.getElementById('hidebtn').addEventListener('click',e=>{hideDone=!hideDone;e.target.textContent=hideDone?'Tampilkan semua soal':'Sembunyikan yang sudah bisa';renderQ()});
+document.getElementById('openall').addEventListener('click',e=>{allOpen=!allOpen;e.target.textContent=allOpen?'Tutup semua jawaban':'Buka semua jawaban';renderQ()});
+renderQ();
+</script>
