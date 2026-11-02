@@ -90,7 +90,17 @@ input[type=range]{width:100%;accent-color:var(--accent);height:28px}
 .meal ul{margin:0;padding-left:18px;font-size:.9rem;display:grid;gap:2px}
 /* bars */
 .bars{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:6px 22px}
-.bar{display:grid;grid-template-columns:110px 1fr 3.4rem;gap:8px;align-items:center;font-size:.88rem}
+.bar{all:unset;box-sizing:border-box;width:100%;cursor:pointer;display:grid;grid-template-columns:118px 1fr 3.4rem;gap:8px;align-items:center;font-size:.88rem;padding:4px 6px;border-radius:8px}
+.bar:hover,.bar[aria-expanded="true"]{background:var(--accent-soft)}
+.bar:focus-visible{outline:2px solid var(--accent)}
+.bar .caret{font-size:.7rem;color:var(--muted);display:inline-block}
+.bar[aria-expanded="true"] .caret{transform:rotate(180deg)}
+.bitem{display:grid;gap:4px;align-content:start}
+.bd{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:grid;gap:6px;margin-bottom:6px}
+.src{display:grid;grid-template-columns:minmax(0,1.2fr) 1fr auto;gap:8px;align-items:center;font-size:.84rem}
+.src i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px}
+.src .tr{height:8px;background:var(--line);border-radius:6px;overflow:hidden}
+.src .v{font-family:var(--f-mono);font-size:.78rem;text-align:right;white-space:nowrap}
 .bar .tr{position:relative;height:12px;background:var(--line);border-radius:6px;overflow:hidden}
 .bar .fl{position:absolute;inset:0 auto 0 0;border-radius:6px;transition:width .3s}
 .bar .egg{position:absolute;inset:0 auto 0 0;background:var(--s-telur);border-radius:6px 0 0 6px;transition:width .3s}
@@ -174,7 +184,7 @@ footer{padding-block:32px 48px;color:var(--muted);font-size:.84rem;display:grid;
   <section>
     <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap">
       <h2>Kecukupan gizi harian</h2>
-      <p class="hint"><span style="display:inline-block;width:10px;height:10px;background:var(--s-telur);border-radius:3px"></span> bagian dari telur · garis penuh = total dari piring</p>
+      <p class="hint"><span style="display:inline-block;width:10px;height:10px;background:var(--s-telur);border-radius:3px"></span> bagian dari telur · garis penuh = total dari piring · ketuk nutrisi untuk melihat sumbernya</p>
     </div>
     <div class="bars" id="bars"></div>
     <div class="card" id="gapcard"><h3>Cara menutup kekurangan</h3><ul class="tips" id="tips"></ul></div>
@@ -320,10 +330,20 @@ function renderMeals(){
 }
 /* ===== render: batang & celah ===== */
 const TIP={fib:['jambu','jambu biji',.054],A:['wortel','wortel',8.52],C:['jambu','jambu biji',2.28],E:['kuaci','kuaci',.35],K:['daun','sayur daun',4.94],B1:['kuaci','kuaci',.0148],B2:['telur','telur',.00457],B3:['kacang','kacang tanah',.135],B6:['pisang','pisang',.0037],fol:['daun','sayur daun',1.46],B12:['kembung','ikan kembung',.087],kol:['telur','telur',2.94],Ca:['teri','teri kering',12],Fe:['daun','sayur daun (+ jambu biji)',.0357],Mg:['labu','biji labu',5.5],Ka:['pisang','pisang',3.58],Zn:['labu','biji labu',.078],Se:['kembung','ikan kembung',.44],I:['garam','—',0],prot:['tempe','tempe',.203]};
+let openBar=null;
+const SEGOF={};SEGS.forEach(sg=>sg.items.forEach(f=>SEGOF[f]=sg.k));
+function breakdown(n,l,u){
+  const r=ref(n),T=plan.t[n]||0;
+  const rows=Object.entries(plan.g).map(([f,g])=>[f,g,(F[f][n]||0)*g/100]).filter(x=>x[2]>0).sort((a,b)=>b[2]-a[2]);
+  if(!rows.length)return '<p class="hint">Tidak ada sumber di piring ini.</p>';
+  const mx=rows[0][2];
+  return `<p class="hint">Total ${fmt(T,T<10?1:0)} ${u} dari kebutuhan ${fmt(r,r<10?1:0)} ${u}. Sumbernya:</p>`+rows.map(([f,g,v])=>{const c=SEGOF[f]?`var(--s-${SEGOF[f]})`:'var(--muted)';
+    return `<div class="src"><span><i style="background:${c}"></i>${LBL[f].split(':')[0].split(' (')[0]} <span class="hint">${fmt(g)} g</span></span><div class="tr"><div style="width:${100*v/mx}%;height:100%;background:${c};border-radius:6px"></div></div><span class="v">${fmt(v,v<10?1:0)} ${u}<span class="hint"> · ${Math.round(100*v/T)}%</span></span></div>`}).join('');
+}
 function renderBars(){
   const t=plan.t,te=plan.te;
-  $('bars').innerHTML=NUT.map(([n,l,u])=>{const r=ref(n),p=100*(t[n]||0)/r,pe=100*(te[n]||0)/r,col=p>=100?'var(--ok)':p>=70?'var(--accent)':'var(--bad)';
-    return `<div class="bar" title="${l}: ${fmt(t[n]||0,1)} ${u} dari ${fmt(r,1)} ${u}"><span>${l}</span><div class="tr"><div class="fl" style="width:${Math.min(100,p)}%;background:${col};opacity:.35"></div><div class="egg" style="width:${Math.min(100,pe)}%"></div><div class="fl" style="width:${Math.min(100,p)}%;background:transparent;box-shadow:inset 0 0 0 2px ${col}"></div></div><span class="v" style="color:${col}">${Math.round(p)}%</span></div>`}).join('');
+  $('bars').innerHTML=NUT.map(([n,l,u])=>{const r=ref(n),p=100*(t[n]||0)/r,pe=100*(te[n]||0)/r,col=p>=100?'var(--ok)':p>=70?'var(--accent)':'var(--bad)',open=openBar===n;
+    return `<div class="bitem"><button class="bar" id="bar-${n}" data-n="${n}" aria-expanded="${open}" aria-controls="bd-${n}" title="${l}: ${fmt(t[n]||0,1)} ${u} dari ${fmt(r,1)} ${u}"><span>${l} <span class="caret" aria-hidden="true">▾</span></span><div class="tr"><div class="fl" style="width:${Math.min(100,p)}%;background:${col};opacity:.35"></div><div class="egg" style="width:${Math.min(100,pe)}%"></div><div class="fl" style="width:${Math.min(100,p)}%;background:transparent;box-shadow:inset 0 0 0 2px ${col}"></div></div><span class="v" style="color:${col}">${Math.round(p)}%</span></button><div class="bd" id="bd-${n}" ${open?'':'hidden'}>${open?breakdown(n,l,u):''}</div></div>`}).join('');
   const gaps=NUT.map(([n,l,u])=>[n,l,u,100*(t[n]||0)/ref(n)]).filter(x=>x[3]<100).sort((a,b)=>a[3]-b[3]);
   $('tips').innerHTML=gaps.length?gaps.slice(0,7).map(([n,l,u,p])=>{const def=ref(n)-(t[n]||0);
     if(n==='D')return `<li><b>Vitamin D ${Math.round(p)}%</b>: berjemur 10–30 menit di pagi atau siang hari (sumber utama vitamin D), atau tambah ikan kembung ±${fmt(Math.min(150,def/.16))} g.</li>`;
@@ -352,6 +372,7 @@ function pick(k){sel=k;renderLegend();paint(shown||fracs().f);renderInfo();if(in
 $('plate').addEventListener('click',e=>{const s=e.target.closest('.slice');if(s)pick(s.dataset.k)});
 $('plate').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.closest('.slice')){e.preventDefault();pick(e.target.dataset.k)}});
 $('legend').addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(b)pick(b.dataset.k)});
+$('bars').addEventListener('click',e=>{const b=e.target.closest('.bar');if(!b)return;const n=b.dataset.n;openBar=openBar===n?null:n;renderBars();document.getElementById('bar-'+n)?.focus()});
 $('sides').addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(b)pick(b.dataset.k)});
 update();
 </script>
