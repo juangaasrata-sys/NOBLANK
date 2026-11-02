@@ -1,0 +1,276 @@
+<title>Pola Pangan Padat Gizi</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: laporan analitis satu kolom (bacaan ±68ch) dengan figur data melebar; nabati=hijau, hewani=karat sebagai warna semantik */
+:root{
+  --bg:#F2F4F7; --surface:#FFFFFF; --ink:#141A26; --muted:#566070; --line:#D8DDE5;
+  --accent:#1F5E8C; --accent-soft:#DDE8F2;
+  --plant:#2E7D4F; --animal:#B4532A; --warn:#8A5A00; --warn-soft:#FBEFD3;
+  --f-display:"Bricolage Grotesque",system-ui,sans-serif;
+  --f-body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F131A; --surface:#171D27; --ink:#E6EAF0; --muted:#9AA5B5; --line:#2A3342;
+  --accent:#6FB0E0; --accent-soft:#1C2E40; --plant:#5FC08A; --animal:#E08A5F; --warn:#F0C062; --warn-soft:#3A2E14; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0F131A; --surface:#171D27; --ink:#E6EAF0; --muted:#9AA5B5; --line:#2A3342;
+  --accent:#6FB0E0; --accent-soft:#1C2E40; --plant:#5FC08A; --animal:#E08A5F; --warn:#F0C062; --warn-soft:#3A2E14; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.62}
+.wrap{max-width:1000px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.prose{max-width:68ch}
+h1,h2,h3{font-family:var(--f-display);line-height:1.12;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.2rem,6.5vw,3.8rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.45rem,3.4vw,2rem);font-weight:750}
+h3{font-size:1.1rem;font-weight:700}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+.lead{color:var(--muted);font-size:1.08rem}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+header.top{padding-block:44px 24px;display:grid;gap:18px}
+.kpis{display:flex;flex-wrap:wrap;gap:12px 36px}
+.kpis div{display:grid}
+.kpis b{font-family:var(--f-display);font-size:1.9rem;font-weight:800;line-height:1}
+.kpis span{font-size:.85rem;color:var(--muted)}
+section{padding-block:40px 6px;display:grid;gap:18px}
+.num{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.finding{display:grid;gap:6px}
+.callout{background:var(--accent-soft);border-radius:var(--r);padding:14px 18px;max-width:68ch}
+.warnbox{background:var(--warn-soft);border-radius:var(--r);padding:14px 18px;max-width:68ch}
+.warnbox b{color:var(--warn)}
+figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:10px;min-width:0}
+figcaption{font-size:.86rem;color:var(--muted)}
+/* bar chart */
+.bars{display:grid;gap:6px}
+.brow{display:grid;grid-template-columns:minmax(120px,190px) 1fr 2.4rem;gap:10px;align-items:center;font-size:.9rem}
+.brow .lab{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brow .track{height:14px;background:var(--line);border-radius:4px;overflow:hidden}
+.brow .fill{height:100%;border-radius:4px}
+.brow .v{font-family:var(--f-mono);font-size:.82rem;text-align:right}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.84rem;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+/* stacked */
+.stack{display:flex;height:14px;border-radius:4px;overflow:hidden;background:var(--line)}
+.stack span{height:100%}
+/* heatmap */
+.scroll{overflow-x:auto}
+table.heat{border-collapse:separate;border-spacing:2px;font-size:.78rem;min-width:760px}
+table.heat th{font-family:var(--f-mono);font-weight:500;color:var(--muted);font-size:.68rem;vertical-align:bottom;padding:2px 4px;text-align:center;line-height:1.2}
+table.heat th.rowh{text-align:left;font-family:var(--f-body);font-size:.82rem;color:var(--ink);white-space:nowrap;padding-right:8px}
+table.heat td{width:46px;height:24px;text-align:center;border-radius:4px;font-family:var(--f-mono);font-size:.72rem}
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table.t{border-collapse:collapse;width:100%;min-width:540px;font-size:.92rem}
+table.t th,table.t td{text-align:left;vertical-align:top;padding:10px 14px;border-bottom:1px solid var(--line)}
+table.t th{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+table.t tr:last-child td{border-bottom:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:.82rem;padding:3px 10px;border-radius:999px;background:var(--accent-soft)}
+.basket{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.basket .b{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;gap:8px;align-content:start}
+.basket ol{margin:0;padding-left:20px;display:grid;gap:4px;font-size:.92rem}
+.concl{counter-reset:k;list-style:none;padding:0;margin:0;display:grid;gap:14px;max-width:72ch}
+.concl li{counter-increment:k;display:grid;grid-template-columns:2.4rem 1fr;gap:6px}
+.concl li::before{content:counter(k);font-family:var(--f-display);font-weight:800;font-size:1.6rem;color:var(--accent);line-height:1}
+footer{padding-block:44px 56px;color:var(--muted);font-size:.86rem;display:grid;gap:8px;max-width:76ch}
+a{color:var(--accent)}
+@media (max-width:480px){.brow{grid-template-columns:110px 1fr 2.2rem}}
+</style>
+
+<header class="top wrap">
+  <p class="eyebrow">Analisis 29 nutrisi × 40 makanan teratas</p>
+  <h1>Pola Pangan Padat Gizi</h1>
+  <p class="lead prose">Apa yang terlihat bila daftar makanan tertinggi untuk setiap vitamin, mineral, dan asam lemak dibandingkan berdampingan? Hasilnya, ada segelintir kelompok makanan yang terus muncul, ada nutrisi yang "milik" hewani atau nabati, dan cukup enam makanan untuk menyentuh seluruh 29 daftar.</p>
+  <div class="kpis">
+    <div><b>29</b><span>nutrisi dibandingkan</span></div>
+    <div><b>1.088</b><span>baris makanan utuh dianalisis</span></div>
+    <div><b>17 / 29</b><span>daftar memuat biji bunga matahari & almond</span></div>
+    <div><b>6</b><span>makanan menutup ke-29 daftar top 20</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section>
+  <p class="eyebrow">Metode singkat</p>
+  <div class="prose" style="display:grid;gap:10px">
+    <p>Sumber data adalah tabel "Top 30 per nutrisi" di halaman <i>Peta Prioritas Nutrisi</i>, yang berasal dari file <i>high nutrisi</i>, sudah dibersihkan duplikatnya, dan dikoreksi untuk angka yang keliru. Untuk analisis ini setiap daftar diperpanjang sampai <b>40 makanan teratas</b>, dalam rentang 30–50 yang Anda minta. Bumbu kering, bubuk, minyak, dan produk fortifikasi dibuang lebih dulu, karena per 100 g mereka selalu menang padahal dimakan hanya beberapa gram.</p>
+    <p>Setiap makanan dikelompokkan ke dalam 13 kelompok pangan. Nama yang berbeda untuk makanan yang sama ("sarden kaleng" dan "ikan sarden") disatukan. Vitamin D, biotin, silikon, dan kedua omega hanya punya 12–35 makanan utuh di sumbernya, jadi daftarnya lebih pendek.</p>
+  </div>
+</section>
+
+<section>
+  <div class="finding"><span class="num">Pola 1</span><h2>Biji, kacang, dan ikan kecil adalah "generalis" gizi</h2></div>
+  <p class="prose">Beberapa makanan masuk daftar teratas untuk banyak nutrisi sekaligus. Dari 20 makanan paling serbaguna, <b>9 adalah biji atau kacang</b>. Sisanya didominasi ikan atau seafood, hati, dan sayuran daun gelap. Makanan seperti ini memberi banyak nutrisi dalam porsi kecil.</p>
+  <figure>
+    <div class="legend" id="g-legend"></div>
+    <div class="bars" id="g-bars"></div>
+    <figcaption>Jumlah daftar nutrisi (dari 29) tempat makanan itu masuk 40 besar. Warna menunjukkan kelompok pangan.</figcaption>
+  </figure>
+  <div class="callout prose"><b>Artinya:</b> segenggam campuran biji (bunga matahari, wijen, labu) dan kacang (almond, mete, kacang tanah) memberi vitamin E, B1, B5, B6, magnesium, mangan, seng, tembaga, fosfor, dan zat besi sekaligus. Sarden menjadi satu-satunya ikan yang menyaingi biji-bijian dalam keserbagunaan, karena tulangnya ikut dimakan.</div>
+</section>
+
+<section>
+  <div class="finding"><span class="num">Pola 2</span><h2>Setiap kelompok pangan punya "spesialisasi"</h2></div>
+  <p class="prose">Peta panas di bawah menunjukkan berapa dari 40 makanan teratas tiap nutrisi yang berasal dari tiap kelompok. Polanya sangat konsisten.</p>
+  <figure>
+    <div class="scroll"><table class="heat" id="heat"></table></div>
+    <figcaption>Angka = jumlah makanan dari kelompok itu di 40 besar. Warna makin pekat berarti makin dominan. Baris yang tidak berjumlah 40 berisi makanan dari kelompok lain (misalnya kakao) atau daftarnya memang pendek.</figcaption>
+  </figure>
+  <div class="tbl"><table class="t">
+    <thead><tr><th>Kelompok pangan</th><th>Spesialisasi utama</th><th>Bukti dari data</th></tr></thead>
+    <tbody>
+      <tr><td><b>Sayur daun hijau</b></td><td>Vitamin K1, vitamin C, folat, kalsium, beta-karoten</td><td>32 dari 40 makanan teratas K1, 20 dari 40 vitamin C, 15 dari 40 kalsium</td></tr>
+      <tr><td><b>Kacang & biji</b></td><td>Magnesium, vitamin E, B1, mangan, seng, ALA</td><td>14 dari 40 di magnesium, B1, dan omega-3. Muncul di semua nutrisi kecuali B12, K1, D, dan yodium</td></tr>
+      <tr><td><b>Kedelai & legum</b></td><td>Tembaga, folat, mangan, kromium</td><td>14 dari 40 tembaga (didominasi tempe), 11 dari 40 folat</td></tr>
+      <tr><td><b>Ikan & seafood</b></td><td>B12, selenium, yodium, vitamin D, B3, fluorida</td><td>18–19 dari 40 di B12, selenium, dan yodium. Separuh lebih daftar vitamin D</td></tr>
+      <tr><td><b>Jeroan (hati)</b></td><td>Vitamin A, B12, B2, tembaga, folat</td><td>10 dari 40 vitamin A, 11 dari 40 B12. Peringkat #1 di vitamin A, B2, B5, folat, tembaga</td></tr>
+      <tr><td><b>Susu & keju</b></td><td>Vitamin K2, kalsium, yodium</td><td>17 dari 40 K2. Keju parmesan #1 kalsium di antara makanan utuh</td></tr>
+      <tr><td><b>Serealia & umbi utuh</b></td><td>Magnesium, B1, mangan, silikon</td><td>12 dari 40 magnesium (oat, quinoa, beras merah)</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="finding"><span class="num">Pola 3</span><h2>Nutrisi "milik hewani" dan "milik nabati"</h2></div>
+  <p class="prose">Bila 40 makanan teratas tiap nutrisi dipisah menjadi hewani dan nabati, nutrisi terbelah jelas menjadi tiga kelompok.</p>
+  <figure>
+    <div class="legend"><span><i style="background:var(--animal)"></i>Hewani</span><span><i style="background:var(--plant)"></i>Nabati & lainnya</span></div>
+    <div class="bars" id="a-bars"></div>
+    <figcaption>Proporsi hewani di daftar makanan teratas tiap nutrisi, diurutkan dari paling hewani.</figcaption>
+  </figure>
+  <div class="tbl"><table class="t">
+    <thead><tr><th>Kelompok</th><th>Nutrisi</th><th>Konsekuensi</th></tr></thead>
+    <tbody>
+      <tr><td><b style="color:var(--animal)">Hampir hanya hewani</b> (≥ 70%)</td><td>B12 (98%), K2 (95%), vitamin D (90%), selenium (78%), B2 (73%)</td><td>Pola makan vegan perlu sumber khusus (natto, jamur yang dijemur, kacang Brazil) atau suplemen B12.</td></tr>
+      <tr><td><b>Seimbang</b> (30–70%)</td><td>Yodium, B3, B5, fosfor, fluorida, seng, kromium, zat besi, vitamin A, kalsium</td><td>Bisa dipenuhi dari kedua sisi, tetapi bentuk hewaninya biasanya lebih mudah diserap (besi heme, retinol, seng).</td></tr>
+      <tr><td><b style="color:var(--plant)">Hampir hanya nabati</b> (≤ 15%)</td><td>K1 (0%), silikon (0%), vitamin C (3%), magnesium (5%), mangan (5%), folat (10%), kalium (10%)</td><td>Pola makan tinggi daging tapi rendah tumbuhan (misalnya karnivora) berisiko kekurangan C, K1, magnesium, kalium, dan folat.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout prose"><b>Artinya:</b> tidak ada satu sisi yang lengkap sendirian. Pola makan campuran (omnivora dengan banyak tumbuhan) paling mudah menutup ke-29 nutrisi tanpa suplemen. Ini sejalan dengan anjuran Dr. Berg: banyak sayur hijau plus protein hewani berkualitas.</div>
+</section>
+
+<section>
+  <div class="finding"><span class="num">Pola 4</span><h2>Ada juara ekstrem: sedikit sudah cukup, banyak bisa berbahaya</h2></div>
+  <p class="prose">Untuk beberapa nutrisi, peringkat #1 jauh meninggalkan peringkat #10. Makanan seperti ini efektif dalam porsi kecil, tetapi juga mudah membuat kelebihan.</p>
+  <div class="tbl"><table class="t">
+    <thead><tr><th>Nutrisi</th><th>Juara #1</th><th>Kali lipat dari #10</th><th>Pelajaran</th></tr></thead>
+    <tbody>
+      <tr><td>Selenium</td><td>Kacang Brazil</td><td class="mono">42×</td><td>1–2 butir per hari sudah memenuhi kebutuhan. Lebih dari itu secara rutin berisiko keracunan.</td></tr>
+      <tr><td>Omega-3 (ALA)</td><td>Biji rami</td><td class="mono">23×</td><td>Tinggi ALA, tetapi hanya sedikit yang menjadi EPA/DHA. Ikan tetap diperlukan.</td></tr>
+      <tr><td>Vitamin K2</td><td>Natto</td><td class="mono">17×</td><td>Satu-satunya sumber nabati K2 yang sangat tinggi. Keju dan kuning telur adalah alternatif harian.</td></tr>
+      <tr><td>Tembaga</td><td>Hati sapi</td><td class="mono">16×</td><td>Hati cukup 1 kali per minggu, karena tembaga dan vitamin A bisa menumpuk.</td></tr>
+      <tr><td>Seng</td><td>Tiram</td><td class="mono">12×</td><td>Satu porsi tiram bisa melampaui kebutuhan seng beberapa hari.</td></tr>
+      <tr><td>Biotin</td><td>Hati ayam</td><td class="mono">11×</td><td>Biotin jarang kurang. Telur matang dan kacang sudah cukup.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="prose" style="font-size:.95rem;color:var(--muted)">Sebaliknya, nutrisi seperti B3, B6, kalium, dan mangan punya rasio #1/#10 hanya 1,6–2,3×. Artinya banyak makanan setara, sehingga variasi lebih penting daripada mencari satu juara.</p>
+</section>
+
+<section>
+  <div class="finding"><span class="num">Pola 5</span><h2>Peringkat "per 100 g" menyesatkan tanpa melihat porsi</h2></div>
+  <p class="prose">Di daftar asli tanpa saringan, banyak puncak diisi bahan yang dimakan sedikit. Dari 30 teratas kalium, <b>26</b> adalah bumbu, bubuk, atau bahan kering. Di vitamin E ada <b>22</b> (didominasi minyak), di magnesium <b>19</b>, dan di fluorida <b>14</b> (daun teh kering). Satu sendok teh basil kering hanya berbobot ±1 g, jadi kandungannya nyaris tidak berarti dibanding sepiring bayam.</p>
+  <div class="callout prose"><b>Artinya:</b> saat membaca daftar "makanan tertinggi X", tanyakan juga berapa yang benar-benar dimakan dalam sehari. Makanan yang dimakan dalam porsi besar (sayur daun, ikan, tempe, telur) sering memberi lebih banyak secara nyata daripada juara per 100 g.</div>
+</section>
+
+<section>
+  <div class="finding"><span class="num">Pola 6</span><h2>Pangan lokal yang murah sering berada di puncak</h2></div>
+  <p class="prose">Banyak makanan sehari-hari Indonesia bersaing dengan "superfood" impor.</p>
+  <div class="tbl"><table class="t">
+    <thead><tr><th>Pangan lokal</th><th>Posisinya di data</th></tr></thead>
+    <tbody>
+      <tr><td><b>Daun singkong</b></td><td>#1 vitamin C (±275 mg, di atas jambu biji dan paprika), dan masuk 10 daftar: K1, vitamin A, folat, kalsium, besi, E, B1, B6</td></tr>
+      <tr><td><b>Daun katuk & daun kelor</b></td><td>Masuk 40 besar vitamin C, A, K1, folat, kalsium, kalium, dan zat besi</td></tr>
+      <tr><td><b>Tempe</b></td><td>Masuk 12 daftar. Tertinggi untuk tembaga dan mangan dari kelompok legum, juga B3, B5, B6, B1, zat besi, selenium, dan K2</td></tr>
+      <tr><td><b>Teri & rebon</b></td><td>Puncak kalsium (rebon ±2.300 mg, teri ±1.200 mg per 100 g kering), juga fosfor dan fluorida</td></tr>
+      <tr><td><b>Kerang darah, kembung, tongkol</b></td><td>Zat besi, B12, B3, selenium, omega-3 setara ikan impor</td></tr>
+      <tr><td><b>Jengkol, klengkeng, rebung</b></td><td>Jengkol dan klengkeng di 20 besar vitamin C. Rebung #1 silikon dari makanan utuh</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="finding"><span class="num">Pola 7</span><h2>Keranjang minimal: 6 makanan menutup 29 daftar</h2></div>
+  <p class="prose">Dengan pencarian "set cover" (memilih makanan yang menutup paling banyak daftar, lalu mengulanginya untuk sisa daftar), cukup <b>6 makanan</b> agar setiap nutrisi punya minimal satu wakil di 20 besarnya. Ada tiga versi:</p>
+  <div class="basket">
+    <div class="b"><h3>Versi dengan jeroan</h3><ol>
+      <li><b>Hati sapi</b>: 15 nutrisi (A, B2, B3, B5, B6, B12, folat, biotin, D, besi, seng, tembaga, selenium, fosfor, kromium)</li>
+      <li><b>Biji rami</b>: 7 (kalium, kalsium, magnesium, mangan, B1, omega-3, omega-6)</li>
+      <li><b>Daun kelor</b>: 3 (vitamin C, E, fluorida)</li>
+      <li><b>Bayam</b>: 2 (K1, silikon)</li>
+      <li><b>Hati babi</b>: K2</li>
+      <li><b>Kerang</b>: yodium</li></ol></div>
+    <div class="b"><h3>Versi tanpa jeroan</h3><ol>
+      <li><b>Biji bunga matahari</b>: 13 (E, B1, B5, B6, folat, magnesium, mangan, seng, besi, selenium, fosfor, kromium, omega-6)</li>
+      <li><b>Salmon/sarden</b>: 7 (D, K2, B3, biotin, kalsium, omega-3, fluorida)</li>
+      <li><b>Kale</b>: 3 (vitamin A, C, K1)</li>
+      <li><b>Almond</b>: 3 (kalium, tembaga, B2)</li>
+      <li><b>Kerang</b>: 2 (B12, yodium)</li>
+      <li><b>Bayam</b>: silikon</li></ol></div>
+    <div class="b"><h3>Versi lokal (tanpa jeroan & impor)</h3><ol>
+      <li><b>Biji bunga matahari</b> (kuaci): 13 nutrisi</li>
+      <li><b>Salmon → sarden/kembung</b>: 7 nutrisi</li>
+      <li><b>Daun katuk</b>: 3 (vitamin A, C, kalium)</li>
+      <li><b>Tiram/kerang</b>: 3 (B12, yodium, tembaga)</li>
+      <li><b>Bayam</b>: 2 (K1, silikon)</li>
+      <li><b>Kuning telur</b>: B2</li></ol></div>
+  </div>
+  <div class="warnbox prose"><b>Batasan:</b> masuk 20 besar tidak sama dengan memenuhi kebutuhan harian. Keranjang ini menunjukkan <i>kelompok</i> mana yang paling efisien, bukan menu lengkap. Pola makan nyata tetap butuh variasi dan porsi yang cukup.</div>
+</section>
+
+<section>
+  <div class="finding"><span class="num">Pola 8</span><h2>Benturan dengan pola makan keto</h2></div>
+  <p class="prose">Makanan andalan Dr. Berg (telur, sarden, hati, sayur hijau, kacang, keju, sauerkraut) memang tersebar di banyak daftar teratas. Tetapi kelompok yang dibatasi pada keto, yaitu <b>legum dan serealia utuh</b>, ternyata penyumbang penting untuk magnesium (12 + 6 dari 40), mangan (7 + 9), tembaga (14 dari legum), folat (11 dari legum), B1 (8 dari serealia), dan silikon. Penganut keto yang membuang kelompok ini perlu menggantinya dengan lebih banyak biji, kacang, dan sayur daun, yang kebetulan juga rendah karbohidrat.</p>
+</section>
+
+<section>
+  <div class="finding"><span class="num">Pola 9</span><h2>Dua celah yang paling mudah terlewat</h2></div>
+  <div class="prose" style="display:grid;gap:10px">
+    <p><b>Vitamin D</b> hanya punya 21 makanan utuh di data, hampir semuanya ikan. Ini memperkuat temuan sebelumnya bahwa vitamin D sulit dipenuhi dari makanan, sehingga sinar matahari tetap sumber utama.</p>
+    <p><b>Yodium</b> bertumpu pada laut (ikan, seafood, rumput laut: 26 dari 40) dan susu/keju (8). Orang yang jauh dari pangan laut dan tidak memakai garam beryodium hampir tidak punya sumber alternatif.</p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Kesimpulan</p>
+  <h2>Delapan pelajaran dari pola makanan teratas</h2>
+  <ol class="concl">
+    <li><div><b>Kepadatan gizi terkumpul di sedikit kelompok.</b> Biji dan kacang, ikan kecil dan seafood, sayur daun gelap, serta hati muncul berulang di hampir semua daftar. Keempatnya layak menjadi tulang punggung menu.</div></li>
+    <li><div><b>Variasi antar kelompok lebih penting daripada mencari superfood.</b> Setiap kelompok punya spesialisasi: daun untuk K1 dan C, laut untuk B12, yodium, dan selenium, biji untuk magnesium dan E, serta susu fermentasi untuk K2.</div></li>
+    <li><div><b>Hewani dan nabati saling melengkapi.</b> B12, K2, D, dan selenium hampir eksklusif hewani. K1, C, magnesium, mangan, folat, dan kalium hampir eksklusif nabati. Pola makan ekstrem ke salah satu sisi pasti punya celah.</div></li>
+    <li><div><b>Juara ekstrem dipakai dalam dosis kecil.</b> Kacang Brazil 1–2 butir, hati 1 kali per minggu, tiram sesekali. Ini cukup untuk manfaatnya tanpa risiko kelebihan selenium, vitamin A, tembaga, atau seng.</div></li>
+    <li><div><b>Baca peringkat per 100 g bersama porsi nyata.</b> Bumbu kering dan minyak menang di atas kertas. Porsi besar sayur, ikan, tempe, dan telur lebih menentukan asupan sebenarnya.</div></li>
+    <li><div><b>Pangan lokal murah sangat kompetitif.</b> Daun singkong, katuk, kelor, tempe, teri, rebon, kembung, dan kerang darah setara atau lebih unggul dari banyak bahan impor.</div></li>
+    <li><div><b>Enam makanan bisa menjadi "kerangka", tetapi bukan menu.</b> Contohnya kuaci, sarden atau kembung, daun katuk, kerang, bayam, dan telur, yang masing-masing mewakili kelompoknya.</div></li>
+    <li><div><b>Bila membatasi satu kelompok, ganti dengan sengaja.</b> Keto atau karnivora kehilangan sumber magnesium, mangan, folat, tembaga, dan C. Vegan kehilangan B12, K2, D, dan sebagian besar yodium. Penggantinya harus dipilih secara sadar.</div></li>
+  </ol>
+  <div class="callout prose"><b>Piring praktis dari pola ini:</b> setengah piring sayur daun (bayam, katuk, singkong, kangkung), seperempat ikan atau seafood atau telur (sarden, kembung, kerang), seperempat tempe atau tahu atau sedikit nasi merah, ditambah segenggam biji atau kacang sebagai lauk atau taburan. Selingi hati atau jeroan 1 kali per minggu, dan keju atau makanan fermentasi beberapa kali per minggu.</div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <p><b>Keterbatasan.</b> Data berasal dari file "high nutrisi" (buatan AI). Sebagian angka sudah dikoreksi, tetapi sebagian besar hanya dicek secara sampel. Pengelompokan makanan dilakukan otomatis dengan kata kunci, dan beberapa makanan bisa salah kelompok. Analisis berbasis per 100 g, bukan per porsi atau per kalori, dan tidak memperhitungkan bioavailabilitas. Hasilnya sebaiknya dibaca sebagai pola umum, bukan angka pasti.</p>
+  <p>Halaman pendamping: <i>Peta Prioritas Nutrisi</i>, yang memuat tabel Top 30 per nutrisi beserta koreksinya.</p>
+</footer>
+
+<script>
+const CATS=["Sayur daun hijau","Sayur lain","Buah","Kacang & biji","Kedelai & legum","Serealia & umbi","Jamur","Rumput laut & alga","Ikan & seafood","Jeroan","Daging","Telur","Susu & keju"];
+const SHORT=["Daun hijau","Sayur lain","Buah","Kacang & biji","Legum & kedelai","Serealia & umbi","Jamur","Rumput laut","Ikan & seafood","Jeroan","Daging","Telur","Susu & keju"];
+const M=[["Vitamin C",40,20,5,7,1,0,1,0,0,0,0,1,0,0],["Vitamin A (retinol/RAE)",40,14,5,0,0,0,1,0,0,0,10,0,1,7],["Vitamin D",21,0,0,0,0,0,0,2,0,10,1,3,2,3],["Vitamin E",40,12,2,1,10,0,1,0,0,7,0,0,1,1],["Vitamin K1",40,32,2,0,0,0,1,0,0,0,0,0,0,0],["Vitamin K2",40,0,0,0,0,2,0,0,0,8,8,1,4,17],["Vitamin B1",40,2,1,1,14,3,8,0,0,4,2,2,1,0],["Vitamin B2",40,0,0,0,4,0,3,4,0,11,4,4,6,4],["Vitamin B3",40,0,0,0,5,4,1,2,0,13,2,8,0,1],["Vitamin B5",40,0,0,1,7,2,2,1,0,12,2,6,2,2],["Vitamin B6",40,4,2,3,8,6,2,0,0,7,1,5,0,0],["Biotin (B7)",27,1,1,2,9,1,2,0,0,2,3,2,2,0],["Folat (B9)",40,11,3,1,8,11,1,0,0,1,2,0,1,0],["Vitamin B12",40,0,0,0,0,0,0,0,0,18,11,5,2,3],["Kalium",40,7,1,4,9,7,3,1,0,4,0,0,0,0],["Magnesium",40,1,0,0,14,6,12,0,4,1,1,0,0,0],["Kalsium",40,15,0,0,6,3,0,0,1,7,0,0,0,7],["Fosfor",40,0,0,0,10,5,4,0,0,8,3,3,1,5],["Zat besi",40,7,0,1,9,3,1,0,0,5,4,7,1,0],["Seng",40,1,0,0,12,3,3,2,0,6,2,5,1,4],["Tembaga",40,0,2,0,7,14,0,2,0,5,4,0,1,2],["Mangan",40,5,2,1,9,9,7,2,0,2,0,0,0,0],["Selenium",40,0,0,0,5,3,0,0,0,17,3,8,2,1],["Yodium",40,1,0,0,0,0,2,0,7,19,0,0,1,8],["Kromium",40,2,1,0,6,9,2,1,0,8,4,4,0,2],["Fluorida",40,5,3,3,3,3,2,0,0,14,2,2,0,1],["Silikon",12,1,2,1,0,2,4,0,0,0,0,0,0,0],["Omega-3 (ALA + EPA/DHA)",35,4,3,0,14,3,1,0,0,10,0,0,0,0],["Omega-6",33,4,2,0,13,3,1,0,0,10,0,0,0,0]];
+const AS=[["Vitamin C",1,40],["Vitamin A",18,40],["Vitamin D",19,21],["Vitamin E",9,40],["Vitamin K1",0,40],["Vitamin K2",38,40],["Vitamin B1",9,40],["Vitamin B2",29,40],["Vitamin B3",24,40],["Vitamin B5",24,40],["Vitamin B6",13,40],["Biotin",9,27],["Folat",4,40],["Vitamin B12",39,40],["Kalium",4,40],["Magnesium",2,40],["Kalsium",14,40],["Fosfor",20,40],["Zat besi",17,40],["Seng",18,40],["Tembaga",12,40],["Mangan",2,40],["Selenium",31,40],["Yodium",28,40],["Kromium",18,40],["Fluorida",19,40],["Silikon",0,12],["Omega-3",10,35],["Omega-6",10,33]];
+const G=[["Biji bunga matahari",17,"Kacang & biji"],["Almond",17,"Kacang & biji"],["Sarden",16,"Ikan & seafood"],["Wijen",16,"Kacang & biji"],["Kacang mete",16,"Kacang & biji"],["Hati sapi",15,"Jeroan"],["Hati ayam",15,"Jeroan"],["Bayam",15,"Sayur daun hijau"],["Salmon",15,"Ikan & seafood"],["Kacang tanah",14,"Kacang & biji"],["Biji labu",13,"Kacang & biji"],["Biji chia",13,"Kacang & biji"],["Tempe",12,"Kedelai & legum"],["Biji rami",12,"Kacang & biji"],["Daun singkong",10,"Sayur daun hijau"],["Kale",10,"Sayur daun hijau"],["Keju parmesan",10,"Susu & keju"],["Daging sapi",10,"Daging"],["Oatmeal",10,"Serealia & umbi"],["Kerang",10,"Ikan & seafood"]];
+const GC={"Kacang & biji":"var(--accent)","Ikan & seafood":"#4F8FB8","Jeroan":"var(--animal)","Sayur daun hijau":"var(--plant)","Kedelai & legum":"#8C7A2E","Susu & keju":"#9A6FB0","Daging":"#C27B5A","Serealia & umbi":"#7D8A99"};
+document.getElementById('g-legend').innerHTML=Object.entries(GC).map(([k,c])=>`<span><i style="background:${c}"></i>${k}</span>`).join('');
+document.getElementById('g-bars').innerHTML=G.map(([n,v,c])=>`<div class="brow"><span class="lab">${n}</span><div class="track"><div class="fill" style="width:${100*v/29}%;background:${GC[c]}"></div></div><span class="v">${v}</span></div>`).join('');
+const heat=document.getElementById('heat');
+const maxc=40;
+heat.innerHTML=`<thead><tr><th></th>${SHORT.map(s=>`<th>${s}</th>`).join('')}</tr></thead><tbody>${M.map(r=>`<tr><th class="rowh">${r[0]}</th>${r.slice(2).map(v=>{const p=Math.round(100*Math.min(1,v/20));return `<td style="background:color-mix(in srgb, var(--accent) ${p}%, var(--surface));color:${p>55?'var(--surface)':'var(--ink)'}">${v||''}</td>`}).join('')}</tr>`).join('')}</tbody>`;
+const ASs=AS.map(([l,a,n])=>[l,a/n,a,n]).sort((x,y)=>y[1]-x[1]);
+document.getElementById('a-bars').innerHTML=ASs.map(([l,f,a,n])=>`<div class="brow"><span class="lab">${l}</span><div class="stack"><span style="width:${100*f}%;background:var(--animal)"></span><span style="width:${100-100*f}%;background:var(--plant)"></span></div><span class="v">${Math.round(100*f)}%</span></div>`).join('');
+</script>
