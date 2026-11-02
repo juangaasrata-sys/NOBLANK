@@ -17,7 +17,7 @@ Format CSV ini sudah dirancang agar nanti bisa **diimpor langsung** ke aplikasi 
 |---|---|---|
 | `instruksi-project.md` | Instruksi sistem Project | Peran, alur mencatat, format CSV, perintah, analisis, keselamatan |
 | `pengetahuan/standar-akg-dv.csv` | Target 22 nutrisi: DV FDA dan AKG 2019 (L/P 19–29 th) | Target harian di bagian TARGET HARIAN dan ANALISIS |
-| `pengetahuan/makanan-dasar-per100g.csv` | 18 makanan inti (telur, ikan kembung, tempe, tahu, sayur daun, wortel, ubi, jambu, pisang, alpukat, kacang, kuaci, teri, susu, nasi merah, dll.) × 24 nutrisi | Langkah 3 "Hitung nutrisinya" |
+| `pengetahuan/makanan-dasar-per100g.csv` | 18 makanan inti (kolom kosong = data tidak tersedia, bukan 0) (telur, ikan kembung, tempe, tahu, sayur daun, wortel, ubi, jambu, pisang, alpukat, kacang, kuaci, teri, susu, nasi merah, dll.) × 24 nutrisi | Langkah 3 "Hitung nutrisinya" |
 | `pengetahuan/ukuran-rumah-tangga.csv` | Konversi butir, potong, centong, mangkuk, sendok ke gram | Langkah 2 "Konversi porsi ke gram" |
 | `pengetahuan/top-makanan-per-nutrisi.csv` | Top 50 makanan per 29 nutrisi (sudah dikoreksi, bertanda bumbu/olahan) | `/saran` dan rencana perbaikan |
 | `pengetahuan/aturan-dan-prioritas.md` | 21 kebiasaan, 19 kartu nutrisi, 19 kombinasi "jangan bersamaan", 19 sinergi, 9 peringatan | Analisis pola kebiasaan, saran, aturan keselamatan |
