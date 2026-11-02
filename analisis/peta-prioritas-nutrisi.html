@@ -136,6 +136,23 @@ td:first-child{font-weight:700;width:30%}
 .q label{display:inline-flex;gap:6px;align-items:center;font-size:.88rem;color:var(--muted);cursor:pointer}
 .q input[type=checkbox]{accent-color:var(--accent);width:18px;height:18px}
 
+/* jangan bersamaan */
+.sep{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.pair{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;gap:8px;align-content:start;min-width:0}
+.pair h3 .x{color:var(--warn);font-weight:800;margin:0 .25em}
+.pair .meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pair .cat{font-size:.76rem;color:var(--muted)}
+.pair p{font-size:.92rem}
+.pair .gap{font-size:.88rem;background:var(--accent-soft);border-radius:8px;padding:8px 10px}
+.pair .gap b{font-family:var(--f-mono);font-size:.82rem}
+.sched{display:grid;gap:14px;padding-top:12px}
+.timeline{list-style:none;margin:0;padding:0;display:grid;border-left:2px solid var(--accent);margin-left:6px}
+.timeline li{display:grid;grid-template-columns:minmax(110px,150px) 1fr;gap:6px 16px;padding:10px 0 10px 18px;position:relative;font-size:.94rem}
+.timeline li::before{content:"";position:absolute;left:-7px;top:16px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.timeline .when{font-family:var(--f-mono);font-size:.8rem;color:var(--accent);padding-top:2px}
+@media (max-width:520px){.timeline li{grid-template-columns:1fr}}
+@media (max-width:420px){.sep{grid-template-columns:1fr}}
+
 footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;gap:8px;max-width:76ch}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 @media (max-width:420px){.nutr,.habits,.warnlist{grid-template-columns:1fr}}
@@ -150,7 +167,8 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
     <div><b>44%</b><span>video menyinggung gula</span></div>
     <div><b>21</b><span>kebiasaan berprioritas</span></div>
     <div><b>19</b><span>nutrisi kunci</span></div>
-    <div><b>61</b><span>latihan soal esai</span></div>
+    <div><b>19</b><span>kombinasi yang jangan bersamaan</span></div>
+    <div><b>68</b><span>latihan soal esai</span></div>
   </div>
 </header>
 
@@ -161,6 +179,7 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
     <a href="#kebiasaan">Kebiasaan</a>
     <a href="#nutrisi">Nutrisi</a>
     <a href="#pasangan">Pasangan nutrisi</a>
+    <a href="#jangan-bersamaan">Jangan bersamaan</a>
     <a href="#berisiko">Siapa berisiko</a>
     <a href="#hati-hati">Hati-hati</a>
     <a href="#latihan">Latihan soal</a>
@@ -217,25 +236,39 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
 </section>
 
 <section id="pasangan">
-  <div class="sec-head"><p class="eyebrow">Bagian 3</p><h2>Pasangan dan penghambat nutrisi</h2>
-  <p class="lead">Nutrisi saling memengaruhi. Pasangan di bawah ini paling sering muncul di video.</p></div>
+  <div class="sec-head"><p class="eyebrow">Bagian 3</p><h2>Pasangan yang saling mendukung</h2>
+  <p class="lead">Nutrisi-nutrisi ini bekerja lebih baik bila dikonsumsi bersama. Untuk kombinasi yang justru saling menghambat, lihat bagian <a href="#jangan-bersamaan">Jangan bersamaan</a>.</p></div>
   <div class="tbl"><table>
     <thead><tr><th>Pasangan</th><th>Hubungannya</th><th>Praktiknya</th></tr></thead>
     <tbody>
       <tr><td>Vitamin D3 + K2 + magnesium</td><td>Magnesium dibutuhkan untuk mengaktifkan vitamin D. Vitamin D menaikkan penyerapan kalsium, dan K2 membantu mengarahkan kalsium ke tulang.</td><td>Kalau minum D3, pastikan asupan magnesium dan K2 (keju, kuning telur, makanan fermentasi) cukup.</td></tr>
       <tr><td>Vitamin C + zat besi nabati</td><td>Vitamin C meningkatkan penyerapan zat besi dari tumbuhan.</td><td>Makan bayam atau kacang bersama jambu biji, jeruk, atau tomat.</td></tr>
-      <tr><td>Teh/kopi ↔ zat besi</td><td>Tanin menghambat penyerapan zat besi.</td><td>Beri jarak sekitar satu jam antara teh/kopi dan waktu makan.</td></tr>
       <tr><td>Lemak + vitamin A, D, E, K</td><td>Keempatnya larut lemak dan butuh lemak serta empedu agar terserap.</td><td>Makan sayur dengan sedikit minyak zaitun, telur, atau alpukat.</td></tr>
-      <tr><td>Seng ↔ tembaga</td><td>Suplemen seng dosis tinggi jangka panjang menurunkan tembaga.</td><td>Hindari suplemen seng di atas 40 mg/hari dalam jangka panjang.</td></tr>
-      <tr><td>Kalsium ↔ zat besi</td><td>Keduanya bersaing saat diserap.</td><td>Kalau minum suplemen, jangan diminum bersamaan.</td></tr>
-      <tr><td>Karbohidrat ↔ vitamin B1</td><td>Makin banyak karbohidrat yang dimakan, makin banyak B1 yang dipakai untuk mengubahnya jadi energi.</td><td>Pola makan tinggi nasi putih, tepung, dan gula menaikkan kebutuhan B1.</td></tr>
-      <tr><td>Asam fitat ↔ mineral</td><td>Fitat dalam biji-bijian dan kacang mengikat seng, besi, magnesium, dan kalsium.</td><td>Rendam, kecambahkan, atau fermentasi. Tempe adalah contoh fermentasi yang menurunkan fitat.</td></tr>
+      <tr><td>Karbohidrat + vitamin B1</td><td>Makin banyak karbohidrat yang dimakan, makin banyak B1 yang dipakai untuk mengubahnya jadi energi.</td><td>Pola makan tinggi nasi putih, tepung, dan gula menaikkan kebutuhan B1.</td></tr>
     </tbody>
   </table></div>
 </section>
 
+<section id="jangan-bersamaan">
+  <div class="sec-head"><p class="eyebrow">Bagian 4</p><h2>Jangan dikonsumsi bersamaan</h2>
+  <p class="lead">Kombinasi yang saling menghambat penyerapan atau berinteraksi dengan obat. Untuk makanan sehari-hari biasanya cukup diberi jarak. Aturan ini paling penting bila Anda minum suplemen atau obat rutin.</p></div>
+  <div class="chips" role="group" aria-label="Saring kombinasi menurut kategori" id="sepf"></div>
+  <div class="sep" id="sep-root"></div>
+  <div class="sched">
+    <div class="sec-head"><h3>Contoh jadwal harian bagi yang minum suplemen</h3>
+    <p class="lead">Ini hanya contoh pengaturan waktu, bukan anjuran untuk minum semuanya. Utamakan makanan, dan minum suplemen hanya bila memang dibutuhkan.</p></div>
+    <ol class="timeline">
+      <li><span class="when">Bangun tidur</span><div><b>Perut kosong:</b> obat tiroid (bila ada), dengan air putih saja. Tunggu 30–60 menit sebelum kopi atau makan.</div></li>
+      <li><span class="when">Makan pertama</span><div><b>Bersama makanan berlemak:</b> vitamin D3 + K2, minyak ikan/omega-3, vitamin A atau E. Kopi atau teh boleh di sini bila tidak sedang minum zat besi.</div></li>
+      <li><span class="when">Tengah hari</span><div><b>Jauh dari teh, kopi, dan susu:</b> zat besi bersama sumber vitamin C (jambu biji, jeruk).</div></li>
+      <li><span class="when">Makan kedua</span><div><b>Bersama makanan:</b> seng atau kalsium, berjarak minimal 2 jam dari zat besi.</div></li>
+      <li><span class="when">Malam</span><div><b>Sebelum tidur:</b> magnesium, yang juga membantu relaksasi dan tidur.</div></li>
+    </ol>
+  </div>
+</section>
+
 <section id="berisiko">
-  <div class="sec-head"><p class="eyebrow">Bagian 4</p><h2>Siapa cenderung kekurangan apa</h2>
+  <div class="sec-head"><p class="eyebrow">Bagian 5</p><h2>Siapa cenderung kekurangan apa</h2>
   <p class="lead">Orang sehat pun bisa kekurangan nutrisi karena gaya hidup, pola makan, atau obat.</p></div>
   <div class="tbl"><table>
     <thead><tr><th>Kelompok</th><th>Cenderung kurang</th><th>Alasan utama</th></tr></thead>
@@ -258,20 +291,20 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:.86rem;display:grid;
 </section>
 
 <section id="hati-hati">
-  <div class="sec-head"><p class="eyebrow">Bagian 5</p><h2>Klaim yang perlu hati-hati</h2>
+  <div class="sec-head"><p class="eyebrow">Bagian 6</p><h2>Klaim yang perlu hati-hati</h2>
   <p class="lead">Klaim berikut muncul di video, tetapi untuk orang sehat sebaiknya tidak dilakukan tanpa pemeriksaan atau pendampingan tenaga kesehatan.</p></div>
   <div class="warnlist" id="warn-root"></div>
 </section>
 
 <section id="latihan">
-  <div class="sec-head"><p class="eyebrow">Bagian 6</p><h2>Latihan soal</h2>
+  <div class="sec-head"><p class="eyebrow">Bagian 7</p><h2>Latihan soal</h2>
   <p class="lead">Soal esai singkat tanpa pilihan ganda. Jawab dulu di kepala atau di kertas, lalu buka jawabannya. Centang “Sudah bisa” untuk melacak kemajuan. Kemajuan tersimpan di browser ini saja.</p></div>
   <div class="qbar">
     <div style="display:grid;gap:8px">
       <div class="chips" role="group" aria-label="Saring soal menurut kategori" id="qcat"></div>
       <div class="chips" role="group" aria-label="Saring soal menurut prioritas" id="qtier"></div>
     </div>
-    <div class="progress"><div class="bar"><i id="pbar"></i></div><span id="ptext">0 dari 61 sudah bisa</span>
+    <div class="progress"><div class="bar"><i id="pbar"></i></div><span id="ptext">0 dari 68 sudah bisa</span>
       <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="shuffle">Acak urutan</button><button class="btn" id="hidebtn">Sembunyikan yang sudah bisa</button><button class="btn" id="openall">Buka semua jawaban</button></div>
     </div>
   </div>
@@ -349,6 +382,28 @@ const WARN=[
  ['Susu mentah dan diet karnivora jangka panjang','Susu mentah berisiko membawa bakteri patogen. Diet karnivora jangka panjang minim serat dan vitamin C, dan buktinya masih sedikit.'],
 ];
 
+const SEP=[
+ {c:'Antar nutrisi',e:'k',a:'Zat besi',b:'Kalsium',w:'Kalsium (susu, keju, yogurt, suplemen kalsium) menghambat penyerapan zat besi, baik heme maupun nonheme.',g:'Beri jarak ≥ 2 jam',x:'Jangan minum suplemen besi dengan susu.'},
+ {c:'Antar nutrisi',e:'s',a:'Zat besi',b:'Seng',w:'Dalam dosis suplemen, keduanya bersaing di jalur penyerapan yang sama, terutama saat perut kosong.',g:'Beri jarak ≥ 2 jam',x:'Atau minum salah satunya bersama makanan.'},
+ {c:'Antar nutrisi',e:'s',a:'Kalsium',b:'Magnesium',w:'Suplemen dosis besar bisa bersaing saat diserap. Dari makanan tidak masalah.',g:'Pisahkan waktu suplemen',x:'Misalnya kalsium siang, magnesium malam.'},
+ {c:'Antar nutrisi',e:'s',a:'Kalsium',b:'Seng',w:'Kalsium dosis besar menurunkan penyerapan seng.',g:'Beri jarak ≥ 2 jam',x:'Berlaku untuk suplemen, bukan makanan biasa.'},
+ {c:'Antar nutrisi',e:'k',a:'Seng dosis tinggi',b:'Tembaga',w:'Seng memicu protein di usus yang mengikat tembaga. Bila berlangsung lama, tubuh kekurangan tembaga.',g:'Hindari > 40 mg seng/hari jangka panjang',x:'Bila perlu seng tinggi, pilih formula yang juga berisi tembaga.'},
+ {c:'Makanan & minuman',e:'k',a:'Teh & kopi',b:'Zat besi',w:'Tanin dan polifenol dapat memangkas penyerapan zat besi nonheme hingga lebih dari separuh.',g:'Minum ≥ 1 jam sebelum atau sesudah makan',x:'Paling penting bagi perempuan haid dan vegetarian.'},
+ {c:'Makanan & minuman',e:'k',a:'Asam fitat',b:'Besi, seng, magnesium, kalsium',w:'Fitat di bekatul, biji-bijian utuh, dan kacang mentah mengikat mineral sehingga sulit diserap.',g:'Rendam, kecambahkan, atau fermentasi',x:'Tempe dan roti ragi (sourdough) lebih rendah fitat. Jangan minum suplemen mineral bersama sereal tinggi serat.'},
+ {c:'Makanan & minuman',e:'k',a:'Oksalat',b:'Kalsium',w:'Oksalat di bayam, bit, dan cokelat mengikat kalsium. Hanya sedikit kalsium bayam yang terserap.',g:'Jangan andalkan bayam untuk kalsium',x:'Teri, sarden bertulang, susu, dan tahu adalah sumber kalsium yang lebih baik.'},
+ {c:'Makanan & minuman',e:'k',a:'Putih telur mentah',b:'Biotin',w:'Avidin dalam putih telur mentah mengikat biotin. Setelah dimasak, avidin tidak aktif lagi.',g:'Masak telur hingga putihnya matang',x:'Masalah hanya muncul bila sering makan telur mentah dalam jumlah banyak.'},
+ {c:'Makanan & minuman',e:'s',a:'Ikan mentah & teh berlebih',b:'Vitamin B1',w:'Tiaminase pada ikan mentah dan tanin pada teh dapat merusak atau menonaktifkan B1. Hal ini disebut di beberapa video.',g:'Jangan berlebihan, dan beri jarak dari makanan sumber B1',x:'Memasak ikan menonaktifkan tiaminase.'},
+ {c:'Makanan & minuman',e:'k',a:'Alkohol',b:'B1, folat, magnesium, seng',w:'Alkohol menghambat penyerapan dan mempercepat pembuangan nutrisi-nutrisi ini lewat urin.',g:'Batasi alkohol',x:'Suplemen tidak bisa menebus kebiasaan minum alkohol.'},
+ {c:'Makanan & minuman',e:'k',a:'Suplemen serat (psyllium)',b:'Obat & suplemen lain',w:'Serat mengikat dan memperlambat penyerapan zat lain yang diminum bersamaan.',g:'Beri jarak ≥ 2 jam',x:'Berlaku juga untuk obat resep.'},
+ {c:'Makanan & minuman',e:'k',a:'Vitamin A, D, E, K',b:'Perut kosong tanpa lemak',w:'Vitamin larut lemak sulit diserap tanpa lemak dan empedu.',g:'Minum bersama makanan berlemak',x:'Misalnya bersama telur, ikan, alpukat, atau minyak zaitun.'},
+ {c:'Dengan obat',e:'k',a:'Obat tiroid (levotiroksin)',b:'Kopi, kalsium, zat besi, kedelai, serat tinggi',w:'Zat-zat ini menurunkan penyerapan obat tiroid sehingga dosisnya jadi kurang efektif.',g:'Kopi/sarapan ≥ 30–60 menit sesudahnya; kalsium & besi ≥ 4 jam',x:'Minum obat tiroid saat perut kosong dengan air putih.'},
+ {c:'Dengan obat',e:'k',a:'Antibiotik tetrasiklin & kuinolon',b:'Susu, kalsium, magnesium, besi, seng, antasida',w:'Mineral mengikat antibiotik di usus sehingga obat tidak terserap dan tidak bekerja.',g:'Beri jarak 2–6 jam sesuai petunjuk obat',x:'Contohnya doksisiklin dan ciprofloxacin. Tanyakan pada apoteker.'},
+ {c:'Dengan obat',e:'k',a:'Antibiotik',b:'Probiotik',w:'Antibiotik ikut membunuh bakteri dari suplemen probiotik.',g:'Beri jarak ≥ 2 jam',x:'Makanan fermentasi tetap bermanfaat selama dan sesudah antibiotik.'},
+ {c:'Dengan obat',e:'k',a:'Warfarin',b:'Vitamin K & suplemen pengencer darah',w:'Perubahan mendadak asupan vitamin K mengubah efek warfarin. Minyak ikan, vitamin E, kunyit, atau bawang putih dosis tinggi dapat menambah risiko perdarahan.',g:'Jaga asupan sayur hijau tetap konsisten',x:'Konsultasikan setiap suplemen baru dengan dokter.'},
+ {c:'Dengan obat',e:'k',a:'Suplemen kalium & garam rendah natrium',b:'Obat tekanan darah tertentu',w:'Obat golongan ACE inhibitor, ARB, dan diuretik hemat kalium menahan kalium. Bila ditambah suplemen, kalium darah bisa terlalu tinggi.',g:'Jangan minum suplemen kalium tanpa dokter',x:'Kalium dari sayur biasanya aman bagi ginjal yang sehat.'},
+ {c:'Dengan obat',e:'k',a:'Jeruk bali (grapefruit)',b:'Beberapa statin & obat lain',w:'Jeruk bali menghambat enzim CYP3A4 yang memecah obat, sehingga kadar obat dalam darah bisa naik berlebihan.',g:'Hindari bila obat Anda termasuk daftarnya',x:'Contohnya simvastatin. Cek brosur obat atau tanya apoteker.'},
+];
+
 const Q=[
  // Gejala kekurangan
  ['Gejala kekurangan',1,'Bila tubuh defisiensi vitamin B12, gejalanya apa saja?','Kesemutan atau mati rasa di tangan dan kaki, lelah dan lemas karena anemia, pucat, lidah merah licin atau sariawan, sulit mengingat, dan mood turun. Bila dibiarkan bisa terjadi gangguan keseimbangan dan kerusakan saraf permanen.'],
@@ -407,6 +462,14 @@ const Q=[
  ['Kebiasaan',2,'Apa saran tentang minyak goreng dan lemak dalam materi ini?','Kurangi minyak yang dipakai berulang dan makanan olahan tinggi minyak biji (omega-6), lalu perbanyak omega-3 dari ikan. Dr. Berg lebih menyukai mentega, minyak zaitun, dan minyak kelapa. Manfaat-risiko minyak biji masih diperdebatkan.'],
  ['Kebiasaan',3,'Apa itu autofagi, dan kapan meningkat?','Proses daur ulang komponen sel yang rusak. Proses ini meningkat saat puasa atau jeda makan yang cukup panjang dan saat berolahraga.'],
  ['Kebiasaan',3,'Mengapa makanan fermentasi dianjurkan? Sebutkan contoh lokal.','Makanan fermentasi mendukung bakteri baik usus, dan sebagian mengandung K2 dan vitamin C. Contohnya tempe, yogurt, kefir, kimchi, dan sauerkraut.'],
+ // Jangan bersamaan
+ ['Jangan bersamaan',2,'Mengapa teh atau kopi sebaiknya tidak diminum bersamaan dengan makan, terutama makanan sumber zat besi? Berapa jarak yang dianjurkan?','Tanin dan polifenol dalam teh dan kopi mengikat zat besi nonheme sehingga penyerapannya bisa turun lebih dari separuh. Minum teh/kopi minimal 1 jam sebelum atau sesudah makan.'],
+ ['Jangan bersamaan',2,'Suplemen zat besi sebaiknya tidak diminum bersama apa saja, dan sebaiknya ditemani apa?','Jangan bersama susu/kalsium, teh atau kopi, suplemen seng dosis tinggi, dan makanan tinggi fitat atau suplemen serat. Sebaiknya ditemani sumber vitamin C, seperti jambu biji atau jeruk.'],
+ ['Jangan bersamaan',2,'Mengapa vitamin D sebaiknya tidak diminum saat perut kosong?','Vitamin D larut lemak dan butuh lemak serta empedu agar terserap. Minum bersama makanan berlemak, idealnya bersama K2.'],
+ ['Jangan bersamaan',2,'Orang yang minum obat tiroid (levotiroksin) harus memberi jarak dengan apa saja?','Kopi dan sarapan minimal 30–60 menit sesudahnya. Kalsium, zat besi, kedelai, dan serat tinggi minimal sekitar 4 jam, karena semuanya menurunkan penyerapan obat.'],
+ ['Jangan bersamaan',2,'Mengapa susu, antasida, atau suplemen mineral tidak boleh diminum bersamaan dengan antibiotik seperti doksisiklin atau ciprofloxacin?','Kalsium, magnesium, besi, dan seng mengikat antibiotik di usus sehingga obat tidak terserap dan tidak bekerja. Beri jarak 2–6 jam sesuai petunjuk obat.'],
+ ['Jangan bersamaan',3,'Mengapa bayam bukan sumber kalsium yang baik walaupun kandungan kalsiumnya tinggi?','Bayam tinggi oksalat yang mengikat kalsium, sehingga hanya sedikit yang terserap. Teri, sarden bertulang, susu, dan tahu lebih baik.'],
+ ['Jangan bersamaan',3,'Apa hubungan putih telur mentah dengan biotin?','Putih telur mentah mengandung avidin yang mengikat biotin sehingga tidak terserap. Memasak telur menonaktifkan avidin.'],
  // Angka penting
  ['Angka penting',1,'Berapa kebutuhan kalium harian orang dewasa?','Sekitar 4.700 mg per hari, baik menurut AKG Indonesia 2019 maupun Dr. Berg.'],
  ['Angka penting',1,'Berapa AKG vitamin D, dan berapa batas atas aman tanpa pengawasan?','AKG sekitar 15 mcg (600 IU), dengan batas atas 4.000 IU per hari. Dr. Berg sering menyebut 10.000 IU, jadi cek kadar 25(OH)D dulu sebelum dosis tinggi.'],
@@ -440,6 +503,17 @@ document.querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>
   document.querySelectorAll('[data-f]').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
   renderNutr(+b.dataset.f);
 }));
+
+/* render jangan bersamaan */
+(function(){
+  const cats=['Semua',...new Set(SEP.map(s=>s.c))];
+  const fEl=document.getElementById('sepf'), root=document.getElementById('sep-root');
+  fEl.innerHTML=cats.map((c,i)=>`<button class="chip" id="sf-${i}" data-s="${c}" aria-pressed="${i===0}">${c} <span class="pct">${i?SEP.filter(s=>s.c===c).length:SEP.length}</span></button>`).join('');
+  const render=c=>{root.innerHTML=SEP.filter(s=>c==='Semua'||s.c===c).map(s=>`<article class="pair"><h3>${s.a}<span class="x" aria-label="jangan bersamaan dengan">✕</span>${s.b}</h3>
+    <div class="meta">${evBadge(s.e)}<span class="cat">${s.c}</span></div><p>${s.w}</p><div class="gap"><b>Saran:</b> ${s.g}</div><p class="pct" style="font-family:var(--f-body);font-size:.86rem">${s.x}</p></article>`).join('')};
+  fEl.addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(!b)return;fEl.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));render(b.dataset.s)});
+  render('Semua');
+})();
 
 /* render warnings */
 document.getElementById('warn-root').innerHTML=WARN.map(([h,p])=>`<div class="warn"><span class="tier tw">Hati-hati</span><b>${h}</b><p>${p}</p></div>`).join('');
