@@ -1,0 +1,847 @@
+=====================================================================
+        PANDUAN LENGKAP BOLA BASKET
+        SKILL, CARA LATIHAN, DAN STRATEGI
+=====================================================================
+
+DAFTAR ISI
+---------------------------------------------------------------------
+BAGIAN I   - DASAR-DASAR
+  1. Pengantar Singkat & Posisi Pemain
+  2. Prinsip Umum Latihan
+
+BAGIAN II  - SKILL INDIVIDU & CARA LATIHANNYA
+  3. Footwork (Kerja Kaki)
+     3.1 Triple Threat Position
+     3.2 Pivot (Front & Reverse)
+     3.3 Jump Stop & Stride Stop
+     3.4 Jab Step
+     3.5 Eurostep
+     3.6 Drop Step
+  4. Dribbling (Menggiring Bola)
+     4.1 Control Dribble & Speed Dribble
+     4.2 Crossover
+     4.3 Between the Legs
+     4.4 Behind the Back
+     4.5 Spin Move
+     4.6 In-and-Out
+     4.7 Hesitation (Hesi)
+     4.8 Shamgod & Kombinasi Lanjutan
+  5. Passing (Mengoper)
+     5.1 Chest Pass
+     5.2 Bounce Pass
+     5.3 Overhead Pass
+     5.4 Outlet Pass & Baseball Pass
+     5.5 No-Look, Wrap-Around, Behind the Back Pass
+     5.6 Skip Pass & Entry Pass
+  6. Shooting (Menembak)
+     6.1 Teknik BEEF
+     6.2 Lay-up (kanan, kiri, reverse, finger roll)
+     6.3 Jump Shot / Mid-range
+     6.4 Three-Point Shot
+     6.5 Free Throw
+     6.6 Floater / Teardrop
+     6.7 Hook Shot
+     6.8 Fadeaway & Step-back
+     6.9 Bank Shot
+     6.10 Dunk
+  7. Rebounding
+     7.1 Box Out
+     7.2 Offensive Rebound & Tip-in
+  8. Post Play (Permainan Dekat Ring)
+     8.1 Sealing & Posting Up
+     8.2 Up-and-Under
+     8.3 Dream Shake / Pump Fake
+     8.4 Face-up
+  9. Pergerakan Tanpa Bola
+     9.1 V-Cut
+     9.2 L-Cut
+     9.3 Backdoor Cut
+     9.4 Curl, Flare, Fade
+     9.5 Setting & Using Screens
+  10. Defense Individu
+     10.1 Defensive Stance
+     10.2 Slide & Close-out
+     10.3 On-ball Defense
+     10.4 Off-ball Defense (Deny, Help)
+     10.5 Steal & Deflection
+     10.6 Block Shot
+     10.7 Taking a Charge
+     10.8 Post Defense
+  11. Fisik & Atletisme
+     11.1 Kecepatan & Kelincahan
+     11.2 Daya Ledak / Vertical Jump
+     11.3 Kekuatan
+     11.4 Daya Tahan (Conditioning)
+     11.5 Kelenturan & Pencegahan Cedera
+  12. Mental & Basketball IQ
+
+BAGIAN III - STRATEGI OFENSIF (MENYERANG)
+  13. Konsep Dasar Ofensif (Spacing, Ball Movement, Pick & Roll, dll)
+  14. Formasi / Set Ofensif
+  15. Sistem Ofensif Terkenal
+  16. Fast Break & Transisi
+  17. Offense Melawan Zona
+  18. Offense Melawan Press
+  19. Set Play Khusus (Inbound, Last Shot)
+
+BAGIAN IV  - STRATEGI DEFENSIF (BERTAHAN)
+  20. Man-to-Man Defense
+  21. Zone Defense
+  22. Combination Defense
+  23. Press Defense
+  24. Pertahanan Pick & Roll
+  25. Transition Defense
+
+BAGIAN V   - STRATEGI SITUASIONAL & MANAJEMEN GAME
+  26. Clock Management & Akhir Pertandingan
+  27. Foul Strategy
+  28. Timeout & Rotasi Pemain
+  29. Scouting & Matchup
+
+BAGIAN VI  - PROGRAM LATIHAN
+  30. Contoh Struktur Sesi Latihan
+  31. Contoh Program Mingguan
+  32. Latihan Mandiri di Rumah
+
+LAMPIRAN
+  33. Glosarium Istilah Basket
+
+=====================================================================
+BAGIAN I - DASAR-DASAR
+=====================================================================
+
+1. PENGANTAR SINGKAT & POSISI PEMAIN
+---------------------------------------------------------------------
+Basket dimainkan 5 lawan 5. Posisi tradisional:
+ 1 - Point Guard (PG)   : pengatur serangan, dribel & passing terbaik.
+ 2 - Shooting Guard (SG): penembak utama, scorer dari perimeter.
+ 3 - Small Forward (SF) : serba bisa, bisa menembak, drive, bertahan.
+ 4 - Power Forward (PF) : kuat di dekat ring, rebound, screen.
+ 5 - Center (C)         : pemain tertinggi, rim protector, post play.
+
+Basket modern lebih "positionless": istilah yang sering dipakai
+adalah Ball Handler, Wing, Big, Stretch Big (big yang bisa tembak
+tiga angka), dan 3&D (wing penembak tiga angka + defender bagus).
+
+2. PRINSIP UMUM LATIHAN
+---------------------------------------------------------------------
+- Teknik dulu, kecepatan kemudian. Lambat & benar > cepat & salah.
+- Latih tangan lemah (non-dominan) minimal sama banyak.
+- Latihan dengan intensitas & kondisi seperti pertandingan.
+- Repetisi terukur: catat jumlah tembakan masuk/percobaan.
+- Pemanasan 10-15 menit (dinamis), pendinginan & stretching statis.
+- Istirahat dan tidur cukup; nutrisi & hidrasi.
+- Progresi: tanpa lawan -> lawan pasif -> lawan aktif -> situasi game.
+
+=====================================================================
+BAGIAN II - SKILL INDIVIDU & CARA LATIHANNYA
+=====================================================================
+
+3. FOOTWORK (KERJA KAKI)
+---------------------------------------------------------------------
+Footwork adalah fondasi semua skill: shooting, finishing, defense.
+
+3.1 Triple Threat Position
+ Teknik : Setelah menerima bola, lutut ditekuk, bola di pinggang
+          sisi tangan tembak, mata ke ring. Dari posisi ini bisa
+          shoot, pass, atau dribble.
+ Latihan:
+  - Catch & Face: lempar bola ke depan (spin), tangkap dengan jump
+    stop, langsung triple threat, tahan 2 detik. 20x tiap sisi.
+  - Triple threat read: partner menunjuk arah, pemain merespon
+    dengan jab, shot fake, atau drive.
+
+3.2 Pivot (Front & Reverse)
+ Teknik : Satu kaki menjadi poros (pivot foot) tidak boleh diangkat
+          sebelum dribel. Front pivot = berputar ke depan, reverse
+          pivot = berputar ke belakang.
+ Latihan:
+  - Pivot 90-180-360 derajat, kaki kiri & kanan, 10x per variasi.
+  - "Pivot pressure": partner merebut bola, pemain pivot melindungi
+    bola selama 10 detik.
+
+3.3 Jump Stop & Stride Stop
+ Teknik : Jump stop = mendarat dua kaki bersamaan (bebas memilih
+          pivot foot). Stride stop = 1-2 langkah (kaki pertama jadi
+          pivot).
+ Latihan: Lari setengah lapangan, peluit -> jump stop seimbang.
+          Ulangi 10x, lalu dengan dribel.
+
+3.4 Jab Step
+ Teknik : Langkah pendek & tajam dengan kaki non-pivot untuk
+          membaca reaksi defender. Jika mundur -> tembak; jika maju
+          -> drive.
+ Latihan: Jab + shot, jab + crossover step, jab + direct drive.
+          10x tiap kombinasi, dua sisi lapangan.
+
+3.5 Eurostep
+ Teknik : Langkah pertama ke satu arah, langkah kedua lateral ke
+          arah lain, lalu lay-up.
+ Latihan: Pasang cone di jalur drive, eurostep melewati cone.
+          Mulai tanpa bola -> dengan bola -> dengan defender pasif.
+
+3.6 Drop Step
+ Teknik : Di post, kaki yang dekat baseline melangkah ke belakang
+          defender (seal), lalu power lay-up.
+ Latihan: Mikan + drop step: 10x kiri, 10x kanan.
+
+4. DRIBBLING (MENGGIRING BOLA)
+---------------------------------------------------------------------
+Prinsip: dribel dengan ujung jari (bukan telapak), bola rendah,
+kepala tegak (lihat lapangan), lindungi bola dengan tangan & badan.
+
+4.1 Control Dribble & Speed Dribble
+ - Control: bola rendah (setinggi lutut), di samping badan, saat
+   dijaga ketat.
+ - Speed  : bola didorong ke depan setinggi pinggang saat lari.
+ Latihan:
+  - Stationary: pound dribble 30 detik tiap tangan (keras & rendah).
+  - Full court speed dribble: baseline ke baseline, 4x tiap tangan.
+
+4.2 Crossover
+ Teknik : Pindah bola dari satu tangan ke tangan lain di depan
+          badan, rendah dan cepat, disertai perpindahan bahu.
+ Latihan: Stationary crossover 30 detik; zig-zag drill dengan cone
+          (crossover di setiap cone).
+
+4.3 Between the Legs
+ Teknik : Bola dipantulkan di antara kaki dari depan ke belakang.
+ Latihan: Stationary 30 detik; walking between the legs sepanjang
+          lapangan; kombinasi between + crossover.
+
+4.4 Behind the Back
+ Teknik : Bola dililitkan dari belakang pinggang ke tangan lain.
+          Berguna saat defender menutup jalur depan.
+ Latihan: Stationary, lalu sambil jalan, lalu sambil lari di cone.
+
+4.5 Spin Move
+ Teknik : Pivot berputar membelakangi defender sambil menarik bola
+          (tidak carry/palming).
+ Latihan: Cone drill: speed dribble -> spin di cone -> lay-up.
+
+4.6 In-and-Out
+ Teknik : Pura-pura crossover, bola dibawa ke dalam lalu didorong
+          keluar dengan tangan sama.
+
+4.7 Hesitation (Hesi)
+ Teknik : Perlambat tiba-tiba, badan sedikit naik (seolah berhenti
+          atau mau menembak), lalu meledak lagi.
+
+4.8 Shamgod & Kombinasi Lanjutan
+ - Shamgod: dorong bola keluar dengan satu tangan, tarik kembali
+   dengan tangan lain sambil melangkah.
+ - Kombinasi: cross-between-behind, hesi-cross, double cross, dll.
+
+ Drill Dribel Umum:
+  - Two-ball dribbling (dua bola bersamaan, bersama & bergantian).
+  - Tennis ball drill: dribel sambil lempar-tangkap bola tenis.
+  - Figure 8 (dribel memutari kaki seperti angka 8).
+  - Dribble Knockout: semua pemain dribel dalam area, saling coba
+    menjatuhkan bola lawan.
+  - Chair/cone drill dengan move berbeda di setiap rintangan.
+  - Latih dengan mata tertutup/kacamata dribel untuk feel bola.
+
+5. PASSING (MENGOPER)
+---------------------------------------------------------------------
+Prinsip: step into the pass, oper ke "target hand" (tangan jauh
+dari defender), cepat dan tepat, gunakan fake (pass fake).
+
+5.1 Chest Pass  : dari dada, ibu jari menghadap ke bawah saat follow
+                  through. Jarak menengah tanpa halangan.
+5.2 Bounce Pass : pantul di 2/3 jarak ke penerima. Untuk melewati
+                  defender tinggi / ke pemain post / backdoor.
+5.3 Overhead    : bola di atas kepala, untuk skip pass atau outlet.
+5.4 Outlet Pass : operan pertama setelah rebound ke guard di sayap.
+    Baseball    : satu tangan jarak jauh (seperti melempar bola kasti)
+                  untuk fast break.
+5.5 No-Look, Wrap-Around, Behind the Back: operan lanjutan untuk
+    mengecoh defender. Gunakan hanya jika fundamental sudah kuat.
+5.6 Skip Pass   : melewati satu pemain ke sisi lapangan seberang
+                  (efektif melawan zona).
+    Entry Pass  : operan ke pemain post.
+
+ Latihan Passing:
+  - Partner passing: 2 orang, 30 detik tiap jenis pass.
+  - Wall passing: oper ke tembok menargetkan kotak/lingkaran.
+  - Two-ball partner passing (chest + bounce bersamaan).
+  - 3-man weave: tiga pemain berlari menyilang sambil mengoper
+    sepanjang lapangan diakhiri lay-up.
+  - Monkey in the middle (2 vs 1): penyerang harus pass fake.
+  - Star passing drill: 5 titik, oper & ikuti operan.
+  - 4-corner passing: oper sambil lari ke sudut lain.
+  - Passing tanpa dribel (scrimmage "no dribble") untuk melatih
+    pergerakan tanpa bola.
+
+6. SHOOTING (MENEMBAK)
+---------------------------------------------------------------------
+6.1 Teknik BEEF
+ B - Balance  : kaki selebar bahu, kaki tangan tembak sedikit maju,
+                lutut ditekuk.
+ E - Eyes     : fokus ke target (bagian depan/belakang ring).
+ E - Elbow    : siku di bawah bola, lurus ke ring (bentuk "L").
+ F - Follow through: pergelangan dipatahkan ke bawah ("tangan masuk
+                ke keranjang kue"), tahan sampai bola masuk.
+ Tangan non-tembak hanya sebagai penyangga (guide hand).
+ Sumber tenaga dari kaki, gerakan satu ritme (one motion).
+
+ Latihan Teknik:
+  - Form shooting: 1 meter dari ring, satu tangan, 20-50 tembakan.
+    Mundur bertahap setelah 5x masuk berturut-turut.
+  - Lying down shooting: berbaring, tembak bola lurus ke atas
+    (cek rotasi & lurusnya bola).
+  - Wall shooting: tembak ke garis di tembok untuk cek arah.
+
+6.2 Lay-up
+ Teknik : Kanan = tolak kaki kiri, angkat lutut kanan, bola dengan
+          tangan kanan, pantulkan di kotak papan. Kiri = kebalikan.
+ Variasi: Power lay-up (dua kaki), reverse lay-up (sisi lain ring),
+          finger roll, under-hand, inside-hand finish, Euro, pro hop.
+ Latihan:
+  - Mikan Drill: lay-up kanan-kiri bergantian di bawah ring tanpa
+    bola menyentuh lantai. 1 menit. Lanjut reverse Mikan.
+  - Lay-up line (2 barisan: shooter & rebounder).
+  - 1-minute lay-ups: sebanyak mungkin dalam 1 menit.
+  - Contact finishing: partner mendorong dengan pad saat lay-up.
+
+6.3 Jump Shot / Mid-range
+ Teknik : Lompat lurus ke atas, lepas bola di puncak lompatan.
+ Latihan:
+  - Catch & shoot dari 5 titik (sudut, sayap, top).
+  - Off-the-dribble: 1 dribel pull-up, 2 dribel pull-up.
+  - Elbow series: shot, jab-shot, shot fake-1 dribel-shot.
+
+6.4 Three-Point Shot
+ Latihan:
+  - "Around the World": 5-7 titik di garis 3, maju jika masuk.
+  - Spot-up 100 tembakan: 20 tiap titik, catat persentase.
+  - Corner three dengan kaki tepat di belakang garis.
+  - Shooting dalam kondisi lelah (sprint lalu tembak).
+  - Relocation shooting: tembak, lari ke titik lain, terima, tembak.
+
+6.5 Free Throw
+ Teknik : Rutinitas konsisten (misal: 3 dribel, tarik napas, tembak).
+ Latihan:
+  - 10 FT setiap selesai latihan (saat lelah).
+  - "Make 2 in a row" sebelum boleh minum.
+  - Pressure FT: jika gagal, seluruh tim lari sprint.
+
+6.6 Floater / Teardrop
+ Teknik : Tembakan lambung tinggi satu tangan sebelum mencapai big
+          man, dilepas lebih awal dari 1-2 kaki.
+ Latihan: Drive dari top, lepas floater di area paint (3-4 m), 20x.
+
+6.7 Hook Shot
+ Teknik : Membelakangi/menyamping ring, lengan melengkung di atas
+          kepala, badan melindungi bola. Baby hook = versi pendek.
+ Latihan: Hook dari blok kanan & kiri, 20x tiap sisi (Mikan hook).
+
+6.8 Fadeaway & Step-back
+ - Fadeaway: lompat menjauh dari defender sambil menembak.
+ - Step-back: dribel maju, lalu melangkah mundur cepat menciptakan
+   jarak, langsung tembak.
+ Latihan: Dari dribel, 1x step-back, catat 10 set x 10 tembakan.
+
+6.9 Bank Shot: tembakan memantul papan, efektif dari sudut 45 derajat.
+
+6.10 Dunk: butuh vertical jump; latih dengan bola kecil/ring rendah
+     dan program plyometric (lihat Bagian 11).
+
+ Drill Shooting Kompetitif:
+  - "Beat the Pro": masuk = +1, gagal = -2 untuk "pro". Main sampai 11.
+  - "Knockout/Lightning": barisan, tembak free throw line, yang
+    tertembak masuk duluan oleh orang belakang tersingkir.
+  - "21", "H-O-R-S-E" untuk variasi tembakan.
+  - Tembakan dengan closeout defender (partner berlari menutup).
+
+7. REBOUNDING
+---------------------------------------------------------------------
+7.1 Box Out (Defensive Rebound)
+ Teknik : Saat bola ditembak, temukan lawan (hit), pivot lalu
+          tempelkan punggung/pantat ke lawan, siku lebar, lalu kejar
+          bola di titik tertinggi dengan dua tangan ("chin it" - bola
+          dibawa ke dagu, siku keluar).
+ Latihan:
+  - Circle box out: bola di tengah lingkaran, defender menahan
+    penyerang agar tidak menyentuh bola selama 3-5 detik.
+  - 3-on-3 rebounding war: tim yang mendapat rebound menyerang.
+  - Rebound + outlet pass.
+
+7.2 Offensive Rebound & Tip-in
+ Teknik : Baca arah bola (umumnya memantul ke sisi berlawanan dari
+          sudut tembakan), hindari box out dengan swim move/spin.
+ Latihan:
+  - Tip drill: tip bola ke papan berulang kali (10x kanan, kiri).
+  - Superman drill: lempar bola ke papan sisi lain, lari & tangkap
+    sebelum menyentuh lantai, ulangi.
+  - Putback series: rebound lalu langsung finishing tanpa dribel.
+
+8. POST PLAY (PERMAINAN DEKAT RING)
+---------------------------------------------------------------------
+8.1 Sealing & Posting Up
+ Teknik : Gunakan badan untuk "mengunci" defender di belakang,
+          tangan target terangkat, posisi lebar & rendah.
+8.2 Up-and-Under: shot fake, defender lompat, melangkah melewatinya.
+8.3 Dream Shake / Pump Fake: kombinasi pivot, fake, dan shot untuk
+    mengecoh defender (terkenal dari Hakeem Olajuwon).
+8.4 Face-up: berbalik menghadap ring lalu jab, shoot, atau drive.
+
+ Latihan Post:
+  - Mikan Drill dan Superman Drill.
+  - Post series: drop step baseline, drop step middle, hook, up-and-
+    under, turnaround jumper. 5x masing-masing di dua blok.
+  - 1-on-1 post dengan entry pass dari sayap.
+  - Drill pegangan bola kuat (bola di atas, "chin it").
+
+9. PERGERAKAN TANPA BOLA (OFF-BALL MOVEMENT)
+---------------------------------------------------------------------
+9.1 V-Cut      : bawa defender ke dalam, lalu keluar tajam membentuk V
+                 untuk menerima bola di sayap.
+9.2 L-Cut      : naik dari blok ke elbow, lalu keluar ke sayap (bentuk L).
+9.3 Backdoor   : saat defender menutup jalur passing (overplay), potong
+                 ke belakang menuju ring.
+9.4 Curl       : lari melingkari screen menuju ring/mid-range.
+    Flare      : keluar menjauhi screen ke perimeter.
+    Fade       : turun ke sudut setelah screen.
+9.5 Screen     : - Setter: kaki selebar bahu, tangan di dada, diam
+                   (tidak moving screen).
+                 - User: tunggu screen terpasang, lewati bahu-ke-bahu,
+                   baca defender (curl, fade, flare, reject).
+ Latihan:
+  - 2-on-0 / 2-on-1 cutting drill: V-cut & backdoor + pass.
+  - "Shell drill" ofensif.
+  - Screen reading: 2-on-2 off-ball screen dengan coach sebagai passer.
+
+10. DEFENSE INDIVIDU
+---------------------------------------------------------------------
+10.1 Defensive Stance
+ Teknik : Kaki lebih lebar dari bahu, lutut ditekuk, punggung tegak,
+          berat di bola kaki, tangan aktif (satu menekan bola, satu
+          di jalur pass).
+10.2 Slide & Close-out
+ - Defensive slide: geser ke samping, jangan menyilangkan kaki,
+   "push step" (kaki depan memimpin).
+ - Close-out: lari ke penembak, lalu langkah pendek-pendek (chop
+   steps), tangan tinggi, jangan melompat pada fake.
+ Latihan:
+  - Lane slides: sideline ke sideline / sepanjang lane 30 detik.
+  - Zig-zag defensive slide sepanjang lapangan.
+  - Close-out drill: dari paint ke perimeter, lanjut 1-on-1 live.
+  - Mirror drill: defender meniru gerakan penyerang tanpa bola.
+10.3 On-ball Defense
+ - Jaga jarak satu lengan, "nose on the ball", arahkan penyerang ke
+   sideline/baseline atau ke tangan lemahnya.
+ - Jangan reach (merebut) sembarangan, gunakan kaki.
+10.4 Off-ball Defense
+ - Deny: satu langkah dari pass line, telapak tangan menghadap bola.
+ - Help: semakin jauh dari bola, semakin ke tengah (help side).
+ - Prinsip segitiga "Ball - You - Man": selalu lihat bola dan lawan.
+10.5 Steal & Deflection: tunggu bola terekspos (dribel tinggi, pass
+     lambat); tangan "flick" dari bawah ke atas.
+10.6 Block Shot: lompat vertikal (verticality), tangan yang dekat bola,
+     hindari foul; arahkan bola tetap di lapangan.
+10.7 Taking a Charge: posisi diam sebelum penyerang mulai gerakan,
+     di luar restricted area, terima kontak di dada lalu jatuh aman.
+10.8 Post Defense: tiga cara - three-quarter, front (di depan), atau
+     behind. Tahan dengan lengan/paha, jangan biarkan posisi dalam.
+
+ Drill Defense Tim/Individu:
+  - 1-on-1 full court zig-zag (defender wajib membelokkan arah).
+  - Shell Drill 4-on-4 (lihat Bagian 20).
+  - Charge drill dengan matras.
+  - "Defensive Shuffle Ladder".
+
+11. FISIK & ATLETISME
+---------------------------------------------------------------------
+11.1 Kecepatan & Kelincahan
+  - Ladder drill (ikkie, in-out, lateral shuffle).
+  - T-drill, 5-10-5 pro agility, cone drill.
+  - Sprint 10-20 m, reaksi peluit/start dari berbagai posisi.
+11.2 Daya Ledak / Vertical Jump
+  - Plyometric: box jump, depth jump, tuck jump, broad jump,
+    single-leg bound, approach jump.
+  - Latihan kekuatan kaki (squat, deadlift, lunges) mendukung lompatan.
+  - Lakukan 2-3x seminggu, volume rendah, kualitas tinggi.
+11.3 Kekuatan
+  - Kaki: squat, Bulgarian split squat, RDL, calf raise.
+  - Atas: push-up, bench press, pull-up, row, shoulder press.
+  - Core: plank, side plank, dead bug, Pallof press, Russian twist.
+11.4 Daya Tahan (Conditioning)
+  - Suicide run (baseline - free throw - half - far FT - baseline).
+  - 17s (sideline ke sideline 17x dalam ~60 detik).
+  - Interval sprint (30 detik sprint, 30 detik istirahat).
+  - Full court lay-up dalam waktu tertentu.
+11.5 Kelenturan & Pencegahan Cedera
+  - Pemanasan dinamis (leg swing, high knees, butt kicks, carioca).
+  - Stretching statis setelah latihan, foam rolling.
+  - Penguatan pergelangan kaki (balance board, single-leg stand).
+  - Latihan pendaratan yang benar (lutut tidak masuk ke dalam).
+
+12. MENTAL & BASKETBALL IQ
+---------------------------------------------------------------------
+ - Pahami situasi (skor, waktu, jumlah foul, siapa yang hot).
+ - Komunikasi: panggil screen ("screen left!"), "help!", "ball!".
+ - Visualisasi sebelum tidur/pertandingan.
+ - Rutinitas sebelum tembakan untuk mengurangi tekanan.
+ - Tonton rekaman pertandingan (film study) diri sendiri & lawan.
+ - Fokus pada proses, cepat lupakan kesalahan ("next play").
+ - Kepemimpinan dan sportivitas.
+ Latihan: drill pengambilan keputusan (advantage/disadvantage drill
+ seperti 3-on-2, 2-on-1), small-sided games (3x3), scrimmage dengan
+ aturan khusus (misal: harus 3 pass sebelum tembak).
+
+=====================================================================
+BAGIAN III - STRATEGI OFENSIF (MENYERANG)
+=====================================================================
+
+13. KONSEP DASAR OFENSIF
+---------------------------------------------------------------------
+13.1 Spacing      : jarak antar pemain 4-5 meter agar defender sulit
+                    membantu. Manfaatkan sudut (corner) dan garis 3.
+13.2 Ball Movement: "Good to great" - oper dari tembakan bagus ke
+                    tembakan lebih bagus. Bola bergerak lebih cepat
+                    dari pemain.
+13.3 Player Movement: cut, screen, replace (isi tempat kosong).
+13.4 Penetrate & Kick (Drive & Kick): drive menarik help defender,
+     lalu oper ke penembak yang terbuka.
+13.5 Drive & Dish: drive lalu oper ke big man dekat ring.
+13.6 Pick and Roll (P&R): screener memasang screen untuk ball handler,
+     lalu roll ke ring. Variasi:
+      - Pick and Pop   : screener keluar untuk tembak (stretch big).
+      - Short Roll     : screener menerima di area free throw.
+      - Slip Screen    : screener pura-pura screen lalu langsung cut.
+      - Spain P&R      : pemain ketiga memasang back screen untuk
+                         defender roller.
+      - Double drag / Horns P&R.
+      - Side P&R, Middle P&R, Step-up screen.
+13.7 Pick and Roll lawan "ghost screen": screener pura-pura lalu pop.
+13.8 Give and Go: oper lalu cut ke ring, terima kembali.
+13.9 Hand-off (DHO - Dribble Hand-off): penyerang dribel, menyerahkan
+     bola langsung ke rekan sambil menjadi screen.
+13.10 Isolation (ISO): beri ruang pada pemain terbaik untuk 1-on-1.
+13.11 Post-up: masukkan bola ke pemain post yang punya matchup bagus.
+13.12 Inside-Out: bola masuk ke post, defense collapse, bola keluar
+      ke penembak.
+13.13 Off-ball screens: down screen, back screen, flare screen,
+      cross screen, pin-down, stagger (dua screen berurutan),
+      elevator screen, hammer screen, UCLA screen, zipper (Z-cut).
+13.14 Shot selection: prioritaskan lay-up/dunk, free throw, dan
+      three-pointer (terutama corner three); kurangi long 2-pointer.
+
+14. FORMASI / SET OFENSIF
+---------------------------------------------------------------------
+14.1 1-4 High   : 1 guard di top, 4 pemain sejajar di garis FT
+                  extended. Bagus untuk P&R & backdoor.
+14.2 1-4 Low    : 4 pemain di baseline/sudut, ruang untuk ISO guard.
+14.3 1-3-1      : satu di high post, satu di low post, dua sayap, satu
+                  top. Efektif melawan zona 2-3.
+14.4 2-3 / 2-1-2: dua guard, tiga di bawah/elbow.
+14.5 Horns      : 1 guard top, 2 big di dua elbow, 2 wing di sudut.
+                  Variasi: Horns flare, Horns twist, Horns P&R,
+                  Horns elbow pass.
+14.6 Box (Box set) : 4 pemain membentuk kotak (2 elbow + 2 blok).
+                  Untuk inbound atau set play.
+14.7 Stack      : dua pemain bertumpuk; satu memasang screen untuk yang
+                  lain.
+14.8 5-Out      : semua lima pemain di luar garis 3 (spasi maksimal).
+14.9 4-Out 1-In : empat di perimeter, satu big di post.
+14.10 Spread / Empty side: satu sisi kosong untuk P&R atau ISO.
+
+15. SISTEM OFENSIF TERKENAL
+---------------------------------------------------------------------
+15.1 Motion Offense: tanpa pola tetap, berdasarkan aturan (pass, cut,
+     screen, replace). Mengandalkan pembacaan pemain.
+15.2 Triangle Offense (Tex Winter / Phil Jackson): tiga pemain membentuk
+     segitiga di satu sisi (post, wing, corner), dua lainnya di sisi
+     lemah. Banyak opsi berdasarkan reaksi defense.
+15.3 Princeton Offense: banyak backdoor cut, high post passing, kontinuitas,
+     dan kesabaran.
+15.4 Flex Offense: pola berulang flex screen (baseline cross screen) +
+     down screen. Mudah diajarkan, disiplin.
+15.5 Swing Offense: kontinuitas dengan banyak screen dan rotasi bola.
+15.6 Dribble Drive Motion (Memphis Attack / Vance Walberg): 4-out 1-in,
+     drive berulang, penyerang lain mengisi slot sesuai aturan.
+15.7 Read and React (Rick Torbett): sistem berbasis "layer" reaksi
+     terhadap aksi rekan (pass & cut, penetrasi, screen).
+15.8 Shuffle Offense: pola kontinuitas dengan shuffle cut.
+15.9 UCLA Offense (John Wooden): UCLA cut dari high post screen.
+15.10 Seven Seconds or Less (Mike D'Antoni): tempo cepat, P&R, banyak
+      three-pointer, spasi lebar.
+15.11 Pace and Space / Motion Strong (Warriors, Spurs): ball movement,
+      off-ball screens, split action, "0.5 second rule" (putuskan
+      tembak/oper/dribel dalam 0,5 detik).
+15.12 Heliocentric offense: serangan berpusat pada satu playmaker utama
+      dengan penembak di sekelilingnya.
+15.13 Euro/ FIBA style: banyak P&R, hand-off, dan disiplin set play.
+15.14 Grinnell System: tempo ekstrem, banyak tembakan tiga angka,
+      full-court press terus-menerus, rotasi pemain besar-besaran.
+
+16. FAST BREAK & TRANSISI
+---------------------------------------------------------------------
+16.1 Primary Break: rebound -> outlet ke guard -> guard dribel di
+     tengah, dua wing lari di jalur samping (lanes), trailer menyusul.
+16.2 Situasi angka:
+      - 2-on-1: dribel ke ring, paksa defender memilih, lalu lay-up
+        atau oper.
+      - 3-on-2: ball handler di tengah berhenti di FT line, oper ke
+        wing yang terbuka.
+      - 4-on-3, 5-on-4.
+16.3 Secondary Break: serangan lanjutan saat defense belum siap
+     (trailer 3-point, drag screen, early P&R).
+16.4 Prinsip: lari di jalur, isi lanes, sprint sepanjang lapangan,
+     "rim runner" (big lari langsung ke ring).
+ Latihan: 3-man weave, 11-man break, 3-on-2/2-on-1 continuous,
+          outlet & fill lanes drill.
+
+17. OFFENSE MELAWAN ZONA
+---------------------------------------------------------------------
+ - Overload: tempatkan lebih banyak penyerang di satu sisi zona.
+ - Serang gap (celah antar defender) dengan dribel/penetrasi.
+ - Gunakan high post (FT line) - "jantung zona".
+ - Skip pass dan ball reversal cepat untuk menggeser zona.
+ - Short corner (baseline area) sebagai titik pass.
+ - Screen the zone (screen dari dalam ke defender zona).
+ - Offensive rebound (zona sulit box out).
+ - Formasi lawan zona ganjil (1-3-1/3-2) gunakan 2-1-2/ genap;
+   lawan zona genap (2-3) gunakan 1-3-1/ ganjil ("odd vs even").
+
+18. OFFENSE MELAWAN PRESS
+---------------------------------------------------------------------
+ - Inbound cepat sebelum press terpasang.
+ - Jangan dribel ke sudut/sideline (trap area).
+ - Pemain di tengah (middle man) sebagai pelepas trap.
+ - Pass melewati trap, bukan dribel keluar.
+ - Gunakan ruang di belakang press untuk lay-up mudah.
+ - Formasi: 1-4 press break, box press break, "Diamond" press break.
+ - Tetap tenang, gunakan pass fake, pivot.
+
+19. SET PLAY KHUSUS
+---------------------------------------------------------------------
+19.1 Baseline Out of Bounds (BLOB): Box set, Stack set, Line set.
+     Contoh "Box Up": back screen di blok untuk lay-up, lalu pop ke
+     sudut sebagai opsi kedua.
+19.2 Sideline Out of Bounds (SLOB): stagger screen untuk penembak,
+     lob untuk big, atau sekadar inbound aman.
+19.3 Last Shot / Buzzer Beater: ISO pemain terbaik, P&R dengan
+     penembak di sudut, atau set play "Hammer".
+19.4 Full-court inbound (sisa < 3 detik): long pass/"home run" atau
+     screen untuk penangkap.
+19.5 After Timeout (ATO) plays: play kejutan yang disiapkan coach.
+19.6 Lob/Alley-oop plays: back screen ke big yang dilob dekat ring.
+
+=====================================================================
+BAGIAN IV - STRATEGI DEFENSIF (BERTAHAN)
+=====================================================================
+
+20. MAN-TO-MAN DEFENSE
+---------------------------------------------------------------------
+ Setiap pemain menjaga satu lawan.
+ Variasi:
+  - Pressure / Deny Man: tekan bola, tutup jalur pass.
+  - Pack Line Defense (Dick Bennett / Tony Bennett): semua defender
+    off-ball berada di dalam garis imajiner ~5 m dari ring;
+    melindungi paint, tekanan bola, contest semua tembakan.
+  - Sagging Man: menjaga longgar, menutup drive.
+  - Switching Man: tukar penjagaan pada setiap screen.
+  - No-Middle / Ice: memaksa bola ke sideline & baseline.
+ Prinsip:
+  - Ball pressure, help & recover, rotasi, close-out, box out.
+  - Komunikasi berkelanjutan.
+  - Shell Drill (4-on-4): melatih posisi on-ball, deny, help, dan
+    rotasi saat bola dioper/dribel.
+
+21. ZONE DEFENSE
+---------------------------------------------------------------------
+ Setiap pemain menjaga area, bukan orang.
+ 21.1 2-3 Zone : dua di atas, tiga di bawah. Kuat di paint & rebound,
+                 lemah di high post dan sudut.
+ 21.2 3-2 Zone : tiga di atas, dua di bawah. Kuat di perimeter, lemah
+                 di baseline/post.
+ 21.3 1-3-1 Zone: trap di sayap dan sudut, lemah di baseline & sudut.
+ 21.4 1-2-2 Zone: mirip 3-2, menekan top.
+ 21.5 2-1-2 Zone: variasi 2-3 dengan satu pemain di tengah (high post).
+ 21.6 Matchup Zone: zona yang bergerak seperti man-to-man berdasarkan
+                    posisi penyerang.
+ 21.7 Amoeba Defense (Jerry Tarkanian): zona gabungan yang berubah-ubah
+                    untuk membingungkan lawan.
+ Kelebihan zona: menyembunyikan defender lemah, mengurangi foul,
+ melindungi paint. Kekurangan: rentan tembakan tiga angka dan
+ offensive rebound.
+
+22. COMBINATION DEFENSE
+---------------------------------------------------------------------
+ 22.1 Box-and-One   : 4 pemain zona kotak, 1 menjaga ketat bintang lawan.
+ 22.2 Diamond-and-One: 4 pemain zona berlian (1-2-1), 1 man-to-man.
+ 22.3 Triangle-and-Two: 3 zona segitiga, 2 menjaga dua penembak
+                       terbaik lawan.
+ 22.4 Junk Defense: istilah untuk pertahanan kombinasi tak lazim.
+
+23. PRESS DEFENSE
+---------------------------------------------------------------------
+ 23.1 Full-Court Man Press: setiap pemain menjaga lawan di seluruh
+      lapangan.
+ 23.2 1-2-1-1 Zone Press (Diamond Press): trap setelah inbound.
+ 23.3 2-2-1 Zone Press: trap di sideline area tengah lapangan;
+      cenderung memperlambat lawan.
+ 23.4 1-3-1 Half-court Trap.
+ 23.5 2-1-2 Press.
+ 23.6 3/4 Court Press: mulai di area free throw line lawan.
+ 23.7 "Run and Jump": defender meninggalkan lawannya untuk trap/jump
+      ball handler secara tiba-tiba, rekan lain rotasi.
+ Prinsip: trap di sudut & sideline, tangan tinggi, tutup jalur pass
+ ke tengah, "safety" di belakang untuk mencegah lay-up.
+
+24. PERTAHANAN PICK & ROLL
+---------------------------------------------------------------------
+ 24.1 Drop / Drop Coverage: big turun ke paint, cegah roll & lay-up,
+      beri tembakan mid-range.
+ 24.2 Hedge / Show: big keluar sejenak menghadang ball handler lalu
+      kembali ke roller.
+ 24.3 Blitz / Trap: dua defender men-trap ball handler.
+ 24.4 Switch: tukar penjagaan.
+ 24.5 Ice / Down / Blue: paksa ball handler ke baseline/sideline,
+      tidak boleh gunakan screen ke tengah (side P&R).
+ 24.6 Over the screen / Under the screen: guard melewati atas screen
+      (vs penembak) atau bawah screen (vs non-penembak).
+ 24.7 Hard hedge, Soft hedge, Up-to-touch / At-the-level (big sejajar
+      screen), Weak (paksa ke tangan lemah).
+ 24.8 Tag & Rotasi: defender weak side "tag" roller, pemain lain
+      rotasi ke penembak.
+ Juga: pertahanan off-ball screen - chase, top lock, switch, "jump
+ to ball".
+
+25. TRANSITION DEFENSE
+---------------------------------------------------------------------
+ - Sprint balik setelah tembakan; tentukan "safety" (biasanya guard).
+ - Hentikan bola dulu ("stop the ball"), lindungi ring, lalu cari
+   lawan masing-masing (matching up).
+ - Batasi jumlah pemain yang mengejar offensive rebound.
+ - Foul taktis untuk mencegah fast break (perhatikan aturan unsportsmanlike).
+
+=====================================================================
+BAGIAN V - STRATEGI SITUASIONAL & MANAJEMEN GAME
+=====================================================================
+
+26. CLOCK MANAGEMENT & AKHIR PERTANDINGAN
+---------------------------------------------------------------------
+ - "2-for-1": tembak cepat di akhir kuarter (~sisa 35-40 detik) agar
+   mendapat dua penguasaan bola dibanding lawan satu.
+ - Memimpin: habiskan shot clock, cari tembakan bagus di akhir,
+   pemain penembak FT terbaik pegang bola.
+ - Tertinggal: tembak cepat, foul untuk menghentikan waktu,
+   prioritas tembakan tiga angka jika butuh.
+ - Unggul 3 di detik akhir: pertimbangkan foul agar lawan hanya
+   dapat 2 FT (bukan tembakan tiga angka).
+ - Tembakan terakhir: sisakan waktu untuk rebound (sekitar 5-8 detik)
+   atau "hold for last shot" agar lawan tidak dapat bola.
+ - Ketahui aturan advance ball setelah timeout (FIBA/NBA di menit
+   akhir).
+
+27. FOUL STRATEGY
+---------------------------------------------------------------------
+ - Intentional foul ke penembak FT lemah ("Hack-a-..." strategy).
+ - Kelola foul pemain kunci (rotasi saat 2 foul di babak pertama).
+ - Team foul / bonus: setelah batas team foul, setiap foul = FT;
+   serang lebih agresif ke ring saat lawan dalam bonus.
+ - Jangan foul penembak tiga angka.
+
+28. TIMEOUT & ROTASI PEMAIN
+---------------------------------------------------------------------
+ - Timeout untuk menghentikan run lawan, memperbaiki kesalahan,
+   memberikan istirahat, atau menyiapkan set play (ATO).
+ - Rotasi: lineup kecil (small ball) untuk kecepatan & spasi;
+   lineup besar untuk rebound & paint.
+ - Manfaatkan mismatch: penyerang tinggi vs defender pendek (post-up);
+   penyerang cepat vs defender lambat (drive/P&R).
+ - Kelola menit bermain dan kelelahan.
+
+29. SCOUTING & MATCHUP
+---------------------------------------------------------------------
+ - Kumpulkan data lawan: pemain terbaik, tangan dominan, tembakan
+   favorit, set play, kebiasaan pertahanan P&R.
+ - Analisis statistik: eFG%, TS%, turnover rate, rebound rate, free
+   throw rate ("Four Factors" Dean Oliver: shooting, turnover,
+   rebounding, free throws).
+ - Game plan: siapa yang dibiarkan menembak, siapa yang wajib
+   dijaga ketat, defense apa melawan P&R mereka.
+ - Penyesuaian di halftime berdasarkan data babak pertama.
+
+=====================================================================
+BAGIAN VI - PROGRAM LATIHAN
+=====================================================================
+
+30. CONTOH STRUKTUR SESI LATIHAN TIM (±120 MENIT)
+---------------------------------------------------------------------
+ 1. Pemanasan dinamis & mobilitas ........................ 10 menit
+ 2. Ball handling (stationary + moving) ................... 10 menit
+ 3. Passing & lay-up drills (3-man weave, Mikan) .......... 10 menit
+ 4. Shooting (form shooting, spot-up, catch & shoot) ...... 15 menit
+ 5. Defense individu & Shell drill ........................ 15 menit
+ 6. Konsep tim ofensif (P&R, set play, motion) ............ 20 menit
+ 7. Situasi transisi (3-on-2, 2-on-1, 11-man break) ....... 10 menit
+ 8. Scrimmage / small-sided games ......................... 20 menit
+ 9. Free throw saat lelah + conditioning ................... 5 menit
+ 10. Pendinginan & stretching .............................. 5 menit
+
+31. CONTOH PROGRAM MINGGUAN (INDIVIDU)
+---------------------------------------------------------------------
+ Senin   : Ball handling + finishing + kekuatan kaki.
+ Selasa  : Shooting (300-500 tembakan) + conditioning.
+ Rabu    : Defense, footwork, kelincahan (ladder, cone) + core.
+ Kamis   : Shooting off-dribble + post moves + kekuatan atas.
+ Jumat   : Latihan tim / 3x3 / scrimmage.
+ Sabtu   : Pertandingan atau latihan situasional + plyometric.
+ Minggu  : Istirahat aktif (stretching, renang ringan, film study).
+
+ Target terukur (contoh):
+  - 70% free throw dalam 4 minggu.
+  - 35% three-point saat latihan catch & shoot.
+  - Mikan Drill 20 masuk/1 menit tanpa jatuh.
+  - Lane slide 30 detik: tambah 2 repetisi tiap minggu.
+
+32. LATIHAN MANDIRI DI RUMAH (TANPA RING)
+---------------------------------------------------------------------
+ - Dribel stationary (pound, crossover, between, behind, figure 8).
+ - Dribel dua bola, dribel dengan bola tenis.
+ - Form shooting berbaring (lying down shooting).
+ - Wall passing (target di tembok).
+ - Footwork tanpa bola: pivot, jab step, jump stop.
+ - Defensive stance hold & slide di lorong.
+ - Bodyweight: squat, lunges, push-up, plank, jump rope, calf raise.
+ - Film study & visualisasi.
+
+=====================================================================
+LAMPIRAN
+=====================================================================
+
+33. GLOSARIUM ISTILAH BASKET
+---------------------------------------------------------------------
+ And-one      : skor sambil dilanggar, dapat 1 FT tambahan.
+ Assist       : operan yang langsung menghasilkan skor.
+ Backcourt    : setengah lapangan pertahanan tim yang menyerang.
+ Block        : tembakan lawan ditepis.
+ Brick        : tembakan meleset jauh/keras.
+ Carry/Palming: pelanggaran membawa bola saat dribel.
+ Charge       : pelanggaran penyerang menabrak defender yang diam.
+ Double Dribble: dribel lagi setelah berhenti, atau dua tangan.
+ Elbow        : sudut pertemuan garis FT dan garis paint.
+ Goaltending  : menyentuh bola saat turun menuju ring.
+ Help side    : sisi lapangan yang jauh dari bola (weak side).
+ Key / Paint  : area persegi di bawah ring.
+ Mismatch     : perbedaan ukuran/kecepatan yang menguntungkan.
+ Pick / Screen: menghalangi defender secara legal.
+ Rim protector: pemain bertahan yang menjaga ring (pemblok).
+ Shot clock   : batas waktu menyerang (24 detik; reset 14 detik pada
+                situasi tertentu).
+ Strong side  : sisi lapangan tempat bola berada.
+ Travelling   : berjalan/melangkah tanpa dribel.
+ Turnover     : kehilangan bola ke lawan.
+ 3-second     : pelanggaran berada di paint >3 detik (ofensif).
+ 5-second     : pelanggaran inbound/dijaga ketat > 5 detik.
+ 8-second     : bola harus melewati tengah lapangan dalam 8 detik.
+ Backcourt violation: bola kembali ke backcourt setelah masuk frontcourt.
+
+=====================================================================
+                         SELESAI
+ Tips akhir: konsistensi mengalahkan intensitas sesaat. Latih
+ fundamental setiap hari, ukur kemajuan, dan nikmati permainannya!
+=====================================================================
